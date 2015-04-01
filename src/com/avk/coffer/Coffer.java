@@ -155,8 +155,7 @@ public class Coffer {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					try {
-						String username = CofferCrypt.decryptFromFile_Index(CofferRef.getCofferKeyIndex(), new File("./Coffer/.cofferkey"));
-						if(username.equals("nouser")){ Coffer.swapTo("CreateUserPage"); }
+						if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
 						else{ Coffer.swapTo("LoginPage"); }
 						frmcoffer.setState(Frame.ICONIFIED);
 					} catch (Exception e) { e.printStackTrace(); }
