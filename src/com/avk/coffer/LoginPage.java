@@ -7,6 +7,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.security.MessageDigest;
 import java.util.StringTokenizer;
 
 import javax.swing.ImageIcon;
@@ -22,7 +23,6 @@ public class LoginPage extends JPanel {
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private String defaultStatus;
-//	private Scanner fileScanner;
 
 	/**
 	 * Create the panel.
@@ -147,13 +147,10 @@ public class LoginPage extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				try 
 				{
-					StringTokenizer content = new StringTokenizer(CofferCrypt.decryptFromFile_Index(CofferRef.getCofferKeyIndex(), new File("./Coffer/.cofferkey")),"|");
 					focusGrab.grabFocus();
 					defaultStatus = Coffer.getStatus();
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
-					String actUsername = content.nextToken();
-					String actPassword = content.nextToken();
 					
 					if(username.equalsIgnoreCase("username") || username.equalsIgnoreCase("") )
 					{
@@ -167,18 +164,37 @@ public class LoginPage extends JPanel {
 						lblUserExclaim.setVisible(false);
 						lblPassExclaim.setVisible(true);
 					}
-					else if(username.equals(actUsername) && password.equals(actPassword))
+					else if(password.length()<10)
 					{
-						passwordField.setText("");
-						Coffer.setStatus("Good to see you back :)");
-						Coffer.swapTo("DashBoard");
+						Coffer.setStatus("Password should be atleast 10 characters.");
+						lblUserExclaim.setVisible(false);
+						lblPassExclaim.setVisible(true);
 					}
 					else
 					{
-						Coffer.setStatus("Sorry can't log you in. Wrong credentials...");
-						passwordField.setText("");
-						lblUserExclaim.setVisible(true);
-						lblPassExclaim.setVisible(true);
+						MessageDigest digest = MessageDigest.getInstance("SHA-256");
+						byte[] hash = digest.digest(password.getBytes("UTF-8"));
+						
+						StringTokenizer st = new StringTokenizer(CofferCrypt.decryptFromFile_Key(new String(hash).substring(0, 16), new File("./Coffer/.cofferkey")),"|");
+						String actUsername = st.nextToken();
+						
+						CofferRef.setCofferSeed(Long.parseLong(st.nextToken()));
+						
+						if(username.equals(actUsername))
+						{
+							passwordField.setText("");
+							Coffer.swapTo("DashBoard");
+							Coffer.setStatus("Good to see you back :)");
+						}
+						else
+						{
+							usernameField.setText("");
+							passwordField.setText("");
+							usernameField.grabFocus();
+							lblUserExclaim.setVisible(true);
+							lblPassExclaim.setVisible(true);
+							Coffer.setStatus("Sorry can't log you in. Wrong credentials...");
+						}
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}

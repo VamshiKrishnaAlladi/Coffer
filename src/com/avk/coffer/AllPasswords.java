@@ -19,7 +19,6 @@ import javax.swing.ScrollPaneConstants;
 @SuppressWarnings("serial")
 public class AllPasswords extends JPanel {
 
-//	private Scanner fileScanner;
 	private static HashMap<String, Password> allPasswords;
 	/**
 	 * Create the panel.
@@ -57,7 +56,6 @@ public class AllPasswords extends JPanel {
 			displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
 
 			allPasswords = new HashMap<String,Password>();
-			// user coffer file used here
 			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferRef.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 			Scanner cofferScanner = new Scanner(user_coffer);
 			cofferScanner.useDelimiter("\n");
@@ -65,24 +63,24 @@ public class AllPasswords extends JPanel {
 			{	
 				String entry =  cofferScanner.next();
 				if(!entry.equals("no_passwords"))
-				{					
+				{
 					StringTokenizer st = new StringTokenizer(entry,"|");
 					Password p = new Password();
 					p.setTitle(st.nextToken());
 					int i = Integer.parseInt(st.nextToken());
-					st = new StringTokenizer(CofferCrypt.decryptFromFile_Index(i, new File("./Coffer/"+ i +".cofferpass")),"|");
+					int f = Integer.parseInt(st.nextToken());
+					st = new StringTokenizer(CofferCrypt.decryptFromFile_Index(i, new File("./Coffer/"+ f +".cofferpass")),"|");
 					p.setUsername(st.nextToken());
 					p.setPassword(st.nextToken());
 					allPasswords.put(p.getTitle(), p);
 					displayPanel.add(new PasswordEntry(p.getTitle()+ " ["+p.getUsername()+"]",new ImageIcon(this.getClass().getResource("/key.png")), javax.swing.SwingConstants.LEFT));					
 				}
 				else{
-					if(!cofferScanner.hasNext()){
-						JLabel noPass = new JLabel("You have'nt stored any passwords yet");
-						noPass.setForeground(new Color(100, 100, 100));
-						noPass.setFont(new Font("Comfortaa", Font.PLAIN, 15));
-						displayPanel.add(noPass);						
-					}
+					Coffer.setStatus("You can make entries in \"Add a Password\" tab.");
+					JLabel noPass = new JLabel("You have'nt stored any passwords yet");
+					noPass.setForeground(new Color(100, 100, 100));
+					noPass.setFont(new Font("Comfortaa", Font.PLAIN, 15));
+					displayPanel.add(noPass);						
 				}
 			}
 			cofferScanner.close();

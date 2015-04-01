@@ -307,17 +307,19 @@ public class AddEntryPage extends JPanel {
 						
 						Random r = new Random();
 						int index;
+						int fileNo;
 						String user_coffer = CofferCrypt.decryptFromFile_Index(CofferRef.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 						do{	index = r.nextInt(CofferCrypt.MAX_KEY_INDEX); }while(user_coffer.contains(Integer.toString(index).subSequence(0, 4)));
+						do{	fileNo = r.nextInt(100000000); }while(user_coffer.contains(Integer.toString(fileNo).subSequence(0, 8)));
 						if(user_coffer.equals("no_passwords")){
-							user_coffer = title + "|" + Integer.toString(index);
+							user_coffer = title + "|" + Integer.toString(index) + "|" + Integer.toString(fileNo);
 						}
 						else
 						{
-							user_coffer += "\n"+ title + "|" + Integer.toString(index);
+							user_coffer += "\n"+ title + "|" + Integer.toString(index) + "|" + Integer.toString(fileNo);
 						}
 						CofferCrypt.encrypt2File_Index(CofferRef.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
-						CofferCrypt.encrypt2File_Index(index, username + "|" + password, new File("./Coffer/" + index + ".cofferpass"));
+						CofferCrypt.encrypt2File_Index(index, username + "|" + password, new File("./Coffer/" + fileNo + ".cofferpass"));
 
 						titleField.setText("");
 						usernameField.setText("");

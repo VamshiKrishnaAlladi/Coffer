@@ -7,6 +7,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.security.MessageDigest;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -208,6 +209,8 @@ public class CreateUserPage extends JPanel {
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
 					String conPass = confirmPasswordField.getText().trim();
+					
+					
 					if(username.equalsIgnoreCase("username") || username.equalsIgnoreCase("") )
 					{
 						Coffer.setStatus("Pick a username.");
@@ -218,6 +221,13 @@ public class CreateUserPage extends JPanel {
 					else if(password.equalsIgnoreCase("password") || password.equalsIgnoreCase(""))
 					{
 						Coffer.setStatus("Pick a password.");
+						lblUserExclaim.setVisible(false);
+						lblPassExclaim.setVisible(true);
+						lblConPassExclaim.setVisible(false);
+					}
+					else if(password.length()<10)
+					{
+						Coffer.setStatus("Password should be atleast 10 characters.");
 						lblUserExclaim.setVisible(false);
 						lblPassExclaim.setVisible(true);
 						lblConPassExclaim.setVisible(false);
@@ -240,15 +250,24 @@ public class CreateUserPage extends JPanel {
 					}
 					else
 					{
+
+						MessageDigest digest = MessageDigest.getInstance("SHA-256");
+						byte[] hash = digest.digest(password.getBytes("UTF-8"));
+						
 						Coffer.setStatus("Credentials Submited...");
 						lblUserExclaim.setVisible(false);
 						lblPassExclaim.setVisible(false);
 						lblConPassExclaim.setVisible(false);
-
-						CofferCrypt.encrypt2File_Index(CofferRef.getCofferKeyIndex(), username + "|" + password, new File("./Coffer/.cofferkey"));
+	
+						long timeStamp = System.currentTimeMillis();
+						int key = (int)timeStamp%100000;
 						
-						Coffer.setStatus("This is your DashBoard...");
+						CofferCrypt.encrypt2File_Key(new String(hash).substring(0, 16), username + "|" + timeStamp , new File("./Coffer/.cofferkey"));
+						CofferRef.setCofferSeed(timeStamp);
+						CofferCrypt.encrypt2File_Index(key, "no_passwords", new File("./Coffer/user's.coffer"));
+
 						Coffer.swapTo("DashBoard");
+						Coffer.setStatus("You can make entries in \"Add a Password\" tab.");
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}

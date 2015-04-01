@@ -2,11 +2,9 @@ package com.avk.coffer;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.security.Key;
 import java.util.Random;
-import java.util.Scanner;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,12 +19,8 @@ public class CofferCrypt {
     private static long[] randomKeys;
     
     static{
-    	try {
-			
-    		R = new Random(new Long(new Scanner(new File("./Coffer/.cofferseed")).nextLong()));
+    		R = new Random(CofferRef.getCofferSeed());
 			randomKeys = R.longs(MAX_KEY_INDEX, 1000000000000000L, 10000000000000000L).toArray();
-    		
-		} catch (FileNotFoundException e) { e.printStackTrace(); }
     }
     
     public static void encrypt2File_Index(int index, String plainText, File outputFile){

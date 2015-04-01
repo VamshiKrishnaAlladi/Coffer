@@ -3,9 +3,7 @@ package com.avk.coffer;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 
@@ -28,14 +26,11 @@ public class CofferRef {
 	
 	public static final ArrayList<Image> COFFER_LOGOS = new ArrayList<Image>();
 	
-	public static long COFFER_SEED;
-	public static int COFFER_KEY_INDEX;
+	private static long COFFER_SEED;
+	private static int COFFER_KEY_INDEX;
 	
+	public static final Clipboard SYS_CLIPBOARD =  Toolkit.getDefaultToolkit().getSystemClipboard();
 	
-	public static Scanner seedFileScanner;
-	
-    public static final Clipboard SYS_CLIPBOARD =  Toolkit.getDefaultToolkit().getSystemClipboard();
-
 	static{
 	    try {
 		    COFFER_LOGOS.add(COFFER_SAFE_LOGO_128X128.getImage());
@@ -47,15 +42,12 @@ public class CofferRef {
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
-	public static long getCofferSeed() throws Exception{
-		seedFileScanner = new Scanner(new File("./Coffer/.cofferseed"));
-		COFFER_SEED = Long.parseLong(seedFileScanner.next());
-		seedFileScanner.close();
-		return COFFER_SEED;
-	}
+	public static long getCofferSeed(){ return COFFER_SEED; }
 	
-	public static int getCofferKeyIndex() throws Exception{
-		COFFER_KEY_INDEX = (int) getCofferSeed()%100000;
+	public static void setCofferSeed(long seed){ COFFER_SEED = seed; }
+	
+	public static int getCofferKeyIndex(){
+		COFFER_KEY_INDEX = (int) COFFER_SEED % 100000;
 		return COFFER_KEY_INDEX;
 	}
 }

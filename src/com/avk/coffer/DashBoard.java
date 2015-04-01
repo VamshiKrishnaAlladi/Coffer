@@ -46,8 +46,8 @@ public class DashBoard extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				lbltabs.setIcon(tab1);
+				Coffer.setStatus("Double-Click on any entry to copy its password to ClipBoard");
 				DashBoard.swapTo("MyPasswords");
-				Coffer.setStatus("Double-Click on any password to copy it to ClipBoard");
 			}
 		});
 		add(lblMyPasswords);

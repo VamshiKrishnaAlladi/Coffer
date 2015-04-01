@@ -36,16 +36,17 @@ import javax.swing.SwingConstants;
 
 public class Coffer {
 
-	public static JFrame frmcoffer;
-	public static JPanel contentPanel;
-	public static CardLayout cl;
-	public static JLabel frmStatusLabel;
-	public static JLabel frmTitleLabel;
+	private static JFrame frmcoffer;
+	private static JPanel contentPanel;
+	private static CardLayout cl;
+	private static JLabel frmStatusLabel;
+	private static JLabel frmTitleLabel;
 	
 	private static int xPressed;
 	private int yPressed;
 
     private static File MUTEX_FILE = new File("./Coffer/Coffer.mutex");
+    private static File KEY_FILE = new File("./Coffer/.cofferkey");
     private static Scanner MUTEX_SCANNER;
 
 	private static TrayIcon trayIcon;
@@ -55,31 +56,13 @@ public class Coffer {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
-		try
-		{			
-			File cofferFolders = new File("./Coffer");
-			if(!cofferFolders.exists())
-			{
-				cofferFolders.mkdirs();
-				long timeStamp = System.currentTimeMillis();
-				int key = (int)timeStamp%100000;
-				Coffer.writeText2File(Long.toString(timeStamp), "./Coffer/.cofferseed");
-				CofferCrypt.encrypt2File_Index(key, "nouser", new File("./Coffer/.cofferkey"));
-				CofferCrypt.encrypt2File_Index(key, "no_passwords", new File("./Coffer/user's.coffer"));
-			}
-			
-			launchApp();
-	    }
-		catch (Throwable e){e.printStackTrace();}
-	}
-	
-	private static void launchApp(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try { 
 						if(!MUTEX_FILE.exists())
 						{
+							File cofferFolders = new File("./Coffer");
+							cofferFolders.mkdirs();
 							MUTEX_FILE.createNewFile();
 							MUTEX_SCANNER = new Scanner(MUTEX_FILE);
 							MUTEX_FILE.deleteOnExit();
@@ -94,7 +77,7 @@ public class Coffer {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -259,12 +242,10 @@ public class Coffer {
 			contentPanel.setBounds(0, 60, 750, 460);
 			contentPanel.add(new LoginPage(),"LoginPage");
 			contentPanel.add(new CreateUserPage(),"CreateUserPage");
-			contentPanel.add(new DashBoard(),"DashBoard");
+//			contentPanel.add(new DashBoard(),"DashBoard");
 			frmcoffer.getContentPane().add(contentPanel);
 
-
-			String username = CofferCrypt.decryptFromFile_Index(CofferRef.getCofferKeyIndex(), new File("./Coffer/.cofferkey"));
-			if(username.equals("nouser")){ Coffer.swapTo("CreateUserPage"); }
+			if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
 			else{ Coffer.swapTo("LoginPage"); }
 
 			JLabel window_img = new JLabel(new ImageIcon(this.getClass().getResource("/CofferBackground.png")));
@@ -284,7 +265,12 @@ public class Coffer {
 	
 	public static String getTitle(){ return frmTitleLabel.getText(); }
 	
-	public static void swapTo(String page){ cl.show(contentPanel, page); }
+	public static void swapTo(String page){
+		if(page == "DashBoard"){
+			contentPanel.add(new DashBoard(),"DashBoard");
+		}
+		cl.show(contentPanel, page);
+	}
 	
 	static void makeAppear(){
 		frmcoffer.setState(Frame.NORMAL);
