@@ -8,13 +8,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -29,6 +25,7 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -46,7 +43,7 @@ public class Coffer {
 	private int yPressed;
 
     private static File MUTEX_FILE = new File("./Coffer/Coffer.mutex");
-    private static File KEY_FILE = new File("./Coffer/.cofferkey");
+    public static File KEY_FILE = new File("./Coffer/.cofferkey");
     private static Scanner MUTEX_SCANNER;
 
 	private static TrayIcon trayIcon;
@@ -90,21 +87,33 @@ public class Coffer {
 		try{
 	        if(SystemTray.isSupported())
 	        {
+//	        	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	            tray=SystemTray.getSystemTray();
-	            Image image=CofferRef.COFFER_SAFE_LOGO_16X16.getImage();
-	            PopupMenu popup=new PopupMenu();
-	            MenuItem item=new MenuItem("Restore");
-	            item.addActionListener(new ActionListener() {
-	                public void actionPerformed(ActionEvent e) { makeAppear(); }
+	            Image image=CofferRef.COFFER_SAFE_BLACK_LOGO_16X16.getImage();
+	            
+	            CofferTrayPopup popup=new CofferTrayPopup();
+	            JDialog hiddenDialog = new JDialog();
+	            hiddenDialog.addWindowFocusListener(new WindowAdapter() {
+	                @Override
+	                public void windowLostFocus (WindowEvent we ) {
+	                    hiddenDialog.setVisible(false);
+	                }
 	            });
-	            popup.add(item);
-	            popup.addSeparator();
-	            item=new MenuItem("Exit");
-	            item.addActionListener(new ActionListener() {
-	                public void actionPerformed(ActionEvent e) { clearAndExit(); }
+	            hiddenDialog.setSize(10, 10);
+	            hiddenDialog.setUndecorated(true);
+	            
+	            trayIcon=new TrayIcon(image, "Coffer - A portable password manager.", null);
+	            trayIcon.addMouseListener(new MouseAdapter() {
+	                public void mouseReleased(MouseEvent e) {
+	                    if (e.isPopupTrigger()) {
+	                    	popup.setLocation(e.getX(), e.getY());
+	                        hiddenDialog.setLocation(e.getX(), e.getY());
+	                        popup.setInvoker(hiddenDialog);
+	                        hiddenDialog.setVisible(true);
+	                        popup.setVisible(true);
+	                    }
+	                }
 	            });
-	            popup.add(item);		          
-	            trayIcon=new TrayIcon(image, "Coffer - A portable password manager.", popup);
 	            trayIcon.setImageAutoSize(true);
 	        }
 	        else{ System.out.println("system tray not supported"); }
@@ -120,7 +129,7 @@ public class Coffer {
 			frmcoffer.setLocationRelativeTo(null);
 			frmcoffer.addWindowListener(new WindowAdapter() {
 				@Override
-				public void windowOpened(WindowEvent e) { Coffer.setStatus("Welcome to your Coffer. :)"); }
+				public void windowOpened(WindowEvent e) { Coffer.setStatus("Hey there! Welcome to Coffer. :)"); }
 				@Override
 				public void windowDeiconified(WindowEvent e) { Coffer.setStatus("Welcome Back. :)"); }
 				@Override
@@ -153,12 +162,8 @@ public class Coffer {
 			lbl_.setForeground(new Color(0,175,210));
 			lbl_.addMouseListener(new MouseAdapter() {
 				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					try {
-						if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
-						else{ Coffer.swapTo("LoginPage"); }
+				public void mouseClicked(MouseEvent arg0) {			
 						frmcoffer.setState(Frame.ICONIFIED);
-					} catch (Exception e) { e.printStackTrace(); }
 				}
 				@Override
 				public void mouseEntered(MouseEvent e) {
@@ -239,9 +244,6 @@ public class Coffer {
 			contentPanel= new JPanel(cl);
 			contentPanel.setOpaque(false);
 			contentPanel.setBounds(0, 60, 750, 460);
-			contentPanel.add(new LoginPage(),"LoginPage");
-			contentPanel.add(new CreateUserPage(),"CreateUserPage");
-//			contentPanel.add(new DashBoard(),"DashBoard");
 			frmcoffer.getContentPane().add(contentPanel);
 
 			if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
@@ -265,8 +267,23 @@ public class Coffer {
 	public static String getTitle(){ return frmTitleLabel.getText(); }
 	
 	public static void swapTo(String page){
-		if(page == "DashBoard"){
-			contentPanel.add(new DashBoard(),"DashBoard");
+		contentPanel.removeAll();
+		switch(page){
+			case "DashBoard":{
+				Coffer.setStatus("On board at DashBoard. ;)");
+				contentPanel.add(new DashBoard(),"DashBoard");
+				break;
+			}
+			case "LoginPage":{
+				Coffer.setStatus("Prove this coffer is your's.");
+				contentPanel.add(new LoginPage(),"LoginPage");
+				break;
+			}
+			case "CreateUserPage":{
+				Coffer.setStatus("Register credentials for creating a new Coffer");
+				contentPanel.add(new CreateUserPage(),"CreateUserPage");
+				break;
+			}
 		}
 		cl.show(contentPanel, page);
 	}

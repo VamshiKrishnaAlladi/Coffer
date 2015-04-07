@@ -32,7 +32,6 @@ public class LoginPage extends JPanel {
 		setLayout(null);
 		defaultStatus = Coffer.getStatus();
 		
-		Coffer.setStatus("Prove you are not a stranger... :P");
 		JButton focusGrab = new JButton("");
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
@@ -182,7 +181,6 @@ public class LoginPage extends JPanel {
 						
 						if(username.equals(actUsername))
 						{
-							passwordField.setText("");
 							Coffer.swapTo("DashBoard");
 							Coffer.setStatus("Good to see you back :)");
 						}

@@ -25,8 +25,8 @@ public class CofferCrypt {
     
     public static void encrypt2File_Index(int index, String plainText, File outputFile){
         try {
-        	String key = getKey(index);
-            Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+        	String key = getKey( Math.abs(index));
+        	Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
              
@@ -40,7 +40,7 @@ public class CofferCrypt {
     }
  
     public static String decryptFromFile_Index(int index, File encryptedFile) throws Exception{
-    	String key = getKey(index);
+    	String key = getKey( Math.abs(index));
     	Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
     	Cipher cipher = Cipher.getInstance(TRANSFORMATION);
     	cipher.init(Cipher.DECRYPT_MODE, secretKey);
@@ -86,19 +86,19 @@ public class CofferCrypt {
     }
     
     public static byte[] encrypt(int index, String plainText) throws Exception{
-        	String key = getKey(index);
-            Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+    	String key = getKey( Math.abs(index));
+    	Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+    	Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+    	cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 
-            byte[] inputBytes = plainText.getBytes();
-            byte[] outputBytes = cipher.doFinal(inputBytes);
-             
-            return outputBytes;
+    	byte[] inputBytes = plainText.getBytes();
+    	byte[] outputBytes = cipher.doFinal(inputBytes);
+
+    	return outputBytes;
     }
  
     public static String decrypt(int index, byte[] encryptedText) throws Exception{
-    	String key = getKey(index);
+    	String key = getKey( Math.abs(index));
     	Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
     	Cipher cipher = Cipher.getInstance(TRANSFORMATION);
     	cipher.init(Cipher.DECRYPT_MODE, secretKey);

@@ -66,7 +66,7 @@ public class DashBoard extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				lbltabs.setIcon(tab2);
 				DashBoard.swapTo("AddEntry");
-				Coffer.setStatus("Make an entry....");
+				Coffer.setStatus("Make a password entry.");
 			}
 		});
 		add(lblAddEntry);
@@ -109,7 +109,6 @@ public class DashBoard extends JPanel {
 	}
 	
 	public static void swapTo(String page){
-//		dashBoardPanel.removeAll();
 		if(page.equals("MyPasswords"))
 			dashBoardPanel.add(new AllPasswords(),"MyPasswords");
 		crdLayout.show(dashBoardPanel, page);

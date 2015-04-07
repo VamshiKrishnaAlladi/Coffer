@@ -32,8 +32,6 @@ public class CreateUserPage extends JPanel {
 		setOpaque(false);
 		setLayout(null);
 
-		Coffer.setStatus("Creating a new Coffer...");
-
 		JButton focusGrab = new JButton("");
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
@@ -260,7 +258,7 @@ public class CreateUserPage extends JPanel {
 						lblConPassExclaim.setVisible(false);
 	
 						long timeStamp = System.currentTimeMillis();
-						int key = (int)timeStamp%100000;
+						int key =(int)timeStamp%100000;
 						
 						CofferCrypt.encrypt2File_Key(new String(hash).substring(0, 16), username + "|" + timeStamp , new File("./Coffer/.cofferkey"));
 						CofferRef.setCofferSeed(timeStamp);

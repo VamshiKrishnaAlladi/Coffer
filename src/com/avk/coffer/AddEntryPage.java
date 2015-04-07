@@ -22,7 +22,6 @@ public class AddEntryPage extends JPanel {
 	private JPasswordField passwordField;
 	private JPasswordField confirmPasswordField;
 	private String defaultStatus;
-//	private FileOutputStream fileWriter;
 	private JTextField titleField;
 
 	/**
@@ -31,8 +30,6 @@ public class AddEntryPage extends JPanel {
 	public AddEntryPage() {
 		setOpaque(false);
 		setLayout(null);
-
-		Coffer.setStatus("");
 
 		JButton focusGrab = new JButton("");
 		focusGrab.setBounds(0, 0, 0, 0);

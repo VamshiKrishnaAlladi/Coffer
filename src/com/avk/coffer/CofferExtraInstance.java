@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class CofferExtraInstance extends JDialog {
@@ -31,6 +34,18 @@ public class CofferExtraInstance extends JDialog {
 		contentPanel.setBorder(new LineBorder(new Color(0,175,210), 1));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		
+		JPopupMenu popup = new JPopupMenu();
+		addPopup(contentPanel, popup);
+		
+		JMenuItem lockItem = new JMenuItem("Lock Coffer");
+		popup.add(lockItem);
+		
+		JMenuItem restoreItem = new JMenuItem("Restore");
+		popup.add(restoreItem);
+		
+		JMenuItem exitItem = new JMenuItem("Exit");
+		popup.add(exitItem);
 		JLabel lblOk = new JLabel("Ok");
 		contentPanel.add(lblOk);
 		lblOk.setForeground(Color.WHITE);
@@ -72,6 +87,23 @@ public class CofferExtraInstance extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
+			}
+		});
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
 	}
