@@ -1,6 +1,5 @@
 package com.avk.coffer;
 
-import java.awt.AWTException;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,6 +37,7 @@ public class Coffer {
 	private static CardLayout cl;
 	private static JLabel frmStatusLabel;
 	private static JLabel frmTitleLabel;
+	private static Thread Sleeper;
 	
 	private static int xPressed;
 	private int yPressed;
@@ -140,13 +140,26 @@ public class Coffer {
 	                    try {
 	                        tray.add(trayIcon);
 	                        frmcoffer.setVisible(false);
-	                    } 
-	                    catch (AWTException ex) {
+	    					Sleeper = new Thread(new Runnable(){
+	    						@Override
+	    						public void run()
+	    						{
+	    							try {
+	    								Thread.sleep(30 * 1000);
+	    								if(frmcoffer.getState() == JFrame.ICONIFIED)
+	    									lockCoffer();
+	    							}
+	    							catch(InterruptedException e){ e.printStackTrace(); }
+	    						} 
+	    					});
+	    					Sleeper.start(); 
+	    				} 
+	                    catch (Exception ex) {
 	                        ex.printStackTrace();
 	                    }
 	                }
 	                if(e.getNewState()==JFrame.NORMAL){
-	                    Coffer.makeAppear();
+	                	Coffer.makeAppear();
 	                }
 	            }
 			});
@@ -162,7 +175,7 @@ public class Coffer {
 			lbl_.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {			
-						frmcoffer.setState(Frame.ICONIFIED);
+					frmcoffer.setState(Frame.ICONIFIED);
 				}
 				@Override
 				public void mouseEntered(MouseEvent e) {
@@ -321,10 +334,19 @@ public class Coffer {
 		return textBytes;
 	}
 
-	static void clearAndExit(){
+	public static void clearAndExit(){
 		CofferRef.SYS_CLIPBOARD.setContents(new StringSelection(""), null);
         MUTEX_SCANNER.close();
         MUTEX_FILE.deleteOnExit();
         System.exit(0);
+	}
+	
+	public static void lockCoffer(){
+		if(!Coffer.KEY_FILE.exists()){
+			Coffer.swapTo("CreateUserPage"); 
+		}
+		else{
+			Coffer.swapTo("LoginPage");
+		}
 	}
 }

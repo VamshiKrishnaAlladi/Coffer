@@ -207,6 +207,7 @@ public class CreateUserPage extends JPanel {
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
 					String conPass = confirmPasswordField.getText().trim();
+					String passPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*+=|\\/,.;:])(?=\\S+$).{10,}$";
 					
 					
 					if(username.equalsIgnoreCase("username") || username.equalsIgnoreCase("") )
@@ -223,20 +224,24 @@ public class CreateUserPage extends JPanel {
 						lblPassExclaim.setVisible(true);
 						lblConPassExclaim.setVisible(false);
 					}
-					else if(password.length()<10)
+					else if(!password.matches(passPattern))
 					{
-						Coffer.setStatus("Password should be atleast 10 characters.");
+						Coffer.setStatus("Click on the Exclaimation for password policy.");
 						lblUserExclaim.setVisible(false);
 						lblPassExclaim.setVisible(true);
+						lblConPassExclaim.setVisible(false);
+						passwordField.setText("");
+						passwordField.grabFocus();
 						lblPassExclaim.addMouseListener(new MouseAdapter() {
-						
+							
 							@Override
 							public void mouseClicked(MouseEvent e) {
-								
-								new CofferDialog("Password should be of minimum 10 characters", "Password should include caps, lower, numbers and symbols");
+								String strs[] = {"-> Master password should be atleast 10 characters.", "-> It should include atleast 1 for each of","        * Upper Case Letter","        * Lower Case Letter","        * Number and","        * Symbol"};
+								CofferDialog cd = new CofferDialog("Password Policy:" , strs);
+								cd.setBounds(0, 0, 400, 200);
+								cd.setLocationRelativeTo(null);
 							}
 						});
-						lblConPassExclaim.setVisible(false);
 					}
 					else if(conPass.equalsIgnoreCase("confirm password") || conPass.equalsIgnoreCase(""))
 					{

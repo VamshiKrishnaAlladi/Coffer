@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -37,7 +38,7 @@ public class AllPasswords extends JPanel {
 			scrollPane.setViewportBorder(null);
 			
 			JScrollBar vsb = scrollPane.getVerticalScrollBar();
-			vsb.setUI(new CofferScrollbarUI());
+			vsb.setUI(new CofferScrollbarUI(new ImageIcon(this.getClass().getResource("/scrollbarTrack.png")).getImage()));
 			vsb.setPreferredSize(new Dimension(10,300));
 			vsb.setOpaque(false);
 			vsb.setUnitIncrement(10);
@@ -74,6 +75,7 @@ public class AllPasswords extends JPanel {
 					p.setPassword(st.nextToken());
 					allPasswords.put(p.getTitle(), p);
 					displayPanel.add(new PasswordEntry(p.getTitle()+ " ["+p.getUsername()+"]",new ImageIcon(this.getClass().getResource("/key.png")), javax.swing.SwingConstants.LEFT));					
+					displayPanel.add(Box.createRigidArea(new Dimension(0,5)));
 				}
 				else{
 					Coffer.setStatus("You can add entries in \"Add a Password\" tab.");
