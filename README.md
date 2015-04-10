@@ -11,10 +11,11 @@ Contribute in the development of the Project Coffer by following the steps below
 
 This Coffer repository is the total project folder of eclipse.
 
-1. Download the code repository.
-2. Extract it to any location and rename the folder to "Coffer"
-3. Paste this folder in your eclipse's work-space.
-4. Restart Eclipse.
-5. Start Off working on the Project.
+1. Create a java project with the name "Coffer" in eclipse work-space.
+2. Download the code repository.
+3. Extract it to project folder of  "Coffer"
+4. If asked to overwrite the src folder content click on continue.
+5. Restart Eclipse.
+6. Start Off working on the Project.
 
-File Coffer.java has the Main class "Coffer" and the function "main" in it.   
+File Coffer.java has the Main class "Coffer" and the function "main" in it.
