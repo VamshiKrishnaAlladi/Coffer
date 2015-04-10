@@ -228,6 +228,14 @@ public class CreateUserPage extends JPanel {
 						Coffer.setStatus("Password should be atleast 10 characters.");
 						lblUserExclaim.setVisible(false);
 						lblPassExclaim.setVisible(true);
+						lblPassExclaim.addMouseListener(new MouseAdapter() {
+						
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								
+								new CofferDialog("Password should be of minimum 10 characters", "Password should include caps, lower, numbers and symbols");
+							}
+						});
 						lblConPassExclaim.setVisible(false);
 					}
 					else if(conPass.equalsIgnoreCase("confirm password") || conPass.equalsIgnoreCase(""))

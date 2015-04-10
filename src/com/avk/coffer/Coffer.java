@@ -87,7 +87,6 @@ public class Coffer {
 		try{
 	        if(SystemTray.isSupported())
 	        {
-//	        	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	            tray=SystemTray.getSystemTray();
 	            Image image=CofferRef.COFFER_SAFE_BLACK_LOGO_16X16.getImage();
 	            
