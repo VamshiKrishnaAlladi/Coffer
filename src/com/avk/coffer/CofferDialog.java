@@ -3,7 +3,6 @@ package com.avk.coffer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -37,13 +36,13 @@ public class CofferDialog extends JDialog  {
 		JLabel titleLbl = new JLabel(title);
 		titleLbl.setBounds(20, 10, 365, 30);
 		titleLbl.setForeground(new Color(0,175,210));
-		titleLbl.setFont(new Font("Comfortaa", Font.BOLD, 16));
+		titleLbl.setFont(CofferRef.Comfortaa_Bold_16);
 		contentPanel.add(titleLbl);
 		
 		JLabel lblX = new JLabel("X");
 		contentPanel.add(lblX);
 		lblX.setForeground(new Color(0,175,210));
-		lblX.setFont(new Font("Antipasto", Font.BOLD, 15));
+		lblX.setFont(CofferRef.Antipasto_Bold_15);
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
 		lblX.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblX.setBounds(375, 5, 20, 20);
@@ -66,7 +65,7 @@ public class CofferDialog extends JDialog  {
 				lbl.setForeground(new Color(100,100,100));
 			else
 				lbl.setForeground(new Color(0,175,210));
-			lbl.setFont(new Font("Comfortaa", Font.PLAIN, 13));
+			lbl.setFont(CofferRef.Comfortaa_Plain_13);
 			panel.add(lbl);
 			panel.add(Box.createRigidArea(new Dimension(0,5)));
 		}

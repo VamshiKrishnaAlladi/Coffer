@@ -110,6 +110,9 @@ public class CofferCrypt {
     	return new String(outputBytes);		
     }
 
-    public static String getKey(int index){ return Long.toString(randomKeys[index]); }
+    public static String getKey(int index)
+    {
+    	return Long.toString(randomKeys[index]);
+    }
     
 }

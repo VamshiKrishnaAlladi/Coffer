@@ -2,7 +2,6 @@ package com.avk.coffer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -47,19 +46,19 @@ public class CofferExtraInstance extends JDialog {
 		lbl1.setBounds(95, 10, 280, 30);
 		panel.add(lbl1);
 		lbl1.setForeground(new Color(0,175,210));
-		lbl1.setFont(new Font("Comfortaa", Font.PLAIN, 13));
+		lbl1.setFont(CofferRef.Comfortaa_Plain_13);
 		{
 			JLabel lbl2 = new JLabel("Check in the system's task tray.");
 			lbl2.setBounds(95, 40, 280, 30);
 			panel.add(lbl2);
 			lbl2.setForeground(new Color(100,100,100));
-			lbl2.setFont(new Font("Comfortaa", Font.PLAIN, 13));
+			lbl2.setFont(CofferRef.Comfortaa_Plain_13);
 		}
 
 		JLabel lblOk = new JLabel("Ok");
 		contentPanel.add(lblOk);
 		lblOk.setForeground(Color.WHITE);
-		lblOk.setFont(new Font("Comfortaa", Font.PLAIN, 13));
+		lblOk.setFont(CofferRef.Comfortaa_Plain_13);
 		lblOk.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOk.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblOk.setBounds(125, 140, 150, 30);

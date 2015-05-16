@@ -2,7 +2,6 @@ package com.avk.coffer;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -37,7 +36,7 @@ public class DashBoard extends JPanel {
 		lblMyPasswords.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMyPasswords.setIcon(new ImageIcon(this.getClass().getResource("/keys.png"))); ;
 		lblMyPasswords.setBounds(0, 0, 250, 35);
-		lblMyPasswords.setFont(new Font("Comfortaa", Font.BOLD, 15));
+		lblMyPasswords.setFont(CofferRef.Comfortaa_Bold_15);
 		lblMyPasswords.setForeground(new Color(0,175,210));
 		lblMyPasswords.addMouseListener(new MouseAdapter() {
 			@Override
@@ -54,7 +53,7 @@ public class DashBoard extends JPanel {
 
 		JLabel lblAddEntry = new JLabel("Add a Password");
 		lblAddEntry.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAddEntry.setFont(new Font("Comfortaa", Font.BOLD, 15));
+		lblAddEntry.setFont(CofferRef.Comfortaa_Bold_15);
 		lblAddEntry.setIcon(new ImageIcon(this.getClass().getResource("/addKey.png")));
 		lblAddEntry.setForeground(new Color(0,175,210));
 		lblAddEntry.setBounds(250, 0, 250, 35);
@@ -75,7 +74,7 @@ public class DashBoard extends JPanel {
 		lblPasswordGen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPasswordGen.setIcon(new ImageIcon(this.getClass().getResource("/keyGen.png")));
 		lblPasswordGen.setBounds(500, 0, 250, 35);
-		lblPasswordGen.setFont(new Font("Comfortaa", Font.BOLD, 15));
+		lblPasswordGen.setFont(CofferRef.Comfortaa_Bold_15);
 		lblPasswordGen.setForeground(new Color(0,175,210));
 		lblPasswordGen.addMouseListener(new MouseAdapter() { 
 			@Override

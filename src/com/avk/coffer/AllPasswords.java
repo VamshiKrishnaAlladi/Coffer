@@ -2,7 +2,6 @@ package com.avk.coffer;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -44,7 +43,7 @@ public class AllPasswords extends JPanel {
 			vsb.setUnitIncrement(10);
 			
 			JLabel lblTitle = new JLabel("Password Almanac");
-			lblTitle.setFont(new Font("Comfortaa", Font.ITALIC|Font.BOLD, 20));
+			lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
 			lblTitle.setForeground(new Color(0,175,210));
 			lblTitle.setBounds(50, 25, 240, 50);
 			add(lblTitle);
@@ -81,7 +80,7 @@ public class AllPasswords extends JPanel {
 					Coffer.setStatus("You can add entries in \"Add a Password\" tab.");
 					JLabel noPass = new JLabel("You have'nt stored any passwords yet");
 					noPass.setForeground(new Color(100, 100, 100));
-					noPass.setFont(new Font("Comfortaa", Font.PLAIN, 15));
+					noPass.setFont(CofferRef.Comfortaa_Plain_15);
 					displayPanel.add(noPass);						
 				}
 			}

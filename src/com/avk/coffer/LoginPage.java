@@ -1,7 +1,6 @@
 package com.avk.coffer;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -48,7 +47,7 @@ public class LoginPage extends JPanel {
 		add(lblPassExclaim);
 		
 		usernameField = new JTextField("Username");
-		usernameField.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		usernameField.setFont(CofferRef.Comfortaa_Plain_14);
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
 		usernameField.setForeground(new Color(75,75,75));
 		usernameField.addMouseListener(new MouseAdapter() {
@@ -89,7 +88,7 @@ public class LoginPage extends JPanel {
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setOpaque(false);
 		passwordField.setText("Password");
-		passwordField.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		passwordField.setFont(CofferRef.Comfortaa_Plain_14);
 		passwordField.setForeground(new Color(75,75,75));
 		passwordField.setEchoChar((char)0);
 		passwordField.addMouseListener(new MouseAdapter() {
@@ -198,7 +197,7 @@ public class LoginPage extends JPanel {
 			}
 		});
 		lblSubmit.setForeground(Color.WHITE);
-		lblSubmit.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		lblSubmit.setFont(CofferRef.Comfortaa_Plain_14);
 		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSubmit.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblSubmit.setBounds(275, 340, 200, 40);
@@ -214,7 +213,7 @@ public class LoginPage extends JPanel {
 		lblCoffer.setForeground( new Color(150,150,150));
 		lblCoffer.setIconTextGap(90);
 		lblCoffer.setHorizontalTextPosition(SwingConstants.RIGHT);
-		lblCoffer.setFont(new Font("Comfortaa", Font.BOLD , 80));
+		lblCoffer.setFont(CofferRef.Comfortaa_Bold_80);
 		lblCoffer.setText("Coffer");
 		lblCoffer.setBounds(10, 80, 730, 100);
 		add(lblCoffer);

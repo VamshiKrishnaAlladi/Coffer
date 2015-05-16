@@ -1,7 +1,6 @@
 package com.avk.coffer;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,7 +20,7 @@ public class CofferTrayPopup extends JPopupMenu {
 		lockItem.setIconTextGap(10);
 		lockItem.setBackground(Color.WHITE);
 		lockItem.setForeground(new Color(100,100,100));
-		lockItem.setFont(new Font("Comfortaa", Font.PLAIN, 13));
+		lockItem.setFont(CofferRef.Comfortaa_Plain_13);
 		lockItem.setIcon(new ImageIcon(this.getClass().getResource("/lock.png")));
 		lockItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
@@ -35,7 +34,7 @@ public class CofferTrayPopup extends JPopupMenu {
 		restoreItem.setBackground(Color.WHITE);
 		restoreItem.setForeground(new Color(100,100,100));
 		restoreItem.setIcon(new ImageIcon(this.getClass().getResource("/restore.png")));
-		restoreItem.setFont(new Font("Comfortaa", Font.PLAIN, 13));
+		restoreItem.setFont(CofferRef.Comfortaa_Plain_13);
 		restoreItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { Coffer.makeAppear(); }
         });
@@ -44,7 +43,7 @@ public class CofferTrayPopup extends JPopupMenu {
 		JMenuItem exitItem = new JMenuItem("Exit");
 		exitItem.setBackground(Color.WHITE);
 		exitItem.setForeground(new Color(100,100,100));
-		exitItem.setFont(new Font("Comfortaa", Font.PLAIN, 13));
+		exitItem.setFont(CofferRef.Comfortaa_Plain_13);
 		exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { Coffer.clearAndExit(); }
         });

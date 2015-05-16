@@ -1,7 +1,6 @@
 package com.avk.coffer;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -32,7 +31,7 @@ public class CofferCheckBox extends JLabel {
 		if(checked){ setIcon(checkedImg); }else{ setIcon(uncheckedImg);}
 		this.setText(text);
 		setForeground(new Color(0, 175, 210));
-		setFont(new Font("Comfortaa", Font.PLAIN, 15));
+		setFont(CofferRef.Comfortaa_Plain_15);
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				toggleCheck();

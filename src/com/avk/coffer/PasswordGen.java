@@ -1,7 +1,6 @@
 package com.avk.coffer;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,14 +25,14 @@ public class PasswordGen extends JPanel {
 		setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Password Brewery");
-		lblTitle.setFont(new Font("Comfortaa", Font.ITALIC|Font.BOLD, 20));
+		lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
 		lblTitle.setForeground(new Color(0,175,210));
 		lblTitle.setBounds(50, 25, 240, 50);
 		add(lblTitle);
 
 		JLabel lblText1 = new JLabel("Your Password will have ");
 		lblText1.setForeground(new Color(0,175,210));
-		lblText1.setFont(new Font("Comfortaa", Font.PLAIN, 15));
+		lblText1.setFont(CofferRef.Comfortaa_Plain_15);
 		lblText1.setBounds(105, 99, 185, 30);
 		add(lblText1);
 		
@@ -46,7 +45,7 @@ public class PasswordGen extends JPanel {
 		
 		JLabel lblText2 = new JLabel("characters and will include");
 		lblText2.setForeground(new Color(0,175,210));
-		lblText2.setFont(new Font("Comfortaa", Font.PLAIN, 15));
+		lblText2.setFont(CofferRef.Comfortaa_Plain_15);
 		lblText2.setBounds(430, 99, 216, 30);
 		add(lblText2);		
 		
@@ -70,7 +69,7 @@ public class PasswordGen extends JPanel {
 		passwordDisp.setText("Your Password will be shown here :)");
 		passwordDisp.setEditable(false);
 		passwordDisp.setForeground(new Color(0,175,210));
-		passwordDisp.setFont(new Font("Comfortaa", Font.BOLD, 15));
+		passwordDisp.setFont(CofferRef.Comfortaa_Bold_15);
 		passwordDisp.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordDisp.setOpaque(false);
 		passwordDisp.setBorder(null);
@@ -96,7 +95,7 @@ public class PasswordGen extends JPanel {
 
 		JLabel lblGen = new JLabel("Generate");
 		lblGen.setForeground(Color.WHITE);
-		lblGen.setFont(new Font("Comfortaa", Font.PLAIN, 15));
+		lblGen.setFont(CofferRef.Comfortaa_Plain_15);
 		lblGen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGen.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblGen.setBounds(275, 340, 200, 40);

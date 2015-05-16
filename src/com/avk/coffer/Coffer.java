@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.SystemTray;
@@ -40,14 +39,14 @@ public class Coffer {
 	private static Thread Sleeper;
 	
 	private static int xPressed;
-	private int yPressed;
+	private static int yPressed;
 
     private static File MUTEX_FILE = new File("./Coffer/Coffer.mutex");
     public static File KEY_FILE = new File("./Coffer/.cofferkey");
     private static Scanner MUTEX_SCANNER;
 
 	private static TrayIcon trayIcon;
-    private static SystemTray tray;
+	private static SystemTray tray;
     
 	/**
 	 * Launch the application.
@@ -167,7 +166,7 @@ public class Coffer {
 
 			JLabel lbl_ = new JLabel();
 			lbl_.setVerticalAlignment(SwingConstants.TOP);
-			lbl_.setFont(new Font("Antipasto", Font.BOLD, 26));
+			lbl_.setFont(CofferRef.Antipasto_Bold_26);
 			lbl_.setHorizontalTextPosition(SwingConstants.CENTER);
 			lbl_.setHorizontalAlignment(SwingConstants.CENTER);
 			lbl_.setText("");
@@ -193,7 +192,7 @@ public class Coffer {
 			JLabel lblX = new JLabel();
 			lblX.setText("");
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
-			lblX.setFont(new Font("Antipasto", Font.BOLD, 26));
+			lblX.setFont(CofferRef.Antipasto_Bold_26);
 			lblX.setForeground(new Color(0,175,210));
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
@@ -235,7 +234,7 @@ public class Coffer {
 			frmTitleLabel.setVerticalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setForeground(Color.WHITE);
-			frmTitleLabel.setFont(new Font("Comfortaa", Font.BOLD, 16));
+			frmTitleLabel.setFont(CofferRef.Comfortaa_Bold_16);
 			frmTitleLabel.setText("Coffer");
 			frmcoffer.getContentPane().add(frmTitleLabel);
 
@@ -248,7 +247,7 @@ public class Coffer {
 			frmStatusLabel = new JLabel("");
 			frmStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			frmStatusLabel.setBounds(10, 520, 730, 30);
-			frmStatusLabel.setFont(new Font("Comfortaa", Font.ITALIC|Font.BOLD, 15));
+			frmStatusLabel.setFont(CofferRef.Comfortaa_Bold_Italic_15);
 			frmStatusLabel.setForeground(Color.white);
 			frmcoffer.getContentPane().add(frmStatusLabel);
 
@@ -300,7 +299,7 @@ public class Coffer {
 		cl.show(contentPanel, page);
 	}
 	
-	static void makeAppear(){
+	public static void makeAppear(){
 		frmcoffer.setState(Frame.NORMAL);
 		frmcoffer.setVisible(true);
 		frmcoffer.setAlwaysOnTop(true);

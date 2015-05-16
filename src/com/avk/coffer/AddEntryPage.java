@@ -1,7 +1,6 @@
 package com.avk.coffer;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -61,7 +60,7 @@ public class AddEntryPage extends JPanel {
 		titleField.setOpaque(false);
 		titleField.setHorizontalAlignment(SwingConstants.LEFT);
 		titleField.setForeground(new Color(75, 75, 75));
-		titleField.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		titleField.setFont(CofferRef.Comfortaa_Plain_14);
 		titleField.setBorder(null);
 		titleField.setBackground((Color) null);
 		titleField.setBounds(235, 119, 280, 30);
@@ -99,7 +98,7 @@ public class AddEntryPage extends JPanel {
 		add(lblTitlefieldImg);
 
 		usernameField = new JTextField("Username");
-		usernameField.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		usernameField.setFont(CofferRef.Comfortaa_Plain_14);
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
 		usernameField.setForeground(new Color(75,75,75));
 		usernameField.setOpaque(false);
@@ -143,7 +142,7 @@ public class AddEntryPage extends JPanel {
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setOpaque(false);
 		passwordField.setText("Password");
-		passwordField.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		passwordField.setFont(CofferRef.Comfortaa_Plain_14);
 		passwordField.setForeground(new Color(75,75,75));
 		passwordField.setEchoChar((char)0);
 		passwordField.setBackground(null);
@@ -191,7 +190,7 @@ public class AddEntryPage extends JPanel {
 		confirmPasswordField.setHorizontalAlignment(SwingConstants.LEFT);
 		confirmPasswordField.setOpaque(false);
 		confirmPasswordField.setText("Confirm Password");
-		confirmPasswordField.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		confirmPasswordField.setFont(CofferRef.Comfortaa_Plain_14);
 		confirmPasswordField.setForeground(new Color(75,75,75));
 		confirmPasswordField.setEchoChar((char)0);
 		confirmPasswordField.setBackground(null);
@@ -237,7 +236,7 @@ public class AddEntryPage extends JPanel {
 
 		JLabel lblSubmit = new JLabel("Submit");
 		lblSubmit.setForeground(Color.WHITE);
-		lblSubmit.setFont(new Font("Comfortaa", Font.PLAIN, 14));
+		lblSubmit.setFont(CofferRef.Comfortaa_Plain_14);
 		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSubmit.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblSubmit.setBounds(275, 315, 200, 40);
@@ -335,7 +334,7 @@ public class AddEntryPage extends JPanel {
 		add(lblSubmit);
 
 		JLabel lblTitle = new JLabel("Password Registry");
-		lblTitle.setFont(new Font("Comfortaa", Font.ITALIC|Font.BOLD, 20));
+		lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
 		lblTitle.setForeground(new Color(0,175,210));
 		lblTitle.setBounds(50, 25, 300, 50);
 		add(lblTitle);
