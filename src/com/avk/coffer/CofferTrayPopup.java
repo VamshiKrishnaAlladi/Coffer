@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.border.LineBorder;
@@ -13,15 +12,15 @@ import javax.swing.border.LineBorder;
 public class CofferTrayPopup extends JPopupMenu {
 
 	public CofferTrayPopup() {
-		setBorder(new LineBorder(new Color(0,175,210)));
+		setBorder(new LineBorder(CofferRef.CofferBlue));
 		setBackground(Color.WHITE);
 		
 		JMenuItem lockItem = new JMenuItem("Lock Coffer");
 		lockItem.setIconTextGap(10);
 		lockItem.setBackground(Color.WHITE);
-		lockItem.setForeground(new Color(100,100,100));
+		lockItem.setForeground(CofferRef.CofferLightGrey);
 		lockItem.setFont(CofferRef.Comfortaa_Plain_13);
-		lockItem.setIcon(new ImageIcon(this.getClass().getResource("/lock.png")));
+		lockItem.setIcon(CofferRef.COFFER_LOCK);
 		lockItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
             	Coffer.lockCoffer();
@@ -32,8 +31,8 @@ public class CofferTrayPopup extends JPopupMenu {
 		JMenuItem restoreItem = new JMenuItem("Restore");
 		restoreItem.setIconTextGap(10);
 		restoreItem.setBackground(Color.WHITE);
-		restoreItem.setForeground(new Color(100,100,100));
-		restoreItem.setIcon(new ImageIcon(this.getClass().getResource("/restore.png")));
+		restoreItem.setForeground(CofferRef.CofferLightGrey);
+		restoreItem.setIcon(CofferRef.COFFER_FRAME_RESTORE);
 		restoreItem.setFont(CofferRef.Comfortaa_Plain_13);
 		restoreItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { Coffer.makeAppear(); }
@@ -42,7 +41,7 @@ public class CofferTrayPopup extends JPopupMenu {
 		
 		JMenuItem exitItem = new JMenuItem("Exit");
 		exitItem.setBackground(Color.WHITE);
-		exitItem.setForeground(new Color(100,100,100));
+		exitItem.setForeground(CofferRef.CofferLightGrey);
 		exitItem.setFont(CofferRef.Comfortaa_Plain_13);
 		exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { Coffer.clearAndExit(); }

@@ -27,7 +27,7 @@ public class CofferExtraInstance extends JDialog {
 		setVisible(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
-		contentPanel.setBorder(new LineBorder(new Color(0,175,210), 1));
+		contentPanel.setBorder(new LineBorder(CofferRef.CofferBlue, 1));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
@@ -45,13 +45,13 @@ public class CofferExtraInstance extends JDialog {
 		JLabel lbl1 = new JLabel("An Instance of Coffer os already running.");
 		lbl1.setBounds(95, 10, 280, 30);
 		panel.add(lbl1);
-		lbl1.setForeground(new Color(0,175,210));
+		lbl1.setForeground(CofferRef.CofferBlue);
 		lbl1.setFont(CofferRef.Comfortaa_Plain_13);
 		{
 			JLabel lbl2 = new JLabel("Check in the system's task tray.");
 			lbl2.setBounds(95, 40, 280, 30);
 			panel.add(lbl2);
-			lbl2.setForeground(new Color(100,100,100));
+			lbl2.setForeground(CofferRef.CofferLightGrey);
 			lbl2.setFont(CofferRef.Comfortaa_Plain_13);
 		}
 

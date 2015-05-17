@@ -1,6 +1,5 @@
 package com.avk.coffer;
 
-import java.awt.Color;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -27,7 +26,7 @@ public class PasswordEntry extends JLabel {
 	
 	void setSettings()
 	{
-		setForeground(new Color(100, 100, 100));
+		setForeground(CofferRef.CofferLightGrey);
 		setFont(CofferRef.Comfortaa_Plain_15);
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

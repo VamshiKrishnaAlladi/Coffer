@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,12 +25,12 @@ public class PasswordGen extends JPanel {
 		
 		JLabel lblTitle = new JLabel("Password Brewery");
 		lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
-		lblTitle.setForeground(new Color(0,175,210));
+		lblTitle.setForeground(CofferRef.CofferBlue);
 		lblTitle.setBounds(50, 25, 240, 50);
 		add(lblTitle);
 
 		JLabel lblText1 = new JLabel("Your Password will have ");
-		lblText1.setForeground(new Color(0,175,210));
+		lblText1.setForeground(CofferRef.CofferBlue);
 		lblText1.setFont(CofferRef.Comfortaa_Plain_15);
 		lblText1.setBounds(105, 99, 185, 30);
 		add(lblText1);
@@ -44,7 +43,7 @@ public class PasswordGen extends JPanel {
 		add(numChars);
 		
 		JLabel lblText2 = new JLabel("characters and will include");
-		lblText2.setForeground(new Color(0,175,210));
+		lblText2.setForeground(CofferRef.CofferBlue);
 		lblText2.setFont(CofferRef.Comfortaa_Plain_15);
 		lblText2.setBounds(430, 99, 216, 30);
 		add(lblText2);		
@@ -68,7 +67,7 @@ public class PasswordGen extends JPanel {
 		passwordDisp = new JTextField();
 		passwordDisp.setText("Your Password will be shown here :)");
 		passwordDisp.setEditable(false);
-		passwordDisp.setForeground(new Color(0,175,210));
+		passwordDisp.setForeground(CofferRef.CofferBlue);
 		passwordDisp.setFont(CofferRef.Comfortaa_Bold_15);
 		passwordDisp.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordDisp.setOpaque(false);
@@ -76,12 +75,12 @@ public class PasswordGen extends JPanel {
 		passwordDisp.setBounds(175, 270, 400, 30);
 		add(passwordDisp);
 		
-		JLabel passwordBlank = new JLabel(new ImageIcon(this.getClass().getResource("/textBlank.png")));
+		JLabel passwordBlank = new JLabel(CofferRef.TEXT_BLANK);
 		passwordBlank.setBounds(175, 290, 400, 10);
 		add(passwordBlank);
 		
 		
-		JLabel lblClipBoard = new JLabel(new ImageIcon(this.getClass().getResource("/clipBoard.png")));
+		JLabel lblClipBoard = new JLabel(CofferRef.CLIPBOARD);
 		lblClipBoard.setBounds(585, 270, 30, 30);
 		lblClipBoard.setVisible(false);
 		lblClipBoard.addMouseListener(new MouseAdapter() {
@@ -128,7 +127,7 @@ public class PasswordGen extends JPanel {
 		});
 		add(lblGen);
 		
-		JLabel genButtonImg = new JLabel(new ImageIcon(this.getClass().getResource("/button.png")));
+		JLabel genButtonImg = new JLabel(CofferRef.BUTTON_IMG);
 		genButtonImg.setBounds(275, 340, 200, 40);
 		add(genButtonImg);		
 	}

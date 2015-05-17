@@ -1,6 +1,5 @@
 package com.avk.coffer;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.StringTokenizer;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -37,14 +35,14 @@ public class AllPasswords extends JPanel {
 			scrollPane.setViewportBorder(null);
 			
 			JScrollBar vsb = scrollPane.getVerticalScrollBar();
-			vsb.setUI(new CofferScrollbarUI(new ImageIcon(this.getClass().getResource("/scrollbarTrack.png")).getImage()));
+			vsb.setUI(new CofferScrollbarUI(CofferRef.COFFER_SCROLLBAR_TRACK.getImage()));
 			vsb.setPreferredSize(new Dimension(10,300));
 			vsb.setOpaque(false);
 			vsb.setUnitIncrement(10);
 			
 			JLabel lblTitle = new JLabel("Password Almanac");
 			lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
-			lblTitle.setForeground(new Color(0,175,210));
+			lblTitle.setForeground(CofferRef.CofferBlue);
 			lblTitle.setBounds(50, 25, 240, 50);
 			add(lblTitle);
 			add(scrollPane);
@@ -73,13 +71,13 @@ public class AllPasswords extends JPanel {
 					p.setUsername(st.nextToken());
 					p.setPassword(st.nextToken());
 					allPasswords.put(p.getTitle(), p);
-					displayPanel.add(new PasswordEntry(p.getTitle()+ " ["+p.getUsername()+"]",new ImageIcon(this.getClass().getResource("/key.png")), javax.swing.SwingConstants.LEFT));					
+					displayPanel.add(new PasswordEntry(p.getTitle()+ " ["+p.getUsername()+"]", CofferRef.COFFER_KEY, javax.swing.SwingConstants.LEFT));					
 					displayPanel.add(Box.createRigidArea(new Dimension(0,5)));
 				}
 				else{
 					Coffer.setStatus("You can add entries in \"Add a Password\" tab.");
 					JLabel noPass = new JLabel("You have'nt stored any passwords yet");
-					noPass.setForeground(new Color(100, 100, 100));
+					noPass.setForeground(CofferRef.CofferLightGrey);
 					noPass.setFont(CofferRef.Comfortaa_Plain_15);
 					displayPanel.add(noPass);						
 				}

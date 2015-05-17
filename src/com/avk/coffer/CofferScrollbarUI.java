@@ -1,6 +1,5 @@
 package com.avk.coffer;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -36,7 +35,7 @@ public class CofferScrollbarUI extends BasicScrollBarUI {
 		if(this.trackImg != null)
 			((Graphics2D)g).drawImage(trackImg,AffineTransform.getScaleInstance(1,(double)trackBounds.height/trackImg.getHeight(null)),null);
 		else{
-			g.setColor( new Color(0,175,210) );
+			g.setColor( CofferRef.CofferBlue );
 			g.drawRect( 0, 4, trackBounds.width - 1 , trackBounds.height - 9 );
 	    }
 		g.translate( -trackBounds.x, -trackBounds.y );
@@ -45,7 +44,7 @@ public class CofferScrollbarUI extends BasicScrollBarUI {
     @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
     	g.translate(thumbBounds.x, thumbBounds.y);
-        g.setColor( new Color(0,175,210) );
+        g.setColor( CofferRef.CofferBlue );
         g.fillRect( 2, 6, thumbBounds.width - 4, thumbBounds.height - 12 );
         g.translate( -thumbBounds.x, -thumbBounds.y );
     }

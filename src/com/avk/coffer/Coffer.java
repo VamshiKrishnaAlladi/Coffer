@@ -22,7 +22,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -170,7 +169,7 @@ public class Coffer {
 			lbl_.setHorizontalTextPosition(SwingConstants.CENTER);
 			lbl_.setHorizontalAlignment(SwingConstants.CENTER);
 			lbl_.setText("");
-			lbl_.setForeground(new Color(0,175,210));
+			lbl_.setForeground(CofferRef.CofferBlue);
 			lbl_.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {			
@@ -193,7 +192,7 @@ public class Coffer {
 			lblX.setText("");
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
 			lblX.setFont(CofferRef.Antipasto_Bold_26);
-			lblX.setForeground(new Color(0,175,210));
+			lblX.setForeground(CofferRef.CofferBlue);
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0)
@@ -238,7 +237,7 @@ public class Coffer {
 			frmTitleLabel.setText("Coffer");
 			frmcoffer.getContentPane().add(frmTitleLabel);
 
-			JLabel frmIconImg = new JLabel(new ImageIcon(this.getClass().getResource("/Coffer_Logo_Blue.png")));
+			JLabel frmIconImg = new JLabel(CofferRef.COFFER_LOGO_SMALL);
 			frmIconImg.setMinimumSize(new Dimension(30, 30));
 			frmIconImg.setBounds(10, 10, 40, 40);
 			frmIconImg.setBackground(Color.WHITE);
@@ -260,7 +259,7 @@ public class Coffer {
 			if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
 			else{ Coffer.swapTo("LoginPage"); }
 
-			JLabel window_img = new JLabel(new ImageIcon(this.getClass().getResource("/CofferBackground.png")));
+			JLabel window_img = new JLabel(CofferRef.COFFER_BACKGROUND);
 			window_img.setBounds(0, 0, 750, 550);
 			frmcoffer.getContentPane().add(window_img);
 		}

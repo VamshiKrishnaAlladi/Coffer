@@ -9,7 +9,6 @@ import java.io.File;
 import java.security.MessageDigest;
 import java.util.StringTokenizer;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,12 +35,12 @@ public class LoginPage extends JPanel {
 		focusGrab.grabFocus();
 		add(focusGrab);
 		
-		JLabel lblUserExclaim = new JLabel(new ImageIcon(this.getClass().getResource("/exclaimRed.png")));
+		JLabel lblUserExclaim = new JLabel(CofferRef.EXCLAIM_RED);
 		lblUserExclaim.setVisible(false);
 		lblUserExclaim.setBounds(530, 240, 40, 40);
 		add(lblUserExclaim);
 		
-		JLabel lblPassExclaim = new JLabel(new ImageIcon(this.getClass().getResource("/exclaimRed.png")));
+		JLabel lblPassExclaim = new JLabel(CofferRef.EXCLAIM_RED);
 		lblPassExclaim.setVisible(false);
 		lblPassExclaim.setBounds(530, 290, 40, 40);
 		add(lblPassExclaim);
@@ -49,7 +48,7 @@ public class LoginPage extends JPanel {
 		usernameField = new JTextField("Username");
 		usernameField.setFont(CofferRef.Comfortaa_Plain_14);
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
-		usernameField.setForeground(new Color(75,75,75));
+		usernameField.setForeground(CofferRef.CofferDarkGrey);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -89,7 +88,7 @@ public class LoginPage extends JPanel {
 		passwordField.setOpaque(false);
 		passwordField.setText("Password");
 		passwordField.setFont(CofferRef.Comfortaa_Plain_14);
-		passwordField.setForeground(new Color(75,75,75));
+		passwordField.setForeground(CofferRef.CofferDarkGrey);
 		passwordField.setEchoChar((char)0);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
@@ -129,11 +128,11 @@ public class LoginPage extends JPanel {
 		add(passwordField);
 		passwordField.setColumns(10);
 		
-		JLabel lblTextfieldimg = new JLabel(new ImageIcon(this.getClass().getResource("/longerRoundTextField.png")));
+		JLabel lblTextfieldimg = new JLabel(CofferRef.TEXTFIELD_IMG);
 		lblTextfieldimg.setBounds(215, 240, 320, 40);
 		add(lblTextfieldimg);
 		
-		JLabel lblPassfieldimg = new JLabel(new ImageIcon(this.getClass().getResource("/longerRoundTextField.png")));
+		JLabel lblPassfieldimg = new JLabel(CofferRef.TEXTFIELD_IMG);
 		lblPassfieldimg.setBounds(215, 290, 320, 40);
 		add(lblPassfieldimg);
 		
@@ -203,14 +202,14 @@ public class LoginPage extends JPanel {
 		lblSubmit.setBounds(275, 340, 200, 40);
 		add(lblSubmit);
 		
-		JLabel submitButtonImg = new JLabel(new ImageIcon(this.getClass().getResource("/button.png")));
+		JLabel submitButtonImg = new JLabel(CofferRef.BUTTON_IMG);
 		submitButtonImg.setBounds(275, 340, 200, 40);
 		add(submitButtonImg);
 		
 		JLabel lblCoffer = new JLabel();
 		lblCoffer.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCoffer.setVerticalTextPosition(SwingConstants.TOP);
-		lblCoffer.setForeground( new Color(150,150,150));
+		lblCoffer.setForeground( CofferRef.CofferVeryLightGrey);
 		lblCoffer.setIconTextGap(90);
 		lblCoffer.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblCoffer.setFont(CofferRef.Comfortaa_Bold_80);
@@ -218,7 +217,7 @@ public class LoginPage extends JPanel {
 		lblCoffer.setBounds(10, 80, 730, 100);
 		add(lblCoffer);
 		
-		JLabel lblBackground = new JLabel(new ImageIcon(this.getClass().getResource("/backgroundLayer.png")));
+		JLabel lblBackground = new JLabel(CofferRef.COFFER_BACKGROUND_LAYER);
 		lblBackground.setBounds(0, -60, 750, 550);
 		add(lblBackground);
 

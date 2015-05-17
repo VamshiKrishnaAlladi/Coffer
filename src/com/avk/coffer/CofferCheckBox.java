@@ -1,10 +1,8 @@
 package com.avk.coffer;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -12,8 +10,6 @@ public class CofferCheckBox extends JLabel {
 
 	private boolean checked = false;
 	private String text = "";
-	private ImageIcon uncheckedImg = new ImageIcon(this.getClass().getResource("/checkBox.png")); 
-	private ImageIcon checkedImg = new ImageIcon(this.getClass().getResource("/checkedBox.png"));
 
 	public CofferCheckBox() {
 		super();
@@ -28,9 +24,9 @@ public class CofferCheckBox extends JLabel {
 	}
 	
 	private void createUI( boolean checked, String text ){
-		if(checked){ setIcon(checkedImg); }else{ setIcon(uncheckedImg);}
+		if(checked){ setIcon(CofferRef.CHECKEDBOX); }else{ setIcon(CofferRef.CHECKBOX);}
 		this.setText(text);
-		setForeground(new Color(0, 175, 210));
+		setForeground(CofferRef.CofferBlue);
 		setFont(CofferRef.Comfortaa_Plain_15);
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -49,12 +45,12 @@ public class CofferCheckBox extends JLabel {
 	public void toggleCheck(){
 		if(checked)
 		{
-			setIcon(uncheckedImg);
+			setIcon(CofferRef.CHECKBOX);
 			checked = false;
 		}
 		else
 		{
-			setIcon(checkedImg);
+			setIcon(CofferRef.CHECKEDBOX);
 			checked = true;
 		}
 	}

@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.security.MessageDigest;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,17 +35,17 @@ public class CreateUserPage extends JPanel {
 		focusGrab.grabFocus();
 		add(focusGrab);
 
-		JLabel lblUserExclaim = new JLabel(new ImageIcon(this.getClass().getResource("/exclaimRed.png")));
+		JLabel lblUserExclaim = new JLabel(CofferRef.EXCLAIM_RED);
 		lblUserExclaim.setVisible(false);
 		lblUserExclaim.setBounds(530, 200, 40, 40);
 		add(lblUserExclaim);
 
-		JLabel lblPassExclaim = new JLabel(new ImageIcon(this.getClass().getResource("/exclaimRed.png")));
+		JLabel lblPassExclaim = new JLabel(CofferRef.EXCLAIM_RED);
 		lblPassExclaim.setVisible(false);
 		lblPassExclaim.setBounds(530, 250, 40, 40);
 		add(lblPassExclaim);
 
-		JLabel lblConPassExclaim = new JLabel(new ImageIcon(this.getClass().getResource("/exclaimRed.png")));
+		JLabel lblConPassExclaim = new JLabel(CofferRef.EXCLAIM_RED);
 		lblConPassExclaim.setVisible(false);
 		lblConPassExclaim.setBounds(530, 300, 40, 40);
 		add(lblConPassExclaim);
@@ -54,7 +53,7 @@ public class CreateUserPage extends JPanel {
 		usernameField = new JTextField("Username");
 		usernameField.setFont(CofferRef.Comfortaa_Plain_14);
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
-		usernameField.setForeground(new Color(75,75,75));
+		usernameField.setForeground(CofferRef.CofferDarkGrey);
 		usernameField.setOpaque(false);
 		usernameField.setBackground(null);
 		usernameField.setBorder(null);
@@ -88,7 +87,7 @@ public class CreateUserPage extends JPanel {
 		});
 		add(usernameField);
 
-		JLabel lblTextfieldImg = new JLabel(new ImageIcon(this.getClass().getResource("/longerRoundTextField.png")));
+		JLabel lblTextfieldImg = new JLabel(CofferRef.TEXTFIELD_IMG);
 		lblTextfieldImg.setBounds(215, 200, 320, 40);
 		add(lblTextfieldImg);
 
@@ -97,7 +96,7 @@ public class CreateUserPage extends JPanel {
 		passwordField.setOpaque(false);
 		passwordField.setText("Password");
 		passwordField.setFont(CofferRef.Comfortaa_Plain_14);
-		passwordField.setForeground(new Color(75,75,75));
+		passwordField.setForeground(CofferRef.CofferDarkGrey);
 		passwordField.setEchoChar((char)0);
 		passwordField.setBackground(null);
 		passwordField.setBorder(null);
@@ -136,7 +135,7 @@ public class CreateUserPage extends JPanel {
 		});
 		add(passwordField);
 
-		JLabel lblPassfieldImg = new JLabel(new ImageIcon(this.getClass().getResource("/longerRoundTextField.png")));
+		JLabel lblPassfieldImg = new JLabel(CofferRef.TEXTFIELD_IMG);
 		lblPassfieldImg.setBounds(215, 250, 320, 40);
 		add(lblPassfieldImg);
 
@@ -145,7 +144,7 @@ public class CreateUserPage extends JPanel {
 		confirmPasswordField.setOpaque(false);
 		confirmPasswordField.setText("Confirm Password");
 		confirmPasswordField.setFont(CofferRef.Comfortaa_Plain_14);
-		confirmPasswordField.setForeground(new Color(75,75,75));
+		confirmPasswordField.setForeground(CofferRef.CofferDarkGrey);
 		confirmPasswordField.setEchoChar((char)0);
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
@@ -185,7 +184,7 @@ public class CreateUserPage extends JPanel {
 		add(confirmPasswordField);
 		confirmPasswordField.setColumns(10);
 
-		JLabel lblConfirmPassfieldImg = new JLabel(new ImageIcon(this.getClass().getResource("/longerRoundTextField.png")));
+		JLabel lblConfirmPassfieldImg = new JLabel(CofferRef.TEXTFIELD_IMG);
 		lblConfirmPassfieldImg.setBounds(215, 300, 320, 40);
 		add(lblConfirmPassfieldImg);
 
@@ -284,14 +283,14 @@ public class CreateUserPage extends JPanel {
 		});
 		add(lblSubmit);
 
-		JLabel submitButtonImg = new JLabel(new ImageIcon(this.getClass().getResource("/button.png")));
+		JLabel submitButtonImg = new JLabel(CofferRef.BUTTON_IMG);
 		submitButtonImg.setBounds(275, 350, 200, 40);
 		add(submitButtonImg);
 
 		JLabel lblCofferlogo = new JLabel();
 		lblCofferlogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCofferlogo.setVerticalTextPosition(SwingConstants.TOP);
-		lblCofferlogo.setForeground( new Color(150,150,150));
+		lblCofferlogo.setForeground( CofferRef.CofferVeryLightGrey);
 		lblCofferlogo.setIconTextGap(90);
 		lblCofferlogo.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblCofferlogo.setFont(CofferRef.Comfortaa_Bold_80);
@@ -299,7 +298,7 @@ public class CreateUserPage extends JPanel {
 		lblCofferlogo.setBounds(10, 80, 730, 100);
 		add(lblCofferlogo);
 		
-		JLabel lblBackground = new JLabel(new ImageIcon(this.getClass().getResource("/backgroundLayer.png")));
+		JLabel lblBackground = new JLabel(CofferRef.COFFER_BACKGROUND_LAYER);
 		lblBackground.setBounds(0, -60, 750, 550);
 		add(lblBackground);
 	}

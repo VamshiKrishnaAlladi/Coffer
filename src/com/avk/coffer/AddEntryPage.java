@@ -59,10 +59,9 @@ public class AddEntryPage extends JPanel {
 		titleField = new JTextField("Title");
 		titleField.setOpaque(false);
 		titleField.setHorizontalAlignment(SwingConstants.LEFT);
-		titleField.setForeground(new Color(75, 75, 75));
+		titleField.setForeground(CofferRef.CofferDarkGrey);
 		titleField.setFont(CofferRef.Comfortaa_Plain_14);
 		titleField.setBorder(null);
-		titleField.setBackground((Color) null);
 		titleField.setBounds(235, 119, 280, 30);
 		titleField.addMouseListener(new MouseAdapter() {
 			@Override
@@ -100,7 +99,7 @@ public class AddEntryPage extends JPanel {
 		usernameField = new JTextField("Username");
 		usernameField.setFont(CofferRef.Comfortaa_Plain_14);
 		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
-		usernameField.setForeground(new Color(75,75,75));
+		usernameField.setForeground(CofferRef.CofferDarkGrey);
 		usernameField.setOpaque(false);
 		usernameField.setBackground(null);
 		usernameField.setBorder(null);
@@ -143,7 +142,7 @@ public class AddEntryPage extends JPanel {
 		passwordField.setOpaque(false);
 		passwordField.setText("Password");
 		passwordField.setFont(CofferRef.Comfortaa_Plain_14);
-		passwordField.setForeground(new Color(75,75,75));
+		passwordField.setForeground(CofferRef.CofferDarkGrey);
 		passwordField.setEchoChar((char)0);
 		passwordField.setBackground(null);
 		passwordField.setBorder(null);
@@ -191,7 +190,7 @@ public class AddEntryPage extends JPanel {
 		confirmPasswordField.setOpaque(false);
 		confirmPasswordField.setText("Confirm Password");
 		confirmPasswordField.setFont(CofferRef.Comfortaa_Plain_14);
-		confirmPasswordField.setForeground(new Color(75,75,75));
+		confirmPasswordField.setForeground(CofferRef.CofferDarkGrey);
 		confirmPasswordField.setEchoChar((char)0);
 		confirmPasswordField.setBackground(null);
 		confirmPasswordField.setBorder(null);
@@ -335,7 +334,7 @@ public class AddEntryPage extends JPanel {
 
 		JLabel lblTitle = new JLabel("Password Registry");
 		lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
-		lblTitle.setForeground(new Color(0,175,210));
+		lblTitle.setForeground(CofferRef.CofferBlue);
 		lblTitle.setBounds(50, 25, 300, 50);
 		add(lblTitle);
 		

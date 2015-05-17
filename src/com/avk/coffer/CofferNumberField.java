@@ -1,11 +1,9 @@
 package com.avk.coffer;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,9 +13,9 @@ import javax.swing.SwingConstants;
 public class CofferNumberField extends JPanel {
 
 	private JTextField numField;
-	private JLabel blank = new JLabel(new ImageIcon(this.getClass().getResource("/mediumTextBlank.png")));
-	private JLabel plus = new JLabel(new ImageIcon(this.getClass().getResource("/plus.png")));
-	private JLabel minus = new JLabel(new ImageIcon(this.getClass().getResource("/minus.png")));
+	private JLabel blank = new JLabel(CofferRef.MEDIUM_TEXT_BLANK);
+	private JLabel plus = new JLabel(CofferRef.PLUS);
+	private JLabel minus = new JLabel(CofferRef.MINUS);
 	private Integer num = 0;
 	private Integer max = Integer.MAX_VALUE;
 	private Integer min = Integer.MIN_VALUE;
@@ -30,7 +28,7 @@ public class CofferNumberField extends JPanel {
 		
 		numField = new JTextField();
 		numField.setText(num.toString());
-		numField.setForeground(new Color(100,100,100));
+		numField.setForeground(CofferRef.CofferLightGrey);
 		numField.setFont(CofferRef.Comfortaa_Plain_15);
 		numField.setHorizontalAlignment(SwingConstants.CENTER);
 		numField.setEditable(false);
