@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -53,9 +52,7 @@ public class CofferRef {
 	public static final ImageIcon TEXT_BLANK = new ImageIcon(Coffer.class.getResource("/textBlank.png"));
 	public static final ImageIcon MEDIUM_TEXT_BLANK = new ImageIcon(Coffer.class.getResource("/mediumTextBlank.png"));
 	public static final ImageIcon PLUS = new ImageIcon(Coffer.class.getResource("/plus.png"));
-	public static final ImageIcon MINUS = new ImageIcon(Coffer.class.getResource("/minus.png"));
-	
-	
+	public static final ImageIcon MINUS = new ImageIcon(Coffer.class.getResource("/minus.png"));	
 	
 	// Images used in System's Tray Icon
 	public static final ImageIcon COFFER_LOCK = new ImageIcon(Coffer.class.getResource("/lock.png"));
@@ -80,8 +77,8 @@ public class CofferRef {
 	
 	static{
 	    try {
-	    	Font Comfortaa = Font.createFont(Font.TRUETYPE_FONT, new File("./resrc/Comfortaa.ttf"));
-	    	Font Antipasto = Font.createFont(Font.TRUETYPE_FONT, new File("./resrc/Antipasto.otf"));
+	    	Font Comfortaa = Font.createFont(Font.TRUETYPE_FONT, Coffer.class.getResourceAsStream("/Comfortaa.ttf"));
+	    	Font Antipasto = Font.createFont(Font.TRUETYPE_FONT, Coffer.class.getResourceAsStream("/Antipasto.otf"));
 	    	
 	    	Comfortaa_Plain_13 = Comfortaa.deriveFont( Font.PLAIN, 13);
 	    	Comfortaa_Plain_14 = Comfortaa.deriveFont( Font.PLAIN, 14);
