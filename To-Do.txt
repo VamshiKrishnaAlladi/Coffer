@@ -1,0 +1,9 @@
+-> Webpage URL redirection.
+-> Password export option.
+-> Implement MVC framework for project.
+-> Edit and Delete options for password entries.
+-> Menu to add options like
+    * Settings
+    * About
+    * Help
+-> Create a Usage Tutorial.
