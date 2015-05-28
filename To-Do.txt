@@ -1,9 +1,13 @@
--> Webpage URL redirection.
--> Password export option.
 -> Implement MVC framework for project.
 -> Edit and Delete options for password entries.
--> Menu to add options like
+-> Implement lock confirmation when minimised to system tray.
+-> Fix persistence issues with coffer.mutex
+-> Webpage URL redirection.
+-> Password export option.
+-> Implement forgotten password retrieval.
+-> Create a Usage Tutorial.
+-> Implement Menu to add options like
+    * Show Tutorial
     * Settings
     * About
     * Help
--> Create a Usage Tutorial.
