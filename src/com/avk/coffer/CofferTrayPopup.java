@@ -12,15 +12,15 @@ import javax.swing.border.LineBorder;
 public class CofferTrayPopup extends JPopupMenu {
 
 	public CofferTrayPopup() {
-		setBorder(new LineBorder(CofferRef.CofferBlue));
+		setBorder(new LineBorder(CofferReferences.CofferBlue));
 		setBackground(Color.WHITE);
 		
 		JMenuItem lockItem = new JMenuItem("Lock Coffer");
 		lockItem.setIconTextGap(10);
 		lockItem.setBackground(Color.WHITE);
-		lockItem.setForeground(CofferRef.CofferLightGrey);
-		lockItem.setFont(CofferRef.Comfortaa_Plain_13);
-		lockItem.setIcon(CofferRef.COFFER_LOCK);
+		lockItem.setForeground(CofferReferences.CofferLightGrey);
+		lockItem.setFont(CofferReferences.Comfortaa_Plain_13);
+		lockItem.setIcon(CofferReferences.COFFER_LOCK);
 		lockItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
             	Coffer.lockCoffer();
@@ -31,9 +31,9 @@ public class CofferTrayPopup extends JPopupMenu {
 		JMenuItem restoreItem = new JMenuItem("Restore");
 		restoreItem.setIconTextGap(10);
 		restoreItem.setBackground(Color.WHITE);
-		restoreItem.setForeground(CofferRef.CofferLightGrey);
-		restoreItem.setIcon(CofferRef.COFFER_FRAME_RESTORE);
-		restoreItem.setFont(CofferRef.Comfortaa_Plain_13);
+		restoreItem.setForeground(CofferReferences.CofferLightGrey);
+		restoreItem.setIcon(CofferReferences.COFFER_FRAME_RESTORE);
+		restoreItem.setFont(CofferReferences.Comfortaa_Plain_13);
 		restoreItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { Coffer.makeAppear(); }
         });
@@ -41,8 +41,8 @@ public class CofferTrayPopup extends JPopupMenu {
 		
 		JMenuItem exitItem = new JMenuItem("Exit");
 		exitItem.setBackground(Color.WHITE);
-		exitItem.setForeground(CofferRef.CofferLightGrey);
-		exitItem.setFont(CofferRef.Comfortaa_Plain_13);
+		exitItem.setForeground(CofferReferences.CofferLightGrey);
+		exitItem.setFont(CofferReferences.Comfortaa_Plain_13);
 		exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { Coffer.clearAndExit(); }
         });

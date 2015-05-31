@@ -1,8 +1,5 @@
 package com.avk.coffer;
 
-import java.awt.Color;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -11,17 +8,14 @@ import java.security.MessageDigest;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class CreateUserPage extends JPanel {
-	private JTextField usernameField;
-	private JPasswordField passwordField;
-	private JPasswordField confirmPasswordField;
+	private CofferTextField usernameField;
+	private CofferPasswordField passwordField;
+	private CofferPasswordField confirmPasswordField;
 	private String defaultStatus;
-//	private BufferedWriter fileWriter;
 	
 	/**
 	 * Create the panel.
@@ -35,29 +29,8 @@ public class CreateUserPage extends JPanel {
 		focusGrab.grabFocus();
 		add(focusGrab);
 
-		JLabel lblUserExclaim = new JLabel(CofferRef.EXCLAIM_RED);
-		lblUserExclaim.setVisible(false);
-		lblUserExclaim.setBounds(530, 200, 40, 40);
-		add(lblUserExclaim);
-
-		JLabel lblPassExclaim = new JLabel(CofferRef.EXCLAIM_RED);
-		lblPassExclaim.setVisible(false);
-		lblPassExclaim.setBounds(530, 250, 40, 40);
-		add(lblPassExclaim);
-
-		JLabel lblConPassExclaim = new JLabel(CofferRef.EXCLAIM_RED);
-		lblConPassExclaim.setVisible(false);
-		lblConPassExclaim.setBounds(530, 300, 40, 40);
-		add(lblConPassExclaim);
-
-		usernameField = new JTextField("Username");
-		usernameField.setFont(CofferRef.Comfortaa_Plain_14);
-		usernameField.setHorizontalAlignment(SwingConstants.LEFT);
-		usernameField.setForeground(CofferRef.CofferDarkGrey);
-		usernameField.setOpaque(false);
-		usernameField.setBackground(null);
-		usernameField.setBorder(null);
-		usernameField.setBounds(235, 205, 280, 30);
+		usernameField = new CofferTextField("Username", null);
+		usernameField.setBounds(215, 200, 360, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -71,38 +44,11 @@ public class CreateUserPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		usernameField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				if(usernameField.getText().equalsIgnoreCase("")){
-					usernameField.setText("Username");
-				}
-			}
-			@Override
-			public void focusGained(FocusEvent e) {
-				if(usernameField.getText().equalsIgnoreCase("username")){
-					usernameField.setText("");
-				}
-			}
-		});
 		add(usernameField);
 
-		JLabel lblTextfieldImg = new JLabel(CofferRef.TEXTFIELD_IMG);
-		lblTextfieldImg.setBounds(215, 200, 320, 40);
-		add(lblTextfieldImg);
-
-		passwordField = new JPasswordField();
-		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
-		passwordField.setOpaque(false);
-		passwordField.setText("Password");
-		passwordField.setFont(CofferRef.Comfortaa_Plain_14);
-		passwordField.setForeground(CofferRef.CofferDarkGrey);
-		passwordField.setEchoChar((char)0);
-		passwordField.setBackground(null);
-		passwordField.setBorder(null);
-		passwordField.setBounds(235, 255, 280, 30);
+		passwordField = new CofferPasswordField("Password", null);
+		passwordField.setBounds(215, 250, 360, 40);
 		passwordField.addMouseListener(new MouseAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(passwordField.getText().equalsIgnoreCase("Password")){
@@ -115,39 +61,10 @@ public class CreateUserPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		passwordField.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
-			@Override
-			public void focusLost(FocusEvent e) {
-				if(passwordField.getText().equalsIgnoreCase("")){
-					passwordField.setEchoChar((char) 0);
-					passwordField.setText("Password");
-				}
-			}
-			@SuppressWarnings("deprecation")
-			@Override
-			public void focusGained(FocusEvent e) {
-				if(passwordField.getText().equalsIgnoreCase("Password")){
-					passwordField.setEchoChar('#');
-					passwordField.setText("");
-				}
-			}
-		});
 		add(passwordField);
 
-		JLabel lblPassfieldImg = new JLabel(CofferRef.TEXTFIELD_IMG);
-		lblPassfieldImg.setBounds(215, 250, 320, 40);
-		add(lblPassfieldImg);
-
-		confirmPasswordField = new JPasswordField();
-		confirmPasswordField.setHorizontalAlignment(SwingConstants.LEFT);
-		confirmPasswordField.setOpaque(false);
-		confirmPasswordField.setText("Confirm Password");
-		confirmPasswordField.setFont(CofferRef.Comfortaa_Plain_14);
-		confirmPasswordField.setForeground(CofferRef.CofferDarkGrey);
-		confirmPasswordField.setEchoChar((char)0);
+		confirmPasswordField = new CofferPasswordField("Confirm Password", null);
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(confirmPasswordField.getText().equalsIgnoreCase("Confirm Password")){
@@ -160,42 +77,13 @@ public class CreateUserPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		confirmPasswordField.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
-			@Override
-			public void focusLost(FocusEvent e) {
-				if(confirmPasswordField.getText().equalsIgnoreCase("")){
-					confirmPasswordField.setEchoChar((char) 0);
-					confirmPasswordField.setText("Confirm Password");
-				}
-			}
-			@SuppressWarnings("deprecation")
-			@Override
-			public void focusGained(FocusEvent e) {
-				if(confirmPasswordField.getText().equalsIgnoreCase("Confirm Password")){
-					confirmPasswordField.setEchoChar('#');
-					confirmPasswordField.setText("");
-				}
-			}
-		});
-		confirmPasswordField.setBackground(null);
-		confirmPasswordField.setBorder(null);
-		confirmPasswordField.setBounds(235, 305, 280, 30);
+		confirmPasswordField.setBounds(215, 300, 360, 40);
 		add(confirmPasswordField);
-		confirmPasswordField.setColumns(10);
 
-		JLabel lblConfirmPassfieldImg = new JLabel(CofferRef.TEXTFIELD_IMG);
-		lblConfirmPassfieldImg.setBounds(215, 300, 320, 40);
-		add(lblConfirmPassfieldImg);
 
-		JLabel lblSubmit = new JLabel("Submit");
-		lblSubmit.setForeground(Color.WHITE);
-		lblSubmit.setFont(CofferRef.Comfortaa_Plain_14);
-		lblSubmit.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSubmit.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblSubmit.setBounds(275, 350, 200, 40);
-		lblSubmit.addMouseListener(new MouseAdapter() {
-			@SuppressWarnings("deprecation")
+		CofferButton submit = new CofferButton("Submit");
+		submit.setBounds(275, 350, 200, 40);
+		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try 
@@ -211,26 +99,26 @@ public class CreateUserPage extends JPanel {
 					if(username.equalsIgnoreCase("username") || username.equalsIgnoreCase("") )
 					{
 						Coffer.setStatus("Pick a username.");
-						lblUserExclaim.setVisible(true);
-						lblPassExclaim.setVisible(false);
-						lblConPassExclaim.setVisible(false);
+						usernameField.setExclaim(true);
+						passwordField.setExclaim(false);
+						confirmPasswordField.setExclaim(false);
 					}
 					else if(password.equalsIgnoreCase("password") || password.equalsIgnoreCase(""))
 					{
 						Coffer.setStatus("Pick a password.");
-						lblUserExclaim.setVisible(false);
-						lblPassExclaim.setVisible(true);
-						lblConPassExclaim.setVisible(false);
+						usernameField.setExclaim(false);
+						passwordField.setExclaim(true);
+						confirmPasswordField.setExclaim(false);
 					}
 					else if(!password.matches(passPattern))
 					{
 						Coffer.setStatus("Click on the Exclaimation for password policy.");
-						lblUserExclaim.setVisible(false);
-						lblPassExclaim.setVisible(true);
-						lblConPassExclaim.setVisible(false);
+						usernameField.setExclaim(false);
+						passwordField.setExclaim(true);
+						confirmPasswordField.setExclaim(false);
 						passwordField.setText("");
 						passwordField.grabFocus();
-						lblPassExclaim.addMouseListener(new MouseAdapter() {
+						passwordField.addExclaimMouseListener(new MouseAdapter() {
 							
 							@Override
 							public void mouseClicked(MouseEvent e) {
@@ -244,18 +132,18 @@ public class CreateUserPage extends JPanel {
 					else if(conPass.equalsIgnoreCase("confirm password") || conPass.equalsIgnoreCase(""))
 					{
 						Coffer.setStatus("Confirm your password.");
-						lblUserExclaim.setVisible(false);
-						lblPassExclaim.setVisible(false);
-						lblConPassExclaim.setVisible(true);
+						usernameField.setExclaim(false);
+						passwordField.setExclaim(false);
+						confirmPasswordField.setExclaim(true);
 					}
 					else if(!password.equals(conPass)){
 						Coffer.setStatus("Passwords did not match. :(");
 						passwordField.setText("");
 						passwordField.grabFocus();
 						confirmPasswordField.setText("");
-						lblUserExclaim.setVisible(false);
-						lblPassExclaim.setVisible(true);
-						lblConPassExclaim.setVisible(true);
+						usernameField.setExclaim(false);
+						passwordField.setExclaim(true);
+						confirmPasswordField.setExclaim(true);
 					}
 					else
 					{
@@ -264,15 +152,15 @@ public class CreateUserPage extends JPanel {
 						byte[] hash = digest.digest(password.getBytes("UTF-8"));
 						
 						Coffer.setStatus("Credentials Submited...");
-						lblUserExclaim.setVisible(false);
-						lblPassExclaim.setVisible(false);
-						lblConPassExclaim.setVisible(false);
+						usernameField.setExclaim(false);
+						passwordField.setExclaim(true);
+						confirmPasswordField.setExclaim(false);
 	
 						long timeStamp = System.currentTimeMillis();
 						int key =(int)timeStamp%100000;
 						
 						CofferCrypt.encrypt2File_Key(new String(hash).substring(0, 16), username + "|" + timeStamp , new File("./Coffer/.cofferkey"));
-						CofferRef.setCofferSeed(timeStamp);
+						CofferReferences.setCofferSeed(timeStamp);
 						CofferCrypt.encrypt2File_Index(key, "no_passwords", new File("./Coffer/user's.coffer"));
 
 						Coffer.swapTo("DashBoard");
@@ -281,24 +169,20 @@ public class CreateUserPage extends JPanel {
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}
 		});
-		add(lblSubmit);
-
-		JLabel submitButtonImg = new JLabel(CofferRef.BUTTON_IMG);
-		submitButtonImg.setBounds(275, 350, 200, 40);
-		add(submitButtonImg);
+		add(submit);
 
 		JLabel lblCofferlogo = new JLabel();
 		lblCofferlogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCofferlogo.setVerticalTextPosition(SwingConstants.TOP);
-		lblCofferlogo.setForeground( CofferRef.CofferVeryLightGrey);
+		lblCofferlogo.setForeground( CofferReferences.CofferVeryLightGrey);
 		lblCofferlogo.setIconTextGap(90);
 		lblCofferlogo.setHorizontalTextPosition(SwingConstants.RIGHT);
-		lblCofferlogo.setFont(CofferRef.Comfortaa_Bold_80);
+		lblCofferlogo.setFont(CofferReferences.Comfortaa_Bold_80);
 		lblCofferlogo.setText("Coffer");
 		lblCofferlogo.setBounds(10, 80, 730, 100);
 		add(lblCofferlogo);
 		
-		JLabel lblBackground = new JLabel(CofferRef.COFFER_BACKGROUND_LAYER);
+		JLabel lblBackground = new JLabel(CofferReferences.COFFER_BACKGROUND_LAYER);
 		lblBackground.setBounds(0, -60, 750, 550);
 		add(lblBackground);
 	}

@@ -35,7 +35,7 @@ public class CofferScrollbarUI extends BasicScrollBarUI {
 		if(this.trackImg != null)
 			((Graphics2D)g).drawImage(trackImg,AffineTransform.getScaleInstance(1,(double)trackBounds.height/trackImg.getHeight(null)),null);
 		else{
-			g.setColor( CofferRef.CofferBlue );
+			g.setColor( CofferReferences.CofferBlue );
 			g.drawRect( 0, 4, trackBounds.width - 1 , trackBounds.height - 9 );
 	    }
 		g.translate( -trackBounds.x, -trackBounds.y );
@@ -44,7 +44,7 @@ public class CofferScrollbarUI extends BasicScrollBarUI {
     @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
     	g.translate(thumbBounds.x, thumbBounds.y);
-        g.setColor( CofferRef.CofferBlue );
+        g.setColor( CofferReferences.CofferBlue );
         g.fillRect( 2, 6, thumbBounds.width - 4, thumbBounds.height - 12 );
         g.translate( -thumbBounds.x, -thumbBounds.y );
     }

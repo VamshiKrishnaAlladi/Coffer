@@ -86,7 +86,7 @@ public class Coffer {
 	        if(SystemTray.isSupported())
 	        {
 	            tray=SystemTray.getSystemTray();
-	            Image image=CofferRef.COFFER_SAFE_BLACK_LOGO_16X16.getImage();
+	            Image image=CofferReferences.COFFER_SAFE_BLACK_LOGO_16X16.getImage();
 	            
 	            CofferTrayPopup popup=new CofferTrayPopup();
 	            JDialog hiddenDialog = new JDialog();
@@ -117,7 +117,7 @@ public class Coffer {
 	        
 	        
 			frmcoffer = new JFrame();
-			frmcoffer.setIconImages(CofferRef.COFFER_LOGOS);
+			frmcoffer.setIconImages(CofferReferences.COFFER_LOGOS);
 			frmcoffer.setTitle("Coffer");
 			frmcoffer.setUndecorated(true);
 			frmcoffer.setBounds(0, 0, 750, 550);
@@ -165,11 +165,11 @@ public class Coffer {
 
 			JLabel lbl_ = new JLabel();
 			lbl_.setVerticalAlignment(SwingConstants.TOP);
-			lbl_.setFont(CofferRef.Antipasto_Bold_26);
+			lbl_.setFont(CofferReferences.Antipasto_Bold_26);
 			lbl_.setHorizontalTextPosition(SwingConstants.CENTER);
 			lbl_.setHorizontalAlignment(SwingConstants.CENTER);
 			lbl_.setText("");
-			lbl_.setForeground(CofferRef.CofferBlue);
+			lbl_.setForeground(CofferReferences.CofferBlue);
 			lbl_.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {			
@@ -191,8 +191,8 @@ public class Coffer {
 			JLabel lblX = new JLabel();
 			lblX.setText("");
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
-			lblX.setFont(CofferRef.Antipasto_Bold_26);
-			lblX.setForeground(CofferRef.CofferBlue);
+			lblX.setFont(CofferReferences.Antipasto_Bold_26);
+			lblX.setForeground(CofferReferences.CofferBlue);
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0)
@@ -233,11 +233,11 @@ public class Coffer {
 			frmTitleLabel.setVerticalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setForeground(Color.WHITE);
-			frmTitleLabel.setFont(CofferRef.Comfortaa_Bold_16);
+			frmTitleLabel.setFont(CofferReferences.Comfortaa_Bold_16);
 			frmTitleLabel.setText("Coffer");
 			frmcoffer.getContentPane().add(frmTitleLabel);
 
-			JLabel frmIconImg = new JLabel(CofferRef.COFFER_LOGO_SMALL);
+			JLabel frmIconImg = new JLabel(CofferReferences.COFFER_LOGO_SMALL);
 			frmIconImg.setMinimumSize(new Dimension(30, 30));
 			frmIconImg.setBounds(10, 10, 40, 40);
 			frmIconImg.setBackground(Color.WHITE);
@@ -246,7 +246,7 @@ public class Coffer {
 			frmStatusLabel = new JLabel("");
 			frmStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			frmStatusLabel.setBounds(10, 520, 730, 30);
-			frmStatusLabel.setFont(CofferRef.Comfortaa_Bold_Italic_15);
+			frmStatusLabel.setFont(CofferReferences.Comfortaa_Bold_Italic_15);
 			frmStatusLabel.setForeground(Color.white);
 			frmcoffer.getContentPane().add(frmStatusLabel);
 
@@ -259,7 +259,7 @@ public class Coffer {
 			if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
 			else{ Coffer.swapTo("LoginPage"); }
 
-			JLabel window_img = new JLabel(CofferRef.COFFER_BACKGROUND);
+			JLabel window_img = new JLabel(CofferReferences.COFFER_BACKGROUND);
 			window_img.setBounds(0, 0, 750, 550);
 			frmcoffer.getContentPane().add(window_img);
 		}
@@ -333,7 +333,7 @@ public class Coffer {
 	}
 
 	public static void clearAndExit(){
-		CofferRef.SYS_CLIPBOARD.setContents(new StringSelection(""), null);
+		CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(""), null);
         MUTEX_SCANNER.close();
         MUTEX_FILE.deleteOnExit();
         System.exit(0);

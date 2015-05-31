@@ -24,10 +24,10 @@ public class CofferCheckBox extends JLabel {
 	}
 	
 	private void createUI( boolean checked, String text ){
-		if(checked){ setIcon(CofferRef.CHECKEDBOX); }else{ setIcon(CofferRef.CHECKBOX);}
+		if(checked){ setIcon(CofferReferences.CHECKEDBOX); }else{ setIcon(CofferReferences.CHECKBOX);}
 		this.setText(text);
-		setForeground(CofferRef.CofferBlue);
-		setFont(CofferRef.Comfortaa_Plain_15);
+		setForeground(CofferReferences.CofferBlue);
+		setFont(CofferReferences.Comfortaa_Plain_15);
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				toggleCheck();
@@ -45,12 +45,12 @@ public class CofferCheckBox extends JLabel {
 	public void toggleCheck(){
 		if(checked)
 		{
-			setIcon(CofferRef.CHECKBOX);
+			setIcon(CofferReferences.CHECKBOX);
 			checked = false;
 		}
 		else
 		{
-			setIcon(CofferRef.CHECKEDBOX);
+			setIcon(CofferReferences.CHECKEDBOX);
 			checked = true;
 		}
 	}

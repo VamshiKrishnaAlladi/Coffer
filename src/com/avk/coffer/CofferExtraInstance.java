@@ -27,7 +27,7 @@ public class CofferExtraInstance extends JDialog {
 		setVisible(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
-		contentPanel.setBorder(new LineBorder(CofferRef.CofferBlue, 1));
+		contentPanel.setBorder(new LineBorder(CofferReferences.CofferBlue, 1));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
@@ -37,7 +37,7 @@ public class CofferExtraInstance extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		{
-			JLabel lblLogo = new JLabel(CofferRef.COFFER_LOGO_64X64);
+			JLabel lblLogo = new JLabel(CofferReferences.COFFER_LOGO_64X64);
 			lblLogo.setBounds(30, 0, 80, 80);
 			panel.add(lblLogo);
 		}
@@ -45,20 +45,20 @@ public class CofferExtraInstance extends JDialog {
 		JLabel lbl1 = new JLabel("An Instance of Coffer os already running.");
 		lbl1.setBounds(95, 10, 280, 30);
 		panel.add(lbl1);
-		lbl1.setForeground(CofferRef.CofferBlue);
-		lbl1.setFont(CofferRef.Comfortaa_Plain_13);
+		lbl1.setForeground(CofferReferences.CofferBlue);
+		lbl1.setFont(CofferReferences.Comfortaa_Plain_13);
 		{
 			JLabel lbl2 = new JLabel("Check in the system's task tray.");
 			lbl2.setBounds(95, 40, 280, 30);
 			panel.add(lbl2);
-			lbl2.setForeground(CofferRef.CofferLightGrey);
-			lbl2.setFont(CofferRef.Comfortaa_Plain_13);
+			lbl2.setForeground(CofferReferences.CofferLightGrey);
+			lbl2.setFont(CofferReferences.Comfortaa_Plain_13);
 		}
 
 		JLabel lblOk = new JLabel("Ok");
 		contentPanel.add(lblOk);
 		lblOk.setForeground(Color.WHITE);
-		lblOk.setFont(CofferRef.Comfortaa_Plain_13);
+		lblOk.setFont(CofferReferences.Comfortaa_Plain_13);
 		lblOk.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOk.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblOk.setBounds(125, 140, 150, 30);
@@ -69,7 +69,7 @@ public class CofferExtraInstance extends JDialog {
 			}
 		});
 		{
-			JLabel okButtonImg = new JLabel(CofferRef.SMALL_BUTTON_IMG);
+			JLabel okButtonImg = new JLabel(CofferReferences.SMALL_BUTTON_IMG);
 			contentPanel.add(okButtonImg);
 			okButtonImg.setBounds(125, 140, 150, 30);
 		}

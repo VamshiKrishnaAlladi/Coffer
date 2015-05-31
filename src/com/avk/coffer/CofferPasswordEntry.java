@@ -1,6 +1,6 @@
 package com.avk.coffer;
 
-public class Password {
+public class CofferPasswordEntry {
 	String title;
 	String username;
 	String password;

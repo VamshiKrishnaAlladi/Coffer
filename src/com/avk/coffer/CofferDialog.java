@@ -29,20 +29,20 @@ public class CofferDialog extends JDialog  {
 		setAlwaysOnTop(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
-		contentPanel.setBorder(new LineBorder(CofferRef.CofferBlue, 1));
+		contentPanel.setBorder(new LineBorder(CofferReferences.CofferBlue, 1));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
 		JLabel titleLbl = new JLabel(title);
 		titleLbl.setBounds(20, 10, 365, 30);
-		titleLbl.setForeground(CofferRef.CofferBlue);
-		titleLbl.setFont(CofferRef.Comfortaa_Bold_16);
+		titleLbl.setForeground(CofferReferences.CofferBlue);
+		titleLbl.setFont(CofferReferences.Comfortaa_Bold_16);
 		contentPanel.add(titleLbl);
 		
 		JLabel lblX = new JLabel("X");
 		contentPanel.add(lblX);
-		lblX.setForeground(CofferRef.CofferBlue);
-		lblX.setFont(CofferRef.Antipasto_Bold_15);
+		lblX.setForeground(CofferReferences.CofferBlue);
+		lblX.setFont(CofferReferences.Antipasto_Bold_15);
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
 		lblX.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblX.setBounds(375, 5, 20, 20);
@@ -62,10 +62,10 @@ public class CofferDialog extends JDialog  {
 		{
 			JLabel lbl = new JLabel(strs[i]);
 			if(i % 2 == 0)
-				lbl.setForeground(CofferRef.CofferLightGrey);
+				lbl.setForeground(CofferReferences.CofferLightGrey);
 			else
-				lbl.setForeground(CofferRef.CofferBlue);
-			lbl.setFont(CofferRef.Comfortaa_Plain_13);
+				lbl.setForeground(CofferReferences.CofferBlue);
+			lbl.setFont(CofferReferences.Comfortaa_Plain_13);
 			panel.add(lbl);
 			panel.add(Box.createRigidArea(new Dimension(0,5)));
 		}

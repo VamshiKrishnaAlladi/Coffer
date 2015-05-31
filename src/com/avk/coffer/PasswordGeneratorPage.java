@@ -12,26 +12,26 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class PasswordGen extends JPanel {
+public class PasswordGeneratorPage extends JPanel {
 	private JTextField passwordDisp;
 	private CofferNumberField numChars;
 
 	/**
 	 * Create the panel.
 	 */
-	public PasswordGen() {
+	public PasswordGeneratorPage() {
 		setOpaque(false);
 		setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Password Brewery");
-		lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
-		lblTitle.setForeground(CofferRef.CofferBlue);
+		lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
+		lblTitle.setForeground(CofferReferences.CofferBlue);
 		lblTitle.setBounds(50, 25, 240, 50);
 		add(lblTitle);
 
 		JLabel lblText1 = new JLabel("Your Password will have ");
-		lblText1.setForeground(CofferRef.CofferBlue);
-		lblText1.setFont(CofferRef.Comfortaa_Plain_15);
+		lblText1.setForeground(CofferReferences.CofferBlue);
+		lblText1.setFont(CofferReferences.Comfortaa_Plain_15);
 		lblText1.setBounds(105, 99, 185, 30);
 		add(lblText1);
 		
@@ -43,8 +43,8 @@ public class PasswordGen extends JPanel {
 		add(numChars);
 		
 		JLabel lblText2 = new JLabel("characters and will include");
-		lblText2.setForeground(CofferRef.CofferBlue);
-		lblText2.setFont(CofferRef.Comfortaa_Plain_15);
+		lblText2.setForeground(CofferReferences.CofferBlue);
+		lblText2.setFont(CofferReferences.Comfortaa_Plain_15);
 		lblText2.setBounds(430, 99, 216, 30);
 		add(lblText2);		
 		
@@ -67,26 +67,26 @@ public class PasswordGen extends JPanel {
 		passwordDisp = new JTextField();
 		passwordDisp.setText("Your Password will be shown here :)");
 		passwordDisp.setEditable(false);
-		passwordDisp.setForeground(CofferRef.CofferBlue);
-		passwordDisp.setFont(CofferRef.Comfortaa_Bold_15);
+		passwordDisp.setForeground(CofferReferences.CofferBlue);
+		passwordDisp.setFont(CofferReferences.Comfortaa_Bold_15);
 		passwordDisp.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordDisp.setOpaque(false);
 		passwordDisp.setBorder(null);
 		passwordDisp.setBounds(175, 270, 400, 30);
 		add(passwordDisp);
 		
-		JLabel passwordBlank = new JLabel(CofferRef.TEXT_BLANK);
+		JLabel passwordBlank = new JLabel(CofferReferences.TEXT_BLANK);
 		passwordBlank.setBounds(175, 290, 400, 10);
 		add(passwordBlank);
 		
 		
-		JLabel lblClipBoard = new JLabel(CofferRef.CLIPBOARD);
+		JLabel lblClipBoard = new JLabel(CofferReferences.CLIPBOARD);
 		lblClipBoard.setBounds(585, 270, 30, 30);
 		lblClipBoard.setVisible(false);
 		lblClipBoard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CofferRef.SYS_CLIPBOARD.setContents(new StringSelection(passwordDisp.getText()), null);
+				CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(passwordDisp.getText()), null);
 				Coffer.setStatus("Password saved to clipboard.");
 			}
 		});
@@ -94,7 +94,7 @@ public class PasswordGen extends JPanel {
 
 		JLabel lblGen = new JLabel("Generate");
 		lblGen.setForeground(Color.WHITE);
-		lblGen.setFont(CofferRef.Comfortaa_Plain_15);
+		lblGen.setFont(CofferReferences.Comfortaa_Plain_15);
 		lblGen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGen.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblGen.setBounds(275, 340, 200, 40);
@@ -127,7 +127,7 @@ public class PasswordGen extends JPanel {
 		});
 		add(lblGen);
 		
-		JLabel genButtonImg = new JLabel(CofferRef.BUTTON_IMG);
+		JLabel genButtonImg = new JLabel(CofferReferences.BUTTON_IMG);
 		genButtonImg.setBounds(275, 340, 200, 40);
 		add(genButtonImg);		
 	}

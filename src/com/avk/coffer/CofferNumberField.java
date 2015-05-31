@@ -13,9 +13,9 @@ import javax.swing.SwingConstants;
 public class CofferNumberField extends JPanel {
 
 	private JTextField numField;
-	private JLabel blank = new JLabel(CofferRef.MEDIUM_TEXT_BLANK);
-	private JLabel plus = new JLabel(CofferRef.PLUS);
-	private JLabel minus = new JLabel(CofferRef.MINUS);
+	private JLabel blank = new JLabel(CofferReferences.MEDIUM_TEXT_BLANK);
+	private JLabel plus = new JLabel(CofferReferences.PLUS);
+	private JLabel minus = new JLabel(CofferReferences.MINUS);
 	private Integer num = 0;
 	private Integer max = Integer.MAX_VALUE;
 	private Integer min = Integer.MIN_VALUE;
@@ -28,8 +28,8 @@ public class CofferNumberField extends JPanel {
 		
 		numField = new JTextField();
 		numField.setText(num.toString());
-		numField.setForeground(CofferRef.CofferLightGrey);
-		numField.setFont(CofferRef.Comfortaa_Plain_15);
+		numField.setForeground(CofferReferences.CofferLightGrey);
+		numField.setFont(CofferReferences.Comfortaa_Plain_15);
 		numField.setHorizontalAlignment(SwingConstants.CENTER);
 		numField.setEditable(false);
 		numField.setOpaque(false);

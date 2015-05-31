@@ -19,7 +19,7 @@ public class CofferCrypt {
     private static long[] randomKeys;
     
     static{
-    		R = new Random(CofferRef.getCofferSeed());
+    		R = new Random(CofferReferences.getCofferSeed());
 			randomKeys = R.longs(MAX_KEY_INDEX, 1000000000000000L, 10000000000000000L).toArray();
     }
     

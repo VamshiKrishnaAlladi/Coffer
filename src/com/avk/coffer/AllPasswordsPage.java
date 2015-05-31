@@ -15,13 +15,13 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
-public class AllPasswords extends JPanel {
+public class AllPasswordsPage extends JPanel {
 
-	private static HashMap<String, Password> allPasswords;
+	private static HashMap<String, CofferPasswordEntry> allPasswords;
 	/**
 	 * Create the panel.
 	 */
-	public AllPasswords() {
+	public AllPasswordsPage() {
 		try{
 			setOpaque(false);
 			setLayout(null);
@@ -35,14 +35,14 @@ public class AllPasswords extends JPanel {
 			scrollPane.setViewportBorder(null);
 			
 			JScrollBar vsb = scrollPane.getVerticalScrollBar();
-			vsb.setUI(new CofferScrollbarUI(CofferRef.COFFER_SCROLLBAR_TRACK.getImage()));
+			vsb.setUI(new CofferScrollbarUI(CofferReferences.COFFER_SCROLLBAR_TRACK.getImage()));
 			vsb.setPreferredSize(new Dimension(10,300));
 			vsb.setOpaque(false);
 			vsb.setUnitIncrement(10);
 			
 			JLabel lblTitle = new JLabel("Password Almanac");
-			lblTitle.setFont(CofferRef.Comfortaa_Bold_Italic_20);
-			lblTitle.setForeground(CofferRef.CofferBlue);
+			lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
+			lblTitle.setForeground(CofferReferences.CofferBlue);
 			lblTitle.setBounds(50, 25, 240, 50);
 			add(lblTitle);
 			add(scrollPane);
@@ -53,8 +53,8 @@ public class AllPasswords extends JPanel {
 			scrollPane.setViewportView(displayPanel);
 			displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
 
-			allPasswords = new HashMap<String,Password>();
-			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferRef.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
+			allPasswords = new HashMap<String,CofferPasswordEntry>();
+			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferReferences.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 			Scanner cofferScanner = new Scanner(user_coffer);
 			cofferScanner.useDelimiter("\n");
 			while(cofferScanner.hasNext())
@@ -63,7 +63,7 @@ public class AllPasswords extends JPanel {
 				if(!entry.equals("no_passwords"))
 				{
 					StringTokenizer st = new StringTokenizer(entry,"|");
-					Password p = new Password();
+					CofferPasswordEntry p = new CofferPasswordEntry();
 					p.setTitle(st.nextToken());
 					int i = Integer.parseInt(st.nextToken());
 					int f = Integer.parseInt(st.nextToken());
@@ -71,14 +71,14 @@ public class AllPasswords extends JPanel {
 					p.setUsername(st.nextToken());
 					p.setPassword(st.nextToken());
 					allPasswords.put(p.getTitle(), p);
-					displayPanel.add(new PasswordEntry(p.getTitle()+ " ["+p.getUsername()+"]", CofferRef.COFFER_KEY, javax.swing.SwingConstants.LEFT));					
+					displayPanel.add(new CofferPasswordEntryLabel(p));					
 					displayPanel.add(Box.createRigidArea(new Dimension(0,5)));
 				}
 				else{
 					Coffer.setStatus("You can add entries in \"Add a Password\" tab.");
 					JLabel noPass = new JLabel("You have'nt stored any passwords yet");
-					noPass.setForeground(CofferRef.CofferLightGrey);
-					noPass.setFont(CofferRef.Comfortaa_Plain_15);
+					noPass.setForeground(CofferReferences.CofferLightGrey);
+					noPass.setFont(CofferReferences.Comfortaa_Plain_15);
 					displayPanel.add(noPass);						
 				}
 			}
@@ -89,7 +89,7 @@ public class AllPasswords extends JPanel {
 
 	}
 
-	public static Password getPasswordObj(String key){
+	public static CofferPasswordEntry getPasswordObj(String key){
 		return allPasswords.get(key);
 	}
 }
