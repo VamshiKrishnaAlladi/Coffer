@@ -174,11 +174,11 @@ public class AddEntryPage extends JPanel {
 						while(user_coffer.contains(Integer.toString(fileNo).subSequence(0, 8)));
 						
 						if(user_coffer.equals("no_passwords")){
-							user_coffer = title + "|" + Integer.toString(index) + "|" + Integer.toString(fileNo);
+							user_coffer = title + "|" + Integer.toString(fileNo) + "|" + Integer.toString(index);
 						}
 						else
 						{
-							user_coffer += "\n"+ title + "|" + Integer.toString(index) + "|" + Integer.toString(fileNo);
+							user_coffer += "\n" + title + "|" + Integer.toString(fileNo) + "|" + Integer.toString(index);
 						}
 						CofferCrypt.encrypt2File_Index(CofferReferences.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
 						CofferCrypt.encrypt2File_Index(index, username + "|" + password, new File("./Coffer/" + fileNo + ".cofferpass"));

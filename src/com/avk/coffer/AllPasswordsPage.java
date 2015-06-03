@@ -64,9 +64,10 @@ public class AllPasswordsPage extends JPanel {
 				{
 					StringTokenizer st = new StringTokenizer(entry,"|");
 					CofferPasswordEntry p = new CofferPasswordEntry();
+					//do not alter the order of following 3 statements.
 					p.setTitle(st.nextToken());
-					int i = Integer.parseInt(st.nextToken());
 					int f = Integer.parseInt(st.nextToken());
+					int i = Integer.parseInt(st.nextToken());
 					st = new StringTokenizer(CofferCrypt.decryptFromFile_Index(i, new File("./Coffer/"+ f +".cofferpass")),"|");
 					p.setUsername(st.nextToken());
 					p.setPassword(st.nextToken());

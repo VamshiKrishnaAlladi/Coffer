@@ -29,7 +29,17 @@ public class LoginPage extends JPanel {
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
 		add(focusGrab);
-		
+
+		JLabel lblCoffer = new JLabel("Coffer");
+		lblCoffer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCoffer.setVerticalTextPosition(SwingConstants.TOP);
+		lblCoffer.setForeground( CofferReferences.CofferVeryLightGrey);
+		lblCoffer.setIconTextGap(90);
+		lblCoffer.setHorizontalTextPosition(SwingConstants.RIGHT);
+		lblCoffer.setFont(CofferReferences.Comfortaa_Bold_80);
+		lblCoffer.setBounds(10, 80, 730, 100);
+		add(lblCoffer);
+
 		usernameField = new CofferTextField("Username",null);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
@@ -44,17 +54,6 @@ public class LoginPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		
-		JLabel lblCoffer = new JLabel();
-		lblCoffer.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCoffer.setVerticalTextPosition(SwingConstants.TOP);
-		lblCoffer.setForeground( CofferReferences.CofferVeryLightGrey);
-		lblCoffer.setIconTextGap(90);
-		lblCoffer.setHorizontalTextPosition(SwingConstants.RIGHT);
-		lblCoffer.setFont(CofferReferences.Comfortaa_Bold_80);
-		lblCoffer.setText("Coffer");
-		lblCoffer.setBounds(10, 80, 730, 100);
-		add(lblCoffer);
 		usernameField.setBounds(215, 240, 360, 40);
 		add(usernameField);
 		
