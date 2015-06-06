@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
@@ -55,24 +54,15 @@ public class CofferExtraInstance extends JDialog {
 			lbl2.setFont(CofferReferences.Comfortaa_Plain_13);
 		}
 
-		JLabel lblOk = new JLabel("Ok");
+		CofferSmallButton lblOk = new CofferSmallButton("Ok");
 		contentPanel.add(lblOk);
-		lblOk.setForeground(Color.WHITE);
-		lblOk.setFont(CofferReferences.Comfortaa_Plain_13);
-		lblOk.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOk.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblOk.setBounds(125, 140, 150, 30);
+		lblOk.setBounds(150, 140, 100, 30);
 		lblOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
 			}
 		});
-		{
-			JLabel okButtonImg = new JLabel(CofferReferences.SMALL_BUTTON_IMG);
-			contentPanel.add(okButtonImg);
-			okButtonImg.setBounds(125, 140, 150, 30);
-		}
 		
 
 	}

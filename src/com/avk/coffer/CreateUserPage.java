@@ -122,10 +122,10 @@ public class CreateUserPage extends JPanel {
 							
 							@Override
 							public void mouseClicked(MouseEvent e) {
-								String strs[] = {"-> Master password should be atleast 10 characters.", "-> It should include atleast 1 for each of","        * Upper Case Letter","        * Lower Case Letter","        * Number and","        * Symbol"};
-								CofferDialog cd = new CofferDialog("Password Policy:" , strs);
-								cd.setBounds(0, 0, 400, 200);
-								cd.setLocationRelativeTo(null);
+								Coffer.disablePanel.setVisible(true);
+								String[] strs = {"-> Master password should be atleast 10 characters.", "-> It should include atleast 1 for each of","        * Upper Case Letter","        * Lower Case Letter","        * Number and","        * Symbol"};
+								new CofferDialog(true,"Password Policy", strs, CofferDialog.OK_OPTION);
+								Coffer.disablePanel.setVisible(false);
 							}
 						});
 					}

@@ -1,39 +1,25 @@
 package com.avk.coffer;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.StringTokenizer;
 
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 
 @SuppressWarnings("serial")
-public class CofferPasswordPopupMenu extends JPopupMenu {
+public class CofferPasswordPopupMenu extends CofferPopupMenu {
 
 	public CofferPasswordPopupMenu(CofferPasswordEntry p) {
-		setBackground(Color.WHITE);
 		
-		JMenuItem loginMenuItem = new JMenuItem("Go to Login Page");
-		loginMenuItem.setFont(CofferReferences.Comfortaa_Plain_13);
-		loginMenuItem.setForeground(CofferReferences.CofferLightGrey);
-		loginMenuItem.setBackground(Color.WHITE);
+		CofferMenuItem loginMenuItem = new CofferMenuItem("Go to Login Page");
 		add(loginMenuItem);
 		
-		JMenuItem editMenuItem = new JMenuItem("Edit Entry");
-		editMenuItem.setBackground(Color.WHITE);
-		editMenuItem.setFont(CofferReferences.Comfortaa_Plain_13);
-		editMenuItem.setForeground(CofferReferences.CofferLightGrey);
+		CofferMenuItem editMenuItem = new CofferMenuItem("Edit Entry");
 		add(editMenuItem);
 		
-		JMenuItem deleteMenuItem = new JMenuItem("Delete Entry");
-		deleteMenuItem.setBackground(Color.WHITE);
-		deleteMenuItem.setFont(CofferReferences.Comfortaa_Plain_13);
-		deleteMenuItem.setForeground(CofferReferences.CofferLightGrey);
+		CofferMenuItem deleteMenuItem = new CofferMenuItem("Delete Entry");
 		deleteMenuItem.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {

@@ -30,12 +30,13 @@ import javax.swing.SwingConstants;
 
 public class Coffer {
 
-	private static JFrame frmcoffer;
+	public static JFrame frmcoffer;
 	private static JPanel contentPanel;
 	private static CardLayout cl;
 	private static JLabel frmStatusLabel;
 	private static JLabel frmTitleLabel;
 	private static Thread Sleeper;
+	public static JPanel disablePanel;
 	
 	private static int xPressed;
 	private static int yPressed;
@@ -143,7 +144,7 @@ public class Coffer {
 	    						public void run()
 	    						{
 	    							try {
-	    								Thread.sleep(30 * 1000);
+	    								Thread.sleep(60 * 1000);
 	    								if(frmcoffer.getState() == JFrame.ICONIFIED)
 	    									lockCoffer();
 	    							}
@@ -163,6 +164,12 @@ public class Coffer {
 			});
 			frmcoffer.setVisible(true);
 
+			disablePanel = new JPanel();
+			disablePanel.setBackground(new Color(75,75,75,90));
+			disablePanel.setBounds(0, 60, 750, 460);
+			disablePanel.setVisible(false);
+			frmcoffer.getContentPane().add(disablePanel);			
+
 			JLabel lbl_ = new JLabel();
 			lbl_.setVerticalAlignment(SwingConstants.TOP);
 			lbl_.setFont(CofferReferences.Antipasto_Bold_26);
@@ -172,7 +179,15 @@ public class Coffer {
 			lbl_.setForeground(CofferReferences.CofferBlue);
 			lbl_.addMouseListener(new MouseAdapter() {
 				@Override
-				public void mouseClicked(MouseEvent arg0) {			
+				public void mouseClicked(MouseEvent arg0) {
+					disablePanel.setVisible(true);
+					String[] msgs = {"Your Coffer will be locked in a minute.", "Do you want to lock it right away?"};
+					CofferDialog lockDialog = new CofferDialog(true,"Lock Confirmation",msgs,CofferDialog.YES_NO_OPTIONS);
+					
+					if(lockDialog.selectedOption == CofferDialog.YES_OPTION)
+						lockCoffer();
+
+					disablePanel.setVisible(false);
 					frmcoffer.setState(Frame.ICONIFIED);
 				}
 				@Override
@@ -184,6 +199,7 @@ public class Coffer {
 					lbl_.setText("");
 				}
 			});
+			
 			lbl_.setBounds(669, 10, 40, 40);
 			frmcoffer.getContentPane().add(lbl_);
 
@@ -197,7 +213,13 @@ public class Coffer {
 				@Override
 				public void mouseClicked(MouseEvent arg0)
 				{
-					clearAndExit();
+					disablePanel.setVisible(true);
+					String[] msgs = {"You are about to exit.", "Do you want to continue?"};
+					CofferDialog exitDialog = new CofferDialog(true, "Exit Confirmation", msgs , CofferDialog.YES_NO_OPTIONS);
+					if(exitDialog.selectedOption==CofferDialog.YES_OPTION)
+						clearAndExit();
+					else
+						disablePanel.setVisible(false);					
 				}
 				@Override
 				public void mouseEntered(MouseEvent e) { lblX.setText("X");	}
