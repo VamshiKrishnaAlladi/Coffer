@@ -1,6 +1,4 @@
--> Implement MVC framework for project.
 -> Edit and Delete options for password entries.
--> Implement lock confirmation when minimised to system tray.
 -> Fix persistence issues with coffer.mutex
 -> Webpage URL redirection.
 -> Password export option.
