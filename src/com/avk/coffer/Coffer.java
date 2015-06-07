@@ -184,11 +184,18 @@ public class Coffer {
 					String[] msgs = {"Your Coffer will be locked in a minute.", "Do you want to lock it right away?"};
 					CofferDialog lockDialog = new CofferDialog(true,"Lock Confirmation",msgs,CofferDialog.YES_NO_OPTIONS);
 					
-					if(lockDialog.selectedOption == CofferDialog.YES_OPTION)
-						lockCoffer();
-
-					disablePanel.setVisible(false);
-					frmcoffer.setState(Frame.ICONIFIED);
+					switch(lockDialog.selectedOption){
+						case CofferDialog.YES_OPTION:{
+							lockCoffer();
+						}
+							
+						case CofferDialog.NO_OPTION:{
+							frmcoffer.setState(Frame.ICONIFIED);
+							break;
+						}
+					}
+					
+					disablePanel.setVisible(false);					
 				}
 				@Override
 				public void mouseEntered(MouseEvent e) {

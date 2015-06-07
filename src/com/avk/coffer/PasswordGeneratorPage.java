@@ -37,7 +37,7 @@ public class PasswordGeneratorPage extends JPanel {
 		
 		numChars = new CofferNumberField();
 		numChars.setBounds(290,90,140,30);
-		numChars.setNum(10);
+		numChars.setNum(15);
 		numChars.setMinNum(5);
 		numChars.setMaxNum(50);
 		add(numChars);

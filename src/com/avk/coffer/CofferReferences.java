@@ -47,6 +47,7 @@ public class CofferReferences {
 	public static final ImageIcon CHECKBOX = new ImageIcon(Coffer.class.getResource("/checkBox.png")); 
 	public static final ImageIcon CHECKEDBOX = new ImageIcon(Coffer.class.getResource("/checkedBox.png"));
 	public static final ImageIcon TEXTFIELD_IMG = new ImageIcon(Coffer.class.getResource("/longerRoundTextField.png"));
+	public static final ImageIcon PASSWORD_TOGGLE_IMG = new ImageIcon(Coffer.class.getResource("/passwordToggle.png"));
 	public static final ImageIcon BUTTON_IMG = new ImageIcon(Coffer.class.getResource("/button.png"));
 	public static final ImageIcon SMALL_BUTTON_IMG = new ImageIcon(Coffer.class.getResource("/smallButton.png"));
 	public static final ImageIcon TEXT_BLANK = new ImageIcon(Coffer.class.getResource("/textBlank.png"));
