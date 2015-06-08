@@ -1,3 +1,5 @@
+-> Change UI style.
+-> Add menu drop down.
 -> Edit and Delete options for password entries.
 -> Fix persistence issues with coffer.mutex
 -> Webpage URL redirection.
