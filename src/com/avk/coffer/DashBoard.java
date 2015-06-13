@@ -79,7 +79,7 @@ public class DashBoard extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				lbltabs.setIcon(CofferReferences.DASHBOARD_TAB3);
 				DashBoard.swapTo("PasswordGeneratorPage");
-				Coffer.setStatus("Picking passwords made easy. :)");
+				Coffer.setStatus("Picking passwords now made easy. ;)");
 			}
 		});
 		add(lblPasswordGen);
@@ -96,7 +96,7 @@ public class DashBoard extends JPanel {
 		crdLayout.show(dashBoardPanel, "MyPasswords");
 		add(dashBoardPanel);
 		
-		JLabel lblBackground = new JLabel(CofferReferences.COFFER_BACKGROUND_LAYER_2);
+		JLabel lblBackground = new JLabel(CofferReferences.COFFER_BACKGROUND_LAYER);
 		lblBackground.setBounds(0, -60, 750, 550);
 		add(lblBackground);
 		

@@ -3,10 +3,11 @@ package com.avk.coffer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,7 +18,6 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class CofferDialog extends JDialog {
@@ -27,8 +27,7 @@ public class CofferDialog extends JDialog {
 	public final static int YES_OPTION = 1;
 	public final static int NO_OPTION = 2;
 	public final static int CANCEL_OPTION = 3;
-	public final static int OK_OPTION = 4;
-		
+	public final static int OK_OPTION = 4;		
 	
 	// CofferDialog Button pane - Option Types
 	public final static int YES_NO_CANCEL_OPTIONS = 123;
@@ -38,20 +37,31 @@ public class CofferDialog extends JDialog {
 	public int selectedOption;
 	private int xPressed;
 	private int yPressed;
+	
+	private Dimension dialogDimensions;
 
 	public CofferDialog(boolean isModal, String title, String[] messages, int Option_type) {
 		super(Coffer.frmcoffer, isModal);
 		
+		if(Coffer.isMenuShown())Coffer.toggleMenu();
+		Coffer.setDisable(true);
+		
+		int length = messages.length;
+		int scrollPaneHeight = Math.max( 40, Math.min(length*21,125));
 		selectedOption = 0;
 		
+		dialogDimensions = new Dimension(450, (110 + scrollPaneHeight));
+		
+		addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent e) { Coffer.setDisable(false);}
+		});
 		JPanel contentPanel = new JPanel();
-		contentPanel.setBorder(new LineBorder(CofferReferences.CofferDarkGrey));
 		contentPanel.setBackground(Color.WHITE);
-		contentPanel.setBounds(97, 92, 200, 50);
 		contentPanel.setLayout(null);
 		
 		JLabel lblX = new JLabel("X");
-		lblX.setForeground(CofferReferences.CofferBlue);
+		lblX.setForeground(Color.WHITE);
 		lblX.setFont(CofferReferences.Antipasto_Bold_15);
 		lblX.setHorizontalAlignment(SwingConstants.CENTER);
 		lblX.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -59,7 +69,16 @@ public class CofferDialog extends JDialog {
 		lblX.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Coffer.setDisable(false);
 				CofferDialog.this.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblX.setForeground(CofferReferences.CofferBlue);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblX.setForeground(Color.WHITE);
 			}
 		});
 		contentPanel.add(lblX);
@@ -69,7 +88,7 @@ public class CofferDialog extends JDialog {
 		titleLbl.setBounds(0, 0, 450, 40);
 		titleLbl.setOpaque(true);
 		titleLbl.setBackground(CofferReferences.CofferDarkGrey);
-		titleLbl.setForeground(CofferReferences.CofferBlue);
+		titleLbl.setForeground(Color.WHITE);
 		titleLbl.setFont(CofferReferences.Comfortaa_Bold_15);
 		titleLbl.addMouseListener(new MouseAdapter() {
 			@Override
@@ -94,23 +113,20 @@ public class CofferDialog extends JDialog {
 		panel.setOpaque(false);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		
-		int length = messages.length;
 		for(int i = 0 ; i < length ; i++)
 		{
 			JLabel lbl = new JLabel(messages[i]);
-			if(i % 2 == 0)
-				lbl.setForeground(CofferReferences.CofferLightGrey);
-			else
-				lbl.setForeground(CofferReferences.CofferBlue);
-			lbl.setFont(CofferReferences.Comfortaa_Plain_13);
+			lbl.setForeground(CofferReferences.CofferDarkGrey);
+			lbl.setFont(CofferReferences.Comfortaa_Plain_14);
 			panel.add(lbl);
-			panel.add(Box.createRigidArea(new Dimension(0,5)));
+			if(i!= length-1)
+				panel.add(Box.createRigidArea(new Dimension(0,5)));
 		}
 
 		JScrollPane scrollPane = new JScrollPane(panel);
 		scrollPane.setBorder(null);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(25, 60, 410,(length < 3)? 50 : 125);
+		scrollPane.setBounds(20, 55, 420, scrollPaneHeight );
 		scrollPane.setOpaque(false);
 		scrollPane.getViewport().setOpaque(false);
 		scrollPane.setViewportBorder(null);
@@ -128,34 +144,34 @@ public class CofferDialog extends JDialog {
 		buttonPanel.setBackground(Color.WHITE);
 		FlowLayout fl_buttonPanel = (FlowLayout) buttonPanel.getLayout();
 		fl_buttonPanel.setAlignment(FlowLayout.TRAILING);
-		buttonPanel.setBounds(10, (length < 3)? 105 : 200, 430, 40);
+		buttonPanel.setBounds(5, dialogDimensions.height - 45, 440, 40);
 		contentPanel.add(buttonPanel);
 		
 		CofferSmallButton okButton = new CofferSmallButton("OK");
 		okButton.addMouseListener(new MouseAdapter(){
 			@Override
-			public void mouseClicked(MouseEvent me){ selectedOption = OK_OPTION; CofferDialog.this.dispose();}
+			public void mouseClicked(MouseEvent me){ selectedOption = OK_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}
 		});
 		buttonPanel.add(okButton);
 
 		CofferSmallButton yesButton = new CofferSmallButton("Yes");
 		yesButton.addMouseListener(new MouseAdapter(){
 			@Override
-			public void mouseClicked(MouseEvent me){ selectedOption = YES_OPTION; CofferDialog.this.dispose();}
+			public void mouseClicked(MouseEvent me){ selectedOption = YES_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}
 		});
 		buttonPanel.add(yesButton);
 		
 		CofferSmallButton noButton = new CofferSmallButton("No");
 		noButton.addMouseListener(new MouseAdapter(){
 			@Override
-			public void mouseClicked(MouseEvent me){ selectedOption = NO_OPTION; CofferDialog.this.dispose();}
+			public void mouseClicked(MouseEvent me){ selectedOption = NO_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}
 		});
 		buttonPanel.add(noButton);
 		
 		CofferSmallButton cancelButton = new CofferSmallButton("Cancel");
 		cancelButton.addMouseListener(new MouseAdapter(){ 
 			@Override
-			public void mouseClicked(MouseEvent me){ selectedOption = CANCEL_OPTION; CofferDialog.this.dispose();}
+			public void mouseClicked(MouseEvent me){ selectedOption = CANCEL_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}
 		});
 		buttonPanel.add(cancelButton);		
 		
@@ -184,13 +200,11 @@ public class CofferDialog extends JDialog {
 				cancelButton.setVisible(false);
 				break;
 			}
-			
 		}
-
 		
 		setContentPane(contentPanel);
 		
-		setBounds(new Rectangle(0, 0, 450,(length < 3)? 150 : 250));
+		setBounds(0, 0, dialogDimensions.width, dialogDimensions.height);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setModal(true);

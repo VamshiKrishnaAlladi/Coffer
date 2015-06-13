@@ -12,13 +12,13 @@ public class CofferPasswordPopupMenu extends CofferPopupMenu {
 
 	public CofferPasswordPopupMenu(CofferPasswordEntry p) {
 		
-		CofferMenuItem loginMenuItem = new CofferMenuItem("Go to Login Page");
+		CofferPopupMenuItem loginMenuItem = new CofferPopupMenuItem("Go to Login Page");
 		add(loginMenuItem);
 		
-		CofferMenuItem editMenuItem = new CofferMenuItem("Edit Entry");
+		CofferPopupMenuItem editMenuItem = new CofferPopupMenuItem("Edit Entry");
 		add(editMenuItem);
 		
-		CofferMenuItem deleteMenuItem = new CofferMenuItem("Delete Entry");
+		CofferPopupMenuItem deleteMenuItem = new CofferPopupMenuItem("Delete Entry");
 		deleteMenuItem.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {

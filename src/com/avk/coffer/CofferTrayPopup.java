@@ -10,7 +10,7 @@ public class CofferTrayPopup extends CofferPopupMenu {
 
 	public CofferTrayPopup() {
 
-		CofferMenuItem lockItem = new CofferMenuItem("Lock Coffer");
+		CofferPopupMenuItem lockItem = new CofferPopupMenuItem("Lock Coffer");
 		lockItem.setIcon(CofferReferences.COFFER_LOCK);
 		lockItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
@@ -19,7 +19,7 @@ public class CofferTrayPopup extends CofferPopupMenu {
         });
 		add(lockItem);
 		
-		CofferMenuItem restoreItem = new CofferMenuItem("Restore");
+		CofferPopupMenuItem restoreItem = new CofferPopupMenuItem("Restore");
 		restoreItem.setIcon(CofferReferences.COFFER_FRAME_RESTORE);
 		restoreItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { Coffer.makeAppear(); }

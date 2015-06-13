@@ -5,9 +5,9 @@ import java.awt.Color;
 import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
-public class CofferMenuItem extends JMenuItem {
+public class CofferPopupMenuItem extends JMenuItem {
 
-	public CofferMenuItem(String string) {
+	public CofferPopupMenuItem(String string) {
 		super(string);
 		setBorder(null);
 		setIconTextGap(10);

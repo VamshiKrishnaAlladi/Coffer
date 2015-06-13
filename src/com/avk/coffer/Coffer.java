@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.datatransfer.StringSelection;
@@ -27,27 +28,29 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
 
 public class Coffer {
 
 	public static JFrame frmcoffer;
-	private static JPanel contentPanel;
+	private static JPanel contentPanel, disablePanel;
+	private static CofferMenu menuPanel;
 	private static CardLayout cl;
-	private static JLabel frmStatusLabel;
-	private static JLabel frmTitleLabel;
+	private static JLabel titleBar, frmTitleLabel, frmStatusLabel;
 	private static Thread Sleeper;
-	public static JPanel disablePanel;
-	
-	private static int xPressed;
-	private static int yPressed;
 
-    private static File MUTEX_FILE = new File("./Coffer/Coffer.mutex");
-    public static File KEY_FILE = new File("./Coffer/.cofferkey");
-    private static Scanner MUTEX_SCANNER;
+
+	private static File MUTEX_FILE = new File("./Coffer/Coffer.mutex");
+	public static File KEY_FILE = new File("./Coffer/.cofferkey");
+	private static Scanner MUTEX_SCANNER;
 
 	private static TrayIcon trayIcon;
 	private static SystemTray tray;
-    
+
+	private int xPressed, yPressed;
+
+	private JLabel lbl_, lblX, frmIconImg, frmDragger;
+
 	/**
 	 * Launch the application.
 	 */
@@ -55,25 +58,26 @@ public class Coffer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try { 
-						if(!MUTEX_FILE.exists())
-						{
-							File cofferFolders = new File("./Coffer");
-							cofferFolders.mkdirs();
-							MUTEX_FILE.createNewFile();
-							MUTEX_SCANNER = new Scanner(MUTEX_FILE);
-							MUTEX_FILE.deleteOnExit();
-					        new Coffer();
-						}
-						else{
-							new CofferExtraInstance();
-						}
-							
+					if(!MUTEX_FILE.exists())
+					{
+						File cofferFolders = new File("./Coffer");
+						cofferFolders.mkdirs();
+						MUTEX_FILE.createNewFile();
+						MUTEX_SCANNER = new Scanner(MUTEX_FILE);
+						MUTEX_FILE.deleteOnExit();
+						new Coffer();
 					}
+					else{
+						new CofferExtraInstance();
+					}
+
+				}
 				catch (Exception e) { e.printStackTrace(); }
 			}
 		});
 	}
-	
+
+
 	/**
 	 * Create the application.
 	 */
@@ -84,39 +88,39 @@ public class Coffer {
 	 */
 	private void initialize() {
 		try{
-	        if(SystemTray.isSupported())
-	        {
-	            tray=SystemTray.getSystemTray();
-	            Image image=CofferReferences.COFFER_SAFE_BLACK_LOGO_16X16.getImage();
-	            
-	            CofferTrayPopup popup=new CofferTrayPopup();
-	            JDialog hiddenDialog = new JDialog();
-	            hiddenDialog.addWindowFocusListener(new WindowAdapter() {
-	                @Override
-	                public void windowLostFocus (WindowEvent we ) {
-	                    hiddenDialog.setVisible(false);
-	                }
-	            });
-	            hiddenDialog.setSize(10, 10);
-	            hiddenDialog.setUndecorated(true);
-	            
-	            trayIcon=new TrayIcon(image, "Coffer - A portable password manager.", null);
-	            trayIcon.addMouseListener(new MouseAdapter() {
-	                public void mouseReleased(MouseEvent e) {
-	                    if (e.isPopupTrigger()) {
-	                    	popup.setLocation(e.getX(), e.getY());
-	                        hiddenDialog.setLocation(e.getX(), e.getY());
-	                        popup.setInvoker(hiddenDialog);
-	                        hiddenDialog.setVisible(true);
-	                        popup.setVisible(true);
-	                    }
-	                }
-	            });
-	            trayIcon.setImageAutoSize(true);
-	        }
-	        else{ System.out.println("system tray not supported"); }
-	        
-	        
+			if(SystemTray.isSupported())
+			{
+				tray=SystemTray.getSystemTray();
+				Image image=CofferReferences.COFFER_SAFE_BLACK_LOGO_16X16.getImage();
+
+				CofferTrayPopup popup=new CofferTrayPopup();
+				JDialog hiddenDialog = new JDialog();
+				hiddenDialog.addWindowFocusListener(new WindowAdapter() {
+					@Override
+					public void windowLostFocus (WindowEvent we ) {
+						hiddenDialog.setVisible(false);
+					}
+				});
+				hiddenDialog.setSize(10, 10);
+				hiddenDialog.setUndecorated(true);
+
+				trayIcon=new TrayIcon(image, "Coffer - A portable password manager.", null);
+				trayIcon.addMouseListener(new MouseAdapter() {
+					public void mouseReleased(MouseEvent e) {
+						if (e.isPopupTrigger()) {
+							popup.setLocation(e.getX(), e.getY());
+							hiddenDialog.setLocation(e.getX(), e.getY());
+							popup.setInvoker(hiddenDialog);
+							hiddenDialog.setVisible(true);
+							popup.setVisible(true);
+						}
+					}
+				});
+				trayIcon.setImageAutoSize(true);
+			}
+			else{ System.out.println("system tray not supported"); }
+
+
 			frmcoffer = new JFrame();
 			frmcoffer.setIconImages(CofferReferences.COFFER_LOGOS);
 			frmcoffer.setTitle("Coffer");
@@ -135,109 +139,105 @@ public class Coffer {
 			});
 			frmcoffer.addWindowStateListener(new WindowStateListener() {
 				public void windowStateChanged(WindowEvent e) {
-	                if(e.getNewState()==JFrame.ICONIFIED){
-	                    try {
-	                        tray.add(trayIcon);
-	                        frmcoffer.setVisible(false);
-	    					Sleeper = new Thread(new Runnable(){
-	    						@Override
-	    						public void run()
-	    						{
-	    							try {
-	    								Thread.sleep(60 * 1000);
-	    								if(frmcoffer.getState() == JFrame.ICONIFIED)
-	    									lockCoffer();
-	    							}
-	    							catch(InterruptedException e){ e.printStackTrace(); }
-	    						} 
-	    					});
-	    					Sleeper.start(); 
-	    				} 
-	                    catch (Exception ex) {
-	                        ex.printStackTrace();
-	                    }
-	                }
-	                if(e.getNewState()==JFrame.NORMAL){
-	                	Coffer.makeAppear();
-	                }
-	            }
+					if(e.getNewState()==JFrame.ICONIFIED){
+						try {
+							tray.add(trayIcon);
+							frmcoffer.setVisible(false);
+							Sleeper = new Thread(new Runnable(){
+								@Override
+								public void run()
+								{
+									try {
+										Thread.sleep(60 * 1000);
+										if(frmcoffer.getState() == JFrame.ICONIFIED)
+											lockCoffer();
+									}
+									catch(InterruptedException e){ e.printStackTrace(); }
+								} 
+							});
+							Sleeper.start(); 
+						} 
+						catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+					if(e.getNewState()==JFrame.NORMAL){
+						Coffer.makeAppear();
+					}
+				}
 			});
 			frmcoffer.setVisible(true);
 
-			disablePanel = new JPanel();
-			disablePanel.setBackground(new Color(75,75,75,90));
-			disablePanel.setBounds(0, 60, 750, 460);
-			disablePanel.setVisible(false);
-			frmcoffer.getContentPane().add(disablePanel);			
-
-			JLabel lbl_ = new JLabel();
+			lbl_ = new JLabel("_");
 			lbl_.setVerticalAlignment(SwingConstants.TOP);
-			lbl_.setFont(CofferReferences.Antipasto_Bold_26);
+			lbl_.setForeground(Color.WHITE);
+			lbl_.setFont(CofferReferences.Antipasto_Plain_26);
 			lbl_.setHorizontalTextPosition(SwingConstants.CENTER);
 			lbl_.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl_.setText("");
-			lbl_.setForeground(CofferReferences.CofferBlue);
 			lbl_.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					disablePanel.setVisible(true);
 					String[] msgs = {"Your Coffer will be locked in a minute.", "Do you want to lock it right away?"};
-					CofferDialog lockDialog = new CofferDialog(true,"Lock Confirmation",msgs,CofferDialog.YES_NO_OPTIONS);
-					
+					CofferDialog lockDialog = new CofferDialog(true,"Lock Confirmation",msgs,CofferDialog.YES_NO_CANCEL_OPTIONS);
+
 					switch(lockDialog.selectedOption){
-						case CofferDialog.YES_OPTION:{
-							lockCoffer();
-						}
-							
-						case CofferDialog.NO_OPTION:{
-							frmcoffer.setState(Frame.ICONIFIED);
-							break;
-						}
+					case CofferDialog.YES_OPTION:{
+						lockCoffer();
 					}
-					
-					disablePanel.setVisible(false);					
+
+					case CofferDialog.NO_OPTION:{
+						frmcoffer.setState(Frame.ICONIFIED);
+						break;
+					}
+					}
 				}
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					lbl_.setText("_");				
+					lbl_.setForeground(CofferReferences.CofferBlue);
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {
-					lbl_.setText("");
+					lbl_.setForeground(Color.WHITE);
 				}
 			});
-			
-			lbl_.setBounds(669, 10, 40, 40);
-			frmcoffer.getContentPane().add(lbl_);
+
+			lbl_.setBounds(660, 15, 40, 40);
 
 
-			JLabel lblX = new JLabel();
-			lblX.setText("");
+			lblX = new JLabel("X");
+			lblX.setForeground(Color.WHITE);
 			lblX.setHorizontalAlignment(SwingConstants.CENTER);
-			lblX.setFont(CofferReferences.Antipasto_Bold_26);
-			lblX.setForeground(CofferReferences.CofferBlue);
+			lblX.setFont(CofferReferences.Antipasto_Plain_26);
 			lblX.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0)
 				{
-					disablePanel.setVisible(true);
 					String[] msgs = {"You are about to exit.", "Do you want to continue?"};
 					CofferDialog exitDialog = new CofferDialog(true, "Exit Confirmation", msgs , CofferDialog.YES_NO_OPTIONS);
 					if(exitDialog.selectedOption==CofferDialog.YES_OPTION)
-						clearAndExit();
-					else
-						disablePanel.setVisible(false);					
+						clearAndExit();					
 				}
 				@Override
-				public void mouseEntered(MouseEvent e) { lblX.setText("X");	}
+				public void mouseEntered(MouseEvent e) { lblX.setForeground(CofferReferences.CofferBlue); }
 				@Override
-				public void mouseExited(MouseEvent e) {	lblX.setText(""); }
+				public void mouseExited(MouseEvent e) { lblX.setForeground(Color.WHITE); }
 			});
-			lblX.setBounds(701, 9, 40, 40);
-			frmcoffer.getContentPane().add(lblX);
+			lblX.setBounds(700, 10, 40, 40);
+
+			
+			frmIconImg = new JLabel(CofferReferences.COFFER_LOGO_SMALL);
+			frmIconImg.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					menuPanel.toggleMenu();
+				}
+			});
+			frmIconImg.setMinimumSize(new Dimension(30, 30));
+			frmIconImg.setBounds(10, 10, 40, 40);
+			frmIconImg.setBackground(Color.WHITE);
 
 
-			JLabel frmDragger = new JLabel();
+			frmDragger = new JLabel();
 			frmDragger.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -253,80 +253,107 @@ public class Coffer {
 
 					frmcoffer.setLocation( ( x - xPressed), ( y - yPressed) );				
 				}
-			});
+			});		
 			frmDragger.setBounds(0, 0, 750, 60);
-			frmcoffer.getContentPane().add(frmDragger);
 
 			frmTitleLabel = new JLabel();
+			frmTitleLabel.setBackground(CofferReferences.CofferDarkGrey);
+			frmTitleLabel.setOpaque(true);
 			frmTitleLabel.setBounds(10, 10, 730, 40);
 			frmTitleLabel.setVerticalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setForeground(Color.WHITE);
 			frmTitleLabel.setFont(CofferReferences.Comfortaa_Bold_16);
 			frmTitleLabel.setText("Coffer");
-			frmcoffer.getContentPane().add(frmTitleLabel);
 
-			JLabel frmIconImg = new JLabel(CofferReferences.COFFER_LOGO_SMALL);
-			frmIconImg.setMinimumSize(new Dimension(30, 30));
-			frmIconImg.setBounds(10, 10, 40, 40);
-			frmIconImg.setBackground(Color.WHITE);
-			frmcoffer.getContentPane().add(frmIconImg);
-
-			frmStatusLabel = new JLabel("");
+			frmStatusLabel = new JLabel();
+			frmStatusLabel.setBackground(CofferReferences.CofferDarkGrey);
+			frmStatusLabel.setOpaque(true);
 			frmStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			frmStatusLabel.setBounds(10, 520, 730, 30);
+			frmStatusLabel.setBounds(0, 520, 750, 30);
 			frmStatusLabel.setFont(CofferReferences.Comfortaa_Bold_Italic_15);
 			frmStatusLabel.setForeground(Color.white);
-			frmcoffer.getContentPane().add(frmStatusLabel);
+
+			titleBar = new JLabel();
+			titleBar.setOpaque(true);
+			titleBar.setBackground(CofferReferences.CofferLightGrey);
+			titleBar.setBounds(0, 0, 750, 60);
+
+			menuPanel = new CofferMenu();
+			menuPanel.setMenuLocation(CofferMenu.HORIZONTAL, CofferMenu.TOP, new Rectangle(0, -90, 750, 152));
+			menuPanel.setToggleConstraints(148, 1, 4);
+			menuPanel.setBorder(new MatteBorder(0, 0, 2, 0, CofferReferences.CofferBlue));
+
+			disablePanel = new JPanel();
+			disablePanel.setBackground(new Color(75,75,75,90));
+			disablePanel.setBounds(0, 60, 750, 460);
+			disablePanel.setVisible(false);
 
 			cl=new CardLayout(0, 0);
 			contentPanel= new JPanel(cl);
-			contentPanel.setOpaque(false);
+			contentPanel.setBackground(Color.WHITE);
 			contentPanel.setBounds(0, 60, 750, 460);
+
+			
+			
+			frmcoffer.getContentPane().add(lbl_);
+			frmcoffer.getContentPane().add(lblX);
+			frmcoffer.getContentPane().add(frmIconImg);
+			frmcoffer.getContentPane().add(frmDragger);
+			frmcoffer.getContentPane().add(frmTitleLabel);
+			frmcoffer.getContentPane().add(frmStatusLabel);
+			frmcoffer.getContentPane().add(titleBar);
+			frmcoffer.getContentPane().add(menuPanel);
+			frmcoffer.getContentPane().add(disablePanel);			
 			frmcoffer.getContentPane().add(contentPanel);
 
 			if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
 			else{ Coffer.swapTo("LoginPage"); }
 
-			JLabel window_img = new JLabel(CofferReferences.COFFER_BACKGROUND);
-			window_img.setBounds(0, 0, 750, 550);
-			frmcoffer.getContentPane().add(window_img);
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void setStatus(String msg){ frmStatusLabel.setText(msg); }
-	
+
 	public static String getStatus(){ return frmStatusLabel.getText(); }
-	
+
 	public static void setTitle(String title){ frmTitleLabel.setText(title); }
-	
+
 	public static String getTitle(){ return frmTitleLabel.getText(); }
+
+	public static void setDisable(boolean flag){ disablePanel.setVisible(flag); }
+
+	public static boolean isDisabled(){return disablePanel.isVisible();}
 	
+	public static boolean isMenuShown(){ return menuPanel.isMenuShown();}
+
+	public static void toggleMenu() { menuPanel.toggleMenu(); }
+
 	public static void swapTo(String page){
 		contentPanel.removeAll();
 		switch(page){
-			case "DashBoard":{
-				Coffer.setStatus("On board at DashBoard. ;)");
-				contentPanel.add(new DashBoard(),"DashBoard");
-				break;
-			}
-			case "LoginPage":{
-				Coffer.setStatus("Prove this coffer is your's.");
-				contentPanel.add(new LoginPage(),"LoginPage");
-				break;
-			}
-			case "CreateUserPage":{
-				Coffer.setStatus("Register credentials for creating a new Coffer");
-				contentPanel.add(new CreateUserPage(),"CreateUserPage");
-				break;
-			}
+		case "DashBoard":{
+			Coffer.setStatus("On board at DashBoard. ;)");
+			contentPanel.add(new DashBoard(),"DashBoard");
+			break;
+		}
+		case "LoginPage":{
+			Coffer.setStatus("Prove this coffer is your's.");
+			contentPanel.add(new LoginPage(),"LoginPage");
+			break;
+		}
+		case "CreateUserPage":{
+			Coffer.setStatus("Register credentials for creating a new Coffer");
+			contentPanel.add(new CreateUserPage(),"CreateUserPage");
+			break;
+		}
 		}
 		cl.show(contentPanel, page);
 	}
-	
+
 	public static void makeAppear(){
 		frmcoffer.setState(Frame.NORMAL);
 		frmcoffer.setVisible(true);
@@ -334,8 +361,7 @@ public class Coffer {
 		frmcoffer.setAlwaysOnTop(false);
 		tray.remove(trayIcon);
 	}
-	
-	
+
 	public static void writeText2File(String text, String outputFilePath){
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath));
@@ -344,7 +370,7 @@ public class Coffer {
 			bw.close();
 		} catch (Exception e) { e.printStackTrace(); }
 	}
-	
+
 	public static void writeBytes2File(byte[] textBytes, String outputFilePath){
 		try {
 			FileOutputStream outputStream = new FileOutputStream(new File(outputFilePath));
@@ -352,7 +378,7 @@ public class Coffer {
 			outputStream.close();
 		} catch (Exception e) { e.printStackTrace(); }
 	}
-	
+
 	public static byte[] readBytesFromFile(File inputFile) throws Exception{
 		FileInputStream inputStream = new FileInputStream(inputFile);
 		byte[] textBytes = new byte[(int) inputFile.length()];
@@ -362,12 +388,15 @@ public class Coffer {
 	}
 
 	public static void clearAndExit(){
-		CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(""), null);
-        MUTEX_SCANNER.close();
-        MUTEX_FILE.deleteOnExit();
-        System.exit(0);
+		if(MUTEX_FILE.exists())
+		{
+			CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(""), null);
+			MUTEX_SCANNER.close();
+			MUTEX_FILE.deleteOnExit();
+			System.exit(0);
+		}
 	}
-	
+
 	public static void lockCoffer(){
 		if(!Coffer.KEY_FILE.exists()){
 			Coffer.swapTo("CreateUserPage"); 

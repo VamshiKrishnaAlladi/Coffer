@@ -24,9 +24,7 @@ public class CofferReferences {
 	public static final ArrayList<Image> COFFER_LOGOS = new ArrayList<Image>();
 	
 	// Images used for Frame
-	public static final ImageIcon COFFER_BACKGROUND = new ImageIcon(Coffer.class.getResource("/CofferBackground.png"));
 	public static final ImageIcon COFFER_BACKGROUND_LAYER = new ImageIcon(Coffer.class.getResource("/backgroundLayer.png"));
-	public static final ImageIcon COFFER_BACKGROUND_LAYER_2 = new ImageIcon(Coffer.class.getResource("/backgroundLayer2.png"));
 	
 	// Images used in DashBoard
 	public static final ImageIcon DASHBOARD_TAB1 = new ImageIcon(Coffer.class.getResource("/tab1.png"));
@@ -64,7 +62,7 @@ public class CofferReferences {
 						Comfortaa_Bold_15, Comfortaa_Bold_16, Comfortaa_Bold_80,
 						Comfortaa_Bold_Italic_15, Comfortaa_Bold_Italic_20,
 						
-						Antipasto_Bold_15, Antipasto_Bold_26;
+						Antipasto_Bold_15, Antipasto_Plain_15, Antipasto_Plain_26;
 	
 	public static Color CofferBlue = new Color(0,175,210);
 	public static Color CofferDarkGrey = new Color(75, 75, 75);
@@ -93,7 +91,8 @@ public class CofferReferences {
 	    	Comfortaa_Bold_Italic_20  = Comfortaa.deriveFont(Font.ITALIC|Font.BOLD, 20);
 	    	
 	    	Antipasto_Bold_15 = Antipasto.deriveFont(Font.BOLD, 15);
-	    	Antipasto_Bold_26 = Antipasto.deriveFont(Font.BOLD, 26);
+	    	Antipasto_Plain_15 = Antipasto.deriveFont(Font.PLAIN, 15);
+	    	Antipasto_Plain_26 = Antipasto.deriveFont(Font.PLAIN, 26);
 		    
 	    	COFFER_LOGOS.add(COFFER_SAFE_LOGO_128X128.getImage());
 		    COFFER_LOGOS.add(COFFER_SAFE_LOGO_64X64.getImage());

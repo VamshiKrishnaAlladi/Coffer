@@ -41,7 +41,7 @@ public class CofferExtraInstance extends JDialog {
 			panel.add(lblLogo);
 		}
 		
-		JLabel lbl1 = new JLabel("An Instance of Coffer os already running.");
+		JLabel lbl1 = new JLabel("An Instance of Coffer is already running.");
 		lbl1.setBounds(95, 10, 280, 30);
 		panel.add(lbl1);
 		lbl1.setForeground(CofferReferences.CofferBlue);

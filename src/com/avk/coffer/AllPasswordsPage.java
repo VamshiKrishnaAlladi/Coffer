@@ -76,7 +76,7 @@ public class AllPasswordsPage extends JPanel {
 					displayPanel.add(Box.createRigidArea(new Dimension(0,5)));
 				}
 				else{
-					Coffer.setStatus("You can add entries in \"Add a Password\" tab.");
+					Coffer.setStatus("You can add entries using \"Add a Password\" tab.");
 					JLabel noPass = new JLabel("You have'nt stored any passwords yet");
 					noPass.setForeground(CofferReferences.CofferLightGrey);
 					noPass.setFont(CofferReferences.Comfortaa_Plain_15);
