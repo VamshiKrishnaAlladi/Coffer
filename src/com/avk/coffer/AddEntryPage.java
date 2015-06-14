@@ -30,7 +30,7 @@ public class AddEntryPage extends JPanel {
 		add(focusGrab);
 		
 		titleField = new CofferTextField("Title",null);
-		titleField.setBounds(215, 115, 360, 40);
+		titleField.setBounds(215, 115, 320, 40);
 		titleField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -47,7 +47,7 @@ public class AddEntryPage extends JPanel {
 		add(titleField);
 		
 		usernameField = new CofferTextField("Username",null);
-		usernameField.setBounds(215, 165, 360, 40);
+		usernameField.setBounds(215, 165, 320, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -64,7 +64,7 @@ public class AddEntryPage extends JPanel {
 		add(usernameField);
 
 		passwordField = new CofferPasswordField("Password", null);
-		passwordField.setBounds(215, 215, 360, 40);
+		passwordField.setBounds(215, 215, 320, 40);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -81,7 +81,7 @@ public class AddEntryPage extends JPanel {
 		add(passwordField);
 
 		confirmPasswordField = new CofferPasswordField("Confirm Password",null);
-		confirmPasswordField.setBounds(215, 265, 360, 40);
+		confirmPasswordField.setBounds(215, 265, 320, 40);
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -113,51 +113,51 @@ public class AddEntryPage extends JPanel {
 					if(title.equalsIgnoreCase("title")|| title.equalsIgnoreCase(""))
 					{
 						Coffer.setStatus("Oops! Title is important and so mandatory.");
-						titleField.setExclaim(true);
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(false);
-						confirmPasswordField.setExclaim(false);
+						titleField.setValid(false);
+						usernameField.setValid(true);
+						passwordField.setValid(true);
+						confirmPasswordField.setValid(true);
 					}
-					else if(username.equalsIgnoreCase("username") || username.equalsIgnoreCase("") )
+					else if( username.equalsIgnoreCase("") )
 					{
 						Coffer.setStatus("Pick a username.");
-						titleField.setExclaim(false);
-						usernameField.setExclaim(true);
-						passwordField.setExclaim(false);
-						confirmPasswordField.setExclaim(false);
+						titleField.setValid(true);
+						usernameField.setValid(false);
+						passwordField.setValid(true);
+						confirmPasswordField.setValid(true);
 					}
-					else if(password.equalsIgnoreCase("password") || password.equalsIgnoreCase(""))
+					else if( password.equalsIgnoreCase(""))
 					{
 						Coffer.setStatus("Pick a password.");
-						titleField.setExclaim(false);
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
-						confirmPasswordField.setExclaim(false);
+						titleField.setValid(true);
+						usernameField.setValid(true);
+						passwordField.setValid(false);
+						confirmPasswordField.setValid(true);
 					}
-					else if(conPass.equalsIgnoreCase("confirm password") || conPass.equalsIgnoreCase(""))
+					else if( conPass.equalsIgnoreCase(""))
 					{
 						Coffer.setStatus("Confirm your password.");
-						titleField.setExclaim(false);
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(false);
-						confirmPasswordField.setExclaim(true);
+						titleField.setValid(true);
+						usernameField.setValid(true);
+						passwordField.setValid(true);
+						confirmPasswordField.setValid(false);
 					}
 					else if(!password.equals(conPass)){
 						Coffer.setStatus("Passwords did not match. :(");
 						passwordField.setText("");
 						passwordField.grabFocus();
 						confirmPasswordField.setText("");
-						titleField.setExclaim(false);
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
-						confirmPasswordField.setExclaim(true);
+						titleField.setValid(true);
+						usernameField.setValid(true);
+						passwordField.setValid(false);
+						confirmPasswordField.setValid(false);
 					}
 					else
 					{
-						titleField.setExclaim(false);
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(false);
-						confirmPasswordField.setExclaim(false);
+						titleField.setValid(true);
+						usernameField.setValid(true);
+						passwordField.setValid(true);
+						confirmPasswordField.setValid(true);
 						
 						Random r = new Random();
 						int index;
@@ -192,6 +192,7 @@ public class AddEntryPage extends JPanel {
 						usernameField.grabFocus();
 						titleField.grabFocus();
 						focusGrab.grabFocus();
+						DashBoard.swapTo("AllPasswordsPage");
 						Coffer.setStatus("Entry made into your coffer.");
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }

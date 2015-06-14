@@ -1,6 +1,5 @@
 package com.avk.coffer;
 
-import java.awt.Color;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -65,7 +64,7 @@ public class PasswordGeneratorPage extends JPanel {
 		add(syms);
 		
 		passwordDisp = new JTextField();
-		passwordDisp.setText("Your Password will be shown here :)");
+		passwordDisp.setText("Your Password will be shown here.    :)");
 		passwordDisp.setEditable(false);
 		passwordDisp.setForeground(CofferReferences.CofferBlue);
 		passwordDisp.setFont(CofferReferences.Comfortaa_Bold_15);
@@ -87,18 +86,14 @@ public class PasswordGeneratorPage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(passwordDisp.getText()), null);
-				Coffer.setStatus("Password saved to clipboard.");
+				Coffer.setStatus("Password saved to clipboard.    :)");
 			}
 		});
 		add(lblClipBoard);
 
-		JLabel lblGen = new JLabel("Generate");
-		lblGen.setForeground(Color.WHITE);
-		lblGen.setFont(CofferReferences.Comfortaa_Plain_15);
-		lblGen.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGen.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblGen.setBounds(275, 340, 200, 40);
-		lblGen.addMouseListener(new MouseAdapter() {
+		CofferButton genButton = new CofferButton("Generate");
+		genButton.setBounds(275, 340, 200, 40);
+		genButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(caps.isChecked()||lower.isChecked()||nums.isChecked()||syms.isChecked()){
@@ -117,18 +112,15 @@ public class PasswordGeneratorPage extends JPanel {
 					}
 					passwordDisp.setText(ranPass);
 					lblClipBoard.setVisible(true);
-					Coffer.setStatus("Click on the icon to save the password to clipboard.");
+					Coffer.setStatus("Click on the icon to save the password to clipboard.    :]");
 				}
 				else
 				{
-					Coffer.setStatus("Choose atleast one of the checkboxes.");
+					Coffer.setStatus("Choose atleast one of the checkboxes.    :|");
 				}
 			}
 		});
-		add(lblGen);
-		
-		JLabel genButtonImg = new JLabel(CofferReferences.BUTTON_IMG);
-		genButtonImg.setBounds(275, 340, 200, 40);
-		add(genButtonImg);		
+		add(genButton);
+
 	}
 }

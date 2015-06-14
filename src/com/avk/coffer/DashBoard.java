@@ -96,10 +96,6 @@ public class DashBoard extends JPanel {
 		crdLayout.show(dashBoardPanel, "MyPasswords");
 		add(dashBoardPanel);
 		
-		JLabel lblBackground = new JLabel(CofferReferences.COFFER_BACKGROUND_LAYER);
-		lblBackground.setBounds(0, -60, 750, 550);
-		add(lblBackground);
-		
 	}
 	
 	public static void swapTo(String page){

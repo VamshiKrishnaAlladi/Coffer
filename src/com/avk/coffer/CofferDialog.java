@@ -3,6 +3,7 @@ package com.avk.coffer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -147,28 +148,39 @@ public class CofferDialog extends JDialog {
 		buttonPanel.setBounds(5, dialogDimensions.height - 45, 440, 40);
 		contentPanel.add(buttonPanel);
 		
-		CofferSmallButton okButton = new CofferSmallButton("OK");
+		Dimension d = new Dimension(100,30);
+		Font f = CofferReferences.Comfortaa_Plain_13;
+		
+		CofferButton okButton = new CofferButton("OK");
+		okButton.setFont(f);
+		okButton.setPreferredSize(d);
 		okButton.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent me){ selectedOption = OK_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}
 		});
 		buttonPanel.add(okButton);
 
-		CofferSmallButton yesButton = new CofferSmallButton("Yes");
+		CofferButton yesButton = new CofferButton("Yes");
+		yesButton.setFont(f);
+		yesButton.setPreferredSize(d);
 		yesButton.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent me){ selectedOption = YES_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}
 		});
 		buttonPanel.add(yesButton);
 		
-		CofferSmallButton noButton = new CofferSmallButton("No");
+		CofferButton noButton = new CofferButton("No");
+		noButton.setFont(f);
+		noButton.setPreferredSize(d);
 		noButton.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent me){ selectedOption = NO_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}
 		});
 		buttonPanel.add(noButton);
 		
-		CofferSmallButton cancelButton = new CofferSmallButton("Cancel");
+		CofferButton cancelButton = new CofferButton("Cancel");
+		cancelButton.setFont(f);
+		cancelButton.setPreferredSize(d);
 		cancelButton.addMouseListener(new MouseAdapter(){ 
 			@Override
 			public void mouseClicked(MouseEvent me){ selectedOption = CANCEL_OPTION; Coffer.setDisable(false); CofferDialog.this.dispose();}

@@ -50,7 +50,12 @@ public class Coffer {
 	private int xPressed, yPressed;
 
 	private JLabel lbl_, lblX, frmIconImg, frmDragger;
+	
+	// constants for page redirections
+	public static final String CreateUserPage = "CreateUserPage";
+	public static final String LoginPage = "LoginPage";
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -265,7 +270,10 @@ public class Coffer {
 			frmTitleLabel.setForeground(Color.WHITE);
 			frmTitleLabel.setFont(CofferReferences.Comfortaa_Bold_16);
 			frmTitleLabel.setText("Coffer");
-
+			
+			JLabel blueLine = new JLabel(CofferReferences.BLUE_STREAK);
+			blueLine.setBounds(0, 518, 750, 2);
+			
 			frmStatusLabel = new JLabel();
 			frmStatusLabel.setBackground(CofferReferences.CofferDarkGrey);
 			frmStatusLabel.setOpaque(true);
@@ -301,14 +309,15 @@ public class Coffer {
 			frmcoffer.getContentPane().add(frmIconImg);
 			frmcoffer.getContentPane().add(frmDragger);
 			frmcoffer.getContentPane().add(frmTitleLabel);
+			frmcoffer.getContentPane().add(blueLine);
 			frmcoffer.getContentPane().add(frmStatusLabel);
 			frmcoffer.getContentPane().add(titleBar);
 			frmcoffer.getContentPane().add(menuPanel);
 			frmcoffer.getContentPane().add(disablePanel);			
 			frmcoffer.getContentPane().add(contentPanel);
 
-			if(!KEY_FILE.exists()){ Coffer.swapTo("CreateUserPage"); }
-			else{ Coffer.swapTo("LoginPage"); }
+			if(!KEY_FILE.exists()){ Coffer.swapTo(Coffer.CreateUserPage); }
+			else{ Coffer.swapTo(Coffer.LoginPage); }
 
 		}
 		catch(Exception e){
@@ -340,14 +349,14 @@ public class Coffer {
 			contentPanel.add(new DashBoard(),"DashBoard");
 			break;
 		}
-		case "LoginPage":{
-			Coffer.setStatus("Prove this coffer is your's.");
-			contentPanel.add(new LoginPage(),"LoginPage");
+		case LoginPage :{
+			Coffer.setStatus("Prove this coffer is your's.    :/");
+			contentPanel.add(new LoginPage(), Coffer.LoginPage);
 			break;
 		}
-		case "CreateUserPage":{
+		case CreateUserPage :{
 			Coffer.setStatus("Register credentials for creating a new Coffer");
-			contentPanel.add(new CreateUserPage(),"CreateUserPage");
+			contentPanel.add(new CreateUserPage(), Coffer.CreateUserPage);
 			break;
 		}
 		}

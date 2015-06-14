@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class CreateUserPage extends JPanel {
@@ -21,6 +22,7 @@ public class CreateUserPage extends JPanel {
 	 * Create the panel.
 	 */
 	public CreateUserPage() {
+		setPreferredSize(new Dimension(750, 460));
 		setOpaque(false);
 		setLayout(null);
 
@@ -30,13 +32,13 @@ public class CreateUserPage extends JPanel {
 		add(focusGrab);
 
 		usernameField = new CofferTextField("Username", null);
-		usernameField.setBounds(215, 200, 360, 40);
+		usernameField.setBounds(215, 175, 320, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(usernameField.getText().equalsIgnoreCase("username")){
+				if(usernameField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
-					Coffer.setStatus("Enter your Username here...");
+					Coffer.setStatus("Enter your Username here.    O:)");
 				}
 			}
 			@Override
@@ -47,13 +49,13 @@ public class CreateUserPage extends JPanel {
 		add(usernameField);
 
 		passwordField = new CofferPasswordField("Password", null);
-		passwordField.setBounds(215, 250, 360, 40);
+		passwordField.setBounds(215, 225, 320, 40);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(passwordField.getText().equalsIgnoreCase("Password")){
+				if(passwordField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
-					Coffer.setStatus("Enter your Password here...");
+					Coffer.setStatus("Enter your Password here.    O:)");
 				}
 			}
 			@Override
@@ -67,9 +69,9 @@ public class CreateUserPage extends JPanel {
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(confirmPasswordField.getText().equalsIgnoreCase("Confirm Password")){
+				if(confirmPasswordField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
-					Coffer.setStatus("Retype your password here...");
+					Coffer.setStatus("Retype your password here.    :)");
 				}
 			}
 			@Override
@@ -77,12 +79,12 @@ public class CreateUserPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		confirmPasswordField.setBounds(215, 300, 360, 40);
+		confirmPasswordField.setBounds(215, 275, 320, 40);
 		add(confirmPasswordField);
 
 
 		CofferButton submit = new CofferButton("Submit");
-		submit.setBounds(275, 350, 200, 40);
+		submit.setBounds(275, 325, 200, 40);
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -96,54 +98,44 @@ public class CreateUserPage extends JPanel {
 					String passPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*+=|\\/,.;:])(?=\\S+$).{10,}$";
 					
 					
-					if(username.equalsIgnoreCase("username") || username.equalsIgnoreCase("") )
+					if( username.equals("") )
 					{
-						Coffer.setStatus("Pick a username.");
-						usernameField.setExclaim(true);
-						passwordField.setExclaim(false);
-						confirmPasswordField.setExclaim(false);
+						Coffer.setStatus("Pick a username.    :|");
+						usernameField.setValid(false);
+						passwordField.setValid(true);
+						confirmPasswordField.setValid(true);
 					}
-					else if(password.equalsIgnoreCase("password") || password.equalsIgnoreCase(""))
+					else if(password.equals(""))
 					{
-						Coffer.setStatus("Pick a password.");
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
-						confirmPasswordField.setExclaim(false);
+						Coffer.setStatus("Pick a password.    :|");
+						usernameField.setValid(true);
+						passwordField.setValid(false);
+						confirmPasswordField.setValid(true);
 					}
 					else if(!password.matches(passPattern))
 					{
-						Coffer.setStatus("Click on the Exclaimation for password policy.");
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
-						confirmPasswordField.setExclaim(false);
+						Coffer.setStatus("Pssst!, Have a look at Password Policy.    O:)");
+						usernameField.setValid(true);
+						passwordField.setValid(false);
+						confirmPasswordField.setValid(true);
 						passwordField.setText("");
 						passwordField.grabFocus();
-						passwordField.addExclaimMouseListener(new MouseAdapter() {
-							
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								Coffer.setDisable(true);
-								String[] strs = {"-> Master password should be atleast 10 characters.", "-> It should include atleast 1 for each of","        * Upper Case Letter","        * Lower Case Letter","        * Number and","        * Symbol"};
-								new CofferDialog(true,"Password Policy", strs, CofferDialog.OK_OPTION);
-								Coffer.setDisable(false);
-							}
-						});
 					}
-					else if(conPass.equalsIgnoreCase("confirm password") || conPass.equalsIgnoreCase(""))
+					else if(conPass.equals(""))
 					{
-						Coffer.setStatus("Confirm your password.");
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(false);
-						confirmPasswordField.setExclaim(true);
+						Coffer.setStatus("Please confirm your password.    :)");
+						usernameField.setValid(true);
+						passwordField.setValid(true);
+						confirmPasswordField.setValid(false);
 					}
 					else if(!password.equals(conPass)){
-						Coffer.setStatus("Passwords did not match. :(");
+						Coffer.setStatus("Passwords did not match.    :(");
 						passwordField.setText("");
 						passwordField.grabFocus();
 						confirmPasswordField.setText("");
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
-						confirmPasswordField.setExclaim(true);
+						usernameField.setValid(true);
+						passwordField.setValid(false);
+						confirmPasswordField.setValid(false);
 					}
 					else
 					{
@@ -151,10 +143,7 @@ public class CreateUserPage extends JPanel {
 						MessageDigest digest = MessageDigest.getInstance("SHA-256");
 						byte[] hash = digest.digest(password.getBytes("UTF-8"));
 						
-						Coffer.setStatus("Credentials Submited...");
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
-						confirmPasswordField.setExclaim(false);
+						Coffer.setStatus("Credentials Submited.    :w");
 	
 						long timeStamp = System.currentTimeMillis();
 						int key =(int)timeStamp%100000;
@@ -173,17 +162,27 @@ public class CreateUserPage extends JPanel {
 
 		JLabel lblCofferlogo = new JLabel();
 		lblCofferlogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCofferlogo.setVerticalTextPosition(SwingConstants.TOP);
 		lblCofferlogo.setForeground( CofferReferences.CofferVeryLightGrey);
 		lblCofferlogo.setIconTextGap(90);
 		lblCofferlogo.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblCofferlogo.setFont(CofferReferences.Comfortaa_Bold_80);
 		lblCofferlogo.setText("Coffer");
-		lblCofferlogo.setBounds(10, 80, 730, 100);
+		lblCofferlogo.setBounds(0, 60, 750, 80);
 		add(lblCofferlogo);
 		
-		JLabel lblBackground = new JLabel(CofferReferences.COFFER_BACKGROUND_LAYER);
-		lblBackground.setBounds(0, -60, 750, 550);
-		add(lblBackground);
+		JLabel lblPolicy = new JLabel("Password Policy");
+		lblPolicy.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPolicy.setFont(CofferReferences.Comfortaa_Plain_13);
+		lblPolicy.setForeground(CofferReferences.CofferBlue);
+		lblPolicy.setBounds(590, 410, 150, 20);
+		lblPolicy.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String[] strs = {"-> Master password should be atleast 10 characters.", "-> It should include atleast 1 for each of","        * Upper Case Letter","        * Lower Case Letter","        * Number and","        * Symbol"};
+				new CofferDialog(true,"Password Policy", strs, CofferDialog.OK_OPTION);
+			}
+		});
+
+		add(lblPolicy);
 	}
 }

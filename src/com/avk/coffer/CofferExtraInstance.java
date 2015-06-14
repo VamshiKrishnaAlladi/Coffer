@@ -54,8 +54,10 @@ public class CofferExtraInstance extends JDialog {
 			lbl2.setFont(CofferReferences.Comfortaa_Plain_13);
 		}
 
-		CofferSmallButton lblOk = new CofferSmallButton("Ok");
+		CofferButton lblOk = new CofferButton("Ok");
 		contentPanel.add(lblOk);
+		lblOk.setSize(100, 30);
+		lblOk.setFont(CofferReferences.Comfortaa_Plain_13);
 		lblOk.setBounds(150, 140, 100, 30);
 		lblOk.addMouseListener(new MouseAdapter() {
 			@Override

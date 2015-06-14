@@ -3,89 +3,83 @@ package com.avk.coffer;
 import java.awt.Dimension;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class CofferTextField extends JPanel {
-	private JTextField textField;
-	private JLabel textFieldImg;
-	private JLabel exclaimRed;
+public class CofferTextField extends JTextField {
+	
 	private String placeHolder = "";
+	
+	private int borderThickness = 2;
+	private int borderRoundness = 5;
 
 	public CofferTextField(String placeHolder, String text) {
+		super((text != null)? text : placeHolder);
+
+		this.placeHolder = placeHolder;
+
 		setOpaque(false);
 		setBackground(null);
-		setLayout(null);
-		setPreferredSize(new Dimension(360,40));
-		
-		this.placeHolder = placeHolder;
-		
-		textField = new JTextField((text != null)? text : this.placeHolder);
-		textField.setBorder(null);
-		textField.setOpaque(false);
-		textField.setCaretColor(CofferReferences.CofferDarkGrey);
-		textField.setForeground((text != null)? CofferReferences.CofferDarkGrey : CofferReferences.CofferLightGrey);
-		textField.setBackground(null);
-		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		textField.setFont(CofferReferences.Comfortaa_Plain_14);
-		textField.setBounds(20, 5, 280, 30);
-		textField.addFocusListener(new FocusAdapter() {
+		setPreferredSize(new Dimension(320,40));
+		setBorder(new CompoundBorder(new CofferRoundBorder(CofferReferences.CofferBlue, borderThickness, borderRoundness), new EmptyBorder(5, 20, 5, 20)));
+		setCaretColor(CofferReferences.CofferDarkGrey);
+		setForeground((text != null)? CofferReferences.CofferDarkGrey : CofferReferences.CofferLightGrey);
+		setHorizontalAlignment(SwingConstants.LEFT);
+		setFont(CofferReferences.Comfortaa_Plain_14);
+		addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if(textField.getText().equals(CofferTextField.this.placeHolder)){
-					textField.setForeground(CofferReferences.CofferDarkGrey);
-					textField.setText("");
+				if(CofferTextField.super.getText().equals(CofferTextField.this.placeHolder)){
+					setForeground(CofferReferences.CofferDarkGrey);
+					CofferTextField.super.setText("");
 				}
 			}
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-				if(textField.getText().equals("")){
-					textField.setForeground(CofferReferences.CofferLightGrey);
-					textField.setText(CofferTextField.this.placeHolder);
+				if(CofferTextField.super.getText().equals("")){
+					setForeground(CofferReferences.CofferLightGrey);
+					CofferTextField.super.setText(CofferTextField.this.placeHolder);
 				}
 			}
 			
 		});
-		add(textField);
-		
-		textFieldImg = new JLabel(CofferReferences.TEXTFIELD_IMG);
-		textFieldImg.setSize(320, 40);
-		add(textFieldImg);
-		
-		exclaimRed = new JLabel(CofferReferences.EXCLAIM_RED);
-		exclaimRed.setBounds(320,0,40,40);
-		exclaimRed.setVisible(false);
-		add(exclaimRed);
-
 	}
 	
-	public void setExclaim(boolean flag){
-		exclaimRed.setVisible(flag);
+	public void setValid(boolean flag){
+		setBorder(new CompoundBorder(new CofferRoundBorder(flag ? CofferReferences.CofferBlue : CofferReferences.CofferRed, borderThickness, borderRoundness), new EmptyBorder(5, 20, 5, 20)));
 	}
 	
+	@Override
 	public String getText(){
-		return textField.getText();
+		String temp = CofferTextField.super.getText();
+		if(temp.equals(this.placeHolder))
+			return "";
+		return temp;
 	}
 	
-	public void setText(String text){
-		textField.setText(text);
+	public void setPlaceHolder(String placeholder){ this.placeHolder = placeholder;}
+	
+	public String getPlaceHolder(){	return placeHolder; }
+	
+	public void setBorderThickness(int thickness){
+		this.borderThickness = thickness;
 	}
 	
-	public void addMouseListener(MouseListener ml){
-		textField.addMouseListener(ml);
+	public int getBorderThickness(){
+		return borderThickness;
+	}
+
+	public int getBorderRoundness() {
+		return borderRoundness;
+	}
+
+	public void setBorderRoundness(int borderRoundness) {
+		this.borderRoundness = borderRoundness;
 	}
 	
-	public void addExclaimMouseListener(MouseListener l){
-		exclaimRed.addMouseListener(l);
-	}
-	
-	public void grabFocus(){
-		textField.grabFocus();
-	}
 }

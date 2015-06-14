@@ -23,8 +23,8 @@ public class CofferReferences {
 
 	public static final ArrayList<Image> COFFER_LOGOS = new ArrayList<Image>();
 	
-	// Images used for Frame
-	public static final ImageIcon COFFER_BACKGROUND_LAYER = new ImageIcon(Coffer.class.getResource("/backgroundLayer.png"));
+	// Images used in Frame
+	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));
 	
 	// Images used in DashBoard
 	public static final ImageIcon DASHBOARD_TAB1 = new ImageIcon(Coffer.class.getResource("/tab1.png"));
@@ -38,16 +38,13 @@ public class CofferReferences {
 	public static final ImageIcon COFFER_SCROLLBAR_TRACK = new ImageIcon(Coffer.class.getResource("/scrollbarTrack.png"));
 	public static final ImageIcon COFFER_KEY = new ImageIcon(Coffer.class.getResource("/key.png"));
 
-	public static final ImageIcon EXCLAIM_RED = new ImageIcon(Coffer.class.getResource("/exclaimRed.png"));
+//	public static final ImageIcon EXCLAIM_RED = new ImageIcon(Coffer.class.getResource("/exclaimRed.png"));
 	public static final ImageIcon CLIPBOARD = new ImageIcon(Coffer.class.getResource("/clipBoard.png"));
 
 	// Images used for Custom Components
 	public static final ImageIcon CHECKBOX = new ImageIcon(Coffer.class.getResource("/checkBox.png")); 
 	public static final ImageIcon CHECKEDBOX = new ImageIcon(Coffer.class.getResource("/checkedBox.png"));
-	public static final ImageIcon TEXTFIELD_IMG = new ImageIcon(Coffer.class.getResource("/longerRoundTextField.png"));
 	public static final ImageIcon PASSWORD_TOGGLE_IMG = new ImageIcon(Coffer.class.getResource("/passwordToggle.png"));
-	public static final ImageIcon BUTTON_IMG = new ImageIcon(Coffer.class.getResource("/button.png"));
-	public static final ImageIcon SMALL_BUTTON_IMG = new ImageIcon(Coffer.class.getResource("/smallButton.png"));
 	public static final ImageIcon TEXT_BLANK = new ImageIcon(Coffer.class.getResource("/textBlank.png"));
 	public static final ImageIcon MEDIUM_TEXT_BLANK = new ImageIcon(Coffer.class.getResource("/mediumTextBlank.png"));
 	public static final ImageIcon PLUS = new ImageIcon(Coffer.class.getResource("/plus.png"));
@@ -63,11 +60,12 @@ public class CofferReferences {
 						Comfortaa_Bold_Italic_15, Comfortaa_Bold_Italic_20,
 						
 						Antipasto_Bold_15, Antipasto_Plain_15, Antipasto_Plain_26;
-	
-	public static Color CofferBlue = new Color(0,175,210);
-	public static Color CofferDarkGrey = new Color(75, 75, 75);
-	public static Color CofferLightGrey = new Color(100,100,100);
-	public static Color CofferVeryLightGrey = new Color(150,150,150);
+
+	public static final Color CofferRed = new Color(230, 75, 60);
+	public static final Color CofferBlue = new Color(0,175,210);
+	public static final Color CofferDarkGrey = new Color(75, 75, 75);
+	public static final Color CofferLightGrey = new Color(100,100,100);
+	public static final Color CofferVeryLightGrey = new Color(150,150,150);
 	
 	private static long COFFER_SEED;
 	private static int COFFER_KEY_INDEX;

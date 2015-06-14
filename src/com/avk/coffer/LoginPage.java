@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import java.awt.Dimension;
+
 @SuppressWarnings("serial")
 public class LoginPage extends JPanel {
 	private CofferTextField usernameField;
@@ -21,6 +23,7 @@ public class LoginPage extends JPanel {
 	 * Create the panel.
 	 */
 	public LoginPage() {
+		setPreferredSize(new Dimension(750, 460));
 		setOpaque(false);
 		setLayout(null);
 		defaultStatus = Coffer.getStatus();
@@ -37,16 +40,16 @@ public class LoginPage extends JPanel {
 		lblCoffer.setIconTextGap(90);
 		lblCoffer.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblCoffer.setFont(CofferReferences.Comfortaa_Bold_80);
-		lblCoffer.setBounds(10, 80, 730, 100);
+		lblCoffer.setBounds(0, 90, 750, 80);
 		add(lblCoffer);
 
 		usernameField = new CofferTextField("Username",null);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(usernameField.getText().equalsIgnoreCase("username")){
+				if(usernameField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
-					Coffer.setStatus("Your Username please...");
+					Coffer.setStatus("Your Username please.    :|");
 				}
 			}
 			@Override
@@ -54,7 +57,7 @@ public class LoginPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		usernameField.setBounds(215, 240, 360, 40);
+		usernameField.setBounds(215, 230, 320, 40);
 		add(usernameField);
 		
 		
@@ -62,9 +65,9 @@ public class LoginPage extends JPanel {
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(passwordField.getText().equalsIgnoreCase("Password")){
+				if(passwordField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
-					Coffer.setStatus("Your Password please...");
+					Coffer.setStatus("Your Password please.    :|");
 				}
 			}
 			@Override
@@ -72,7 +75,7 @@ public class LoginPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		passwordField.setBounds(215, 290, 360, 40);
+		passwordField.setBounds(215, 280, 320, 40);
 		add(passwordField);
 		
 		
@@ -87,24 +90,27 @@ public class LoginPage extends JPanel {
 					defaultStatus = Coffer.getStatus();
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
+					String passPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*+=|\\/,.;:])(?=\\S+$).{10,}$";
 					
-					if(username.equalsIgnoreCase("username") || username.equalsIgnoreCase("") )
+					if( username.equalsIgnoreCase("") )
 					{
-						Coffer.setStatus("Username please...");
-						usernameField.setExclaim(true);
-						passwordField.setExclaim(false);
+						Coffer.setStatus("Username please.    :|");
+						usernameField.setValid(false);
+						passwordField.setValid(true);
 					}
-					else if(password.equalsIgnoreCase("password") || password.equalsIgnoreCase(""))
+					else if( password.equalsIgnoreCase(""))
 					{
-						Coffer.setStatus("Did you forget entering password?");
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
+						Coffer.setStatus("Did you forget entering password?    :/");
+						usernameField.setValid(true);
+						passwordField.setValid(false);
 					}
-					else if(password.length()<10)
+					else if(!password.matches(passPattern))
 					{
-						Coffer.setStatus("Password should be atleast 10 characters.");
-						usernameField.setExclaim(false);
-						passwordField.setExclaim(true);
+						Coffer.setStatus("Don't you remember the Password Policy?    O.o");
+						usernameField.setValid(true);
+						passwordField.setValid(false);
+						passwordField.setText("");
+						passwordField.grabFocus();
 					}
 					else
 					{
@@ -119,27 +125,23 @@ public class LoginPage extends JPanel {
 						if(username.equals(actUsername))
 						{
 							Coffer.swapTo("DashBoard");
-							Coffer.setStatus("Good to see you back :)");
+							Coffer.setStatus("Good to see you back.    :)");
 						}
 						else
 						{
 							usernameField.setText("");
 							passwordField.setText("");
 							usernameField.grabFocus();
-							usernameField.setExclaim(true);
-							passwordField.setExclaim(true);
-							Coffer.setStatus("Sorry can't log you in. Wrong credentials...");
+							usernameField.setValid(false);
+							passwordField.setValid(false);
+							Coffer.setStatus("Sorry can't log you in. Wrong credentials.    :'(");
 						}
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}
 		});
-		submit.setBounds(275, 340, 200, 40);
+		submit.setBounds(275, 330, 200, 40);
 		add(submit);
 		
-		JLabel lblBackground = new JLabel(CofferReferences.COFFER_BACKGROUND_LAYER);
-		lblBackground.setBounds(0, -60, 750, 550);
-		add(lblBackground);
-
 	}
 }

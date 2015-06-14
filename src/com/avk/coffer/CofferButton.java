@@ -4,35 +4,27 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import java.awt.Rectangle;
-
 @SuppressWarnings("serial")
-public class CofferButton extends JPanel {
+public class CofferButton extends JLabel {
 
-	private JLabel buttonImg;
-	private JLabel buttonText;
-	
 	public CofferButton(String text) {
+		super(text);
 		setPreferredSize(new Dimension(200,40));
 		setVisible(true);
 		setLayout(null);
 		setOpaque(false);
 		
-		buttonText = new JLabel(text);
-		buttonText.setForeground(Color.WHITE);
-		buttonText.setFont(CofferReferences.Comfortaa_Plain_14);
-		buttonText.setHorizontalAlignment(SwingConstants.CENTER);
-		buttonText.setHorizontalTextPosition(SwingConstants.CENTER);
-		buttonText.setBounds(0, 0, 200, 40);
-		add(buttonText);
+		setBorder(new CofferRoundBorder(CofferReferences.CofferBlue, 2, 10));
+		setBackground(CofferReferences.CofferBlue);
+		setOpaque(true);
+		setForeground(Color.WHITE);
+		setFont(CofferReferences.Comfortaa_Plain_14);
+		setHorizontalAlignment(SwingConstants.CENTER);
+		setHorizontalTextPosition(SwingConstants.CENTER);
+		setBounds(0, 0, 200, 40);
 				
-		buttonImg = new JLabel(CofferReferences.BUTTON_IMG);
-		buttonImg.setBounds(new Rectangle(0, 0, 200, 40));
-		buttonImg.setBounds(0, 0, 200, 40);
-		add(buttonImg);
 	}
-
+	
 }
