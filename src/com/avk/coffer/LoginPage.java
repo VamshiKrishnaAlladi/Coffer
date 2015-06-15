@@ -120,11 +120,12 @@ public class LoginPage extends JPanel {
 						StringTokenizer st = new StringTokenizer(CofferCrypt.decryptFromFile_Key(new String(hash).substring(0, 16), new File("./Coffer/.cofferkey")),"|");
 						String actUsername = st.nextToken();
 						
-						CofferReferences.setCofferSeed(Long.parseLong(st.nextToken()));
+						CofferCrypt.setCofferSeed(Long.parseLong(st.nextToken()));
 						
 						if(username.equals(actUsername))
 						{
-							Coffer.swapTo("DashBoard");
+							Coffer.user_logged_in = true;
+							Coffer.swapTo(Coffer.AllPasswordsPage);
 							Coffer.setStatus("Good to see you back.    :)");
 						}
 						else

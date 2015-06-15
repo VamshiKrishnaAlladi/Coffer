@@ -44,8 +44,10 @@ public class CofferDialog extends JDialog {
 	public CofferDialog(boolean isModal, String title, String[] messages, int Option_type) {
 		super(Coffer.frmcoffer, isModal);
 		
-		if(Coffer.isMenuShown())Coffer.toggleMenu();
-		Coffer.setDisable(true);
+		if(Coffer.isMenuShown())
+			Coffer.toggleMenu();
+		else
+			Coffer.setDisable(true);
 		
 		int length = messages.length;
 		int scrollPaneHeight = Math.max( 40, Math.min(length*21,125));
@@ -218,7 +220,7 @@ public class CofferDialog extends JDialog {
 		
 		setBounds(0, 0, dialogDimensions.width, dialogDimensions.height);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(Coffer.frmcoffer);
 		setModal(true);
 		setResizable(false);
 		setUndecorated(true);

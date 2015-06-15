@@ -22,6 +22,7 @@ public class AllPasswordsPage extends JPanel {
 	 * Create the panel.
 	 */
 	public AllPasswordsPage() {
+		setPreferredSize(new Dimension(750, 460));
 		try{
 			setOpaque(false);
 			setLayout(null);
@@ -54,7 +55,7 @@ public class AllPasswordsPage extends JPanel {
 			displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
 
 			allPasswords = new HashMap<String,CofferPasswordEntry>();
-			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferReferences.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
+			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 			Scanner cofferScanner = new Scanner(user_coffer);
 			cofferScanner.useDelimiter("\n");
 			while(cofferScanner.hasNext())

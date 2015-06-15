@@ -10,17 +10,15 @@ import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.util.Scanner;
 
 import javax.swing.JDialog;
@@ -28,32 +26,36 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
 
 public class Coffer {
 
 	public static JFrame frmcoffer;
 	private static JPanel contentPanel, disablePanel;
 	private static CofferMenu menuPanel;
+	private static CofferMenuItem allPasswordsItem, addPasswordItem, generatePasswordItem, aboutItem;
 	private static CardLayout cl;
 	private static JLabel titleBar, frmTitleLabel, frmStatusLabel;
-	private static Thread Sleeper;
-
-
-	private static File MUTEX_FILE = new File("./Coffer/Coffer.mutex");
-	public static File KEY_FILE = new File("./Coffer/.cofferkey");
-	private static Scanner MUTEX_SCANNER;
-
 	private static TrayIcon trayIcon;
 	private static SystemTray tray;
 
-	private int xPressed, yPressed;
-
 	private JLabel lbl_, lblX, frmIconImg, frmDragger;
 	
+	private static File MUTEX_FILE = new File("./Coffer/Coffer.mutex");
+	public static File KEY_FILE = new File("./Coffer/.cofferkey");
+	private static Scanner MUTEX_SCANNER;
+	private static Thread Sleeper;
+
+
+	public static boolean user_logged_in = false;
+	private int xPressed, yPressed;
+
+	
 	// constants for page redirections
-	public static final String CreateUserPage = "CreateUserPage";
-	public static final String LoginPage = "LoginPage";
+	protected static final String CreateUserPage = "CreateUserPage";
+	protected static final String LoginPage = "LoginPage";
+	protected static final String AllPasswordsPage = "AllPasswordsPage";
+	protected static final String AddEntryPage = "AddEntryPage";
+	protected static final String PasswordGeneratorPage = "PasswordGeneratorPage";
 
 	
 	/**
@@ -231,15 +233,17 @@ public class Coffer {
 
 			
 			frmIconImg = new JLabel(CofferReferences.COFFER_LOGO_SMALL);
-			frmIconImg.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					menuPanel.toggleMenu();
-				}
-			});
 			frmIconImg.setMinimumSize(new Dimension(30, 30));
 			frmIconImg.setBounds(10, 10, 40, 40);
 			frmIconImg.setBackground(Color.WHITE);
+			frmIconImg.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(user_logged_in)
+						menuPanel.toggleMenu();
+				}
+			});
+
 
 
 			frmDragger = new JLabel();
@@ -271,9 +275,6 @@ public class Coffer {
 			frmTitleLabel.setFont(CofferReferences.Comfortaa_Bold_16);
 			frmTitleLabel.setText("Coffer");
 			
-			JLabel blueLine = new JLabel(CofferReferences.BLUE_STREAK);
-			blueLine.setBounds(0, 518, 750, 2);
-			
 			frmStatusLabel = new JLabel();
 			frmStatusLabel.setBackground(CofferReferences.CofferDarkGrey);
 			frmStatusLabel.setOpaque(true);
@@ -288,12 +289,62 @@ public class Coffer {
 			titleBar.setBounds(0, 0, 750, 60);
 
 			menuPanel = new CofferMenu();
-			menuPanel.setMenuLocation(CofferMenu.HORIZONTAL, CofferMenu.TOP, new Rectangle(0, -90, 750, 152));
-			menuPanel.setToggleConstraints(148, 1, 4);
-			menuPanel.setBorder(new MatteBorder(0, 0, 2, 0, CofferReferences.CofferBlue));
+			menuPanel.setMenuLocation(CofferMenu.VERTICAL, CofferMenu.LEFT, new Rectangle(-200,60,200,462));
+			menuPanel.setToggleConstraints(200, 1, 4);
 
+			allPasswordsItem = new CofferMenuItem("All My Passwords");
+			allPasswordsItem.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Coffer.swapTo(AllPasswordsPage);
+				}
+			});
+			allPasswordsItem.setBounds(0, 0, 200, 40);
+			allPasswordsItem.setIcon(CofferReferences.MULTIPLE_KEYS);
+			menuPanel.add(allPasswordsItem);
+			
+			addPasswordItem = new CofferMenuItem("Add a Password");
+			addPasswordItem.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Coffer.swapTo(AddEntryPage);
+				}
+			});
+			addPasswordItem.setBounds(0,40,200,40);
+			addPasswordItem.setIcon(CofferReferences.ADD_KEY);
+			menuPanel.add(addPasswordItem);
+			
+			generatePasswordItem = new CofferMenuItem("Password Generator");
+			generatePasswordItem.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Coffer.swapTo(PasswordGeneratorPage);
+				}
+			});
+			generatePasswordItem.setBounds(0,80,200,40);
+			generatePasswordItem.setIcon(CofferReferences.KEY_GEN);
+			menuPanel.add(generatePasswordItem);
+			
+			aboutItem = new CofferMenuItem("About Coffer");
+			aboutItem.setBounds(0,120,200,40);
+			aboutItem.setIcon(CofferReferences.PLUS);
+			menuPanel.add(aboutItem);
+			
 			disablePanel = new JPanel();
-			disablePanel.setBackground(new Color(75,75,75,90));
+			disablePanel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					disablePanel.grabFocus();
+				}
+			});
+			disablePanel.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusGained(FocusEvent e) {
+					if(menuPanel.isMenuShown())
+						menuPanel.toggleMenu();
+				}
+			});
+			disablePanel.setBackground(new Color(75,75,75,100));
 			disablePanel.setBounds(0, 60, 750, 460);
 			disablePanel.setVisible(false);
 
@@ -309,10 +360,13 @@ public class Coffer {
 			frmcoffer.getContentPane().add(frmIconImg);
 			frmcoffer.getContentPane().add(frmDragger);
 			frmcoffer.getContentPane().add(frmTitleLabel);
-			frmcoffer.getContentPane().add(blueLine);
 			frmcoffer.getContentPane().add(frmStatusLabel);
 			frmcoffer.getContentPane().add(titleBar);
 			frmcoffer.getContentPane().add(menuPanel);
+			
+			JLabel blueLine = new JLabel(CofferReferences.BLUE_STREAK);
+			blueLine.setBounds(0, 518, 750, 2);
+			frmcoffer.getContentPane().add(blueLine);
 			frmcoffer.getContentPane().add(disablePanel);			
 			frmcoffer.getContentPane().add(contentPanel);
 
@@ -342,23 +396,40 @@ public class Coffer {
 	public static void toggleMenu() { menuPanel.toggleMenu(); }
 
 	public static void swapTo(String page){
+		
+		if(isMenuShown())
+			menuPanel.toggleMenu();
+		
 		contentPanel.removeAll();
+		
 		switch(page){
-		case "DashBoard":{
-			Coffer.setStatus("On board at DashBoard. ;)");
-			contentPanel.add(new DashBoard(),"DashBoard");
-			break;
-		}
-		case LoginPage :{
-			Coffer.setStatus("Prove this coffer is your's.    :/");
-			contentPanel.add(new LoginPage(), Coffer.LoginPage);
-			break;
-		}
-		case CreateUserPage :{
-			Coffer.setStatus("Register credentials for creating a new Coffer");
-			contentPanel.add(new CreateUserPage(), Coffer.CreateUserPage);
-			break;
-		}
+			case AllPasswordsPage :{
+				Coffer.setStatus("All your passwords are here.    :)");
+				contentPanel.add(new AllPasswordsPage(), AllPasswordsPage);
+				break;
+			}
+			case LoginPage :{
+				Coffer.user_logged_in = false;
+				Coffer.setStatus("Prove this coffer is your's.    :/");
+				contentPanel.add(new LoginPage(), LoginPage);
+				break;
+			}
+			case AddEntryPage :{
+				Coffer.setStatus("This is where you add password entries.    ;)");
+				contentPanel.add(new AddEntryPage(), AddEntryPage);
+				break;
+			}
+			case PasswordGeneratorPage :{
+				Coffer.setStatus("Creating passwords was never this easy.    O:)");
+				contentPanel.add(new PasswordGeneratorPage(), PasswordGeneratorPage);
+				break;
+			}
+			case CreateUserPage :{
+				Coffer.user_logged_in = false;
+				Coffer.setStatus("Register with credentials for creating a new Coffer.    ^_^");
+				contentPanel.add(new CreateUserPage(), CreateUserPage);
+				break;
+			}
 		}
 		cl.show(contentPanel, page);
 	}
@@ -369,31 +440,6 @@ public class Coffer {
 		frmcoffer.setAlwaysOnTop(true);
 		frmcoffer.setAlwaysOnTop(false);
 		tray.remove(trayIcon);
-	}
-
-	public static void writeText2File(String text, String outputFilePath){
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(outputFilePath));
-			bw.write(text);
-			bw.flush();
-			bw.close();
-		} catch (Exception e) { e.printStackTrace(); }
-	}
-
-	public static void writeBytes2File(byte[] textBytes, String outputFilePath){
-		try {
-			FileOutputStream outputStream = new FileOutputStream(new File(outputFilePath));
-			outputStream.write(textBytes);
-			outputStream.close();
-		} catch (Exception e) { e.printStackTrace(); }
-	}
-
-	public static byte[] readBytesFromFile(File inputFile) throws Exception{
-		FileInputStream inputStream = new FileInputStream(inputFile);
-		byte[] textBytes = new byte[(int) inputFile.length()];
-		inputStream.read(textBytes);
-		inputStream.close();
-		return textBytes;
 	}
 
 	public static void clearAndExit(){
@@ -408,10 +454,10 @@ public class Coffer {
 
 	public static void lockCoffer(){
 		if(!Coffer.KEY_FILE.exists()){
-			Coffer.swapTo("CreateUserPage"); 
+			Coffer.swapTo(CreateUserPage); 
 		}
 		else{
-			Coffer.swapTo("LoginPage");
+			Coffer.swapTo(LoginPage);
 		}
 	}
 }

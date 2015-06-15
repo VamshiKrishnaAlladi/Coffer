@@ -23,25 +23,21 @@ public class CofferReferences {
 
 	public static final ArrayList<Image> COFFER_LOGOS = new ArrayList<Image>();
 	
+	// Images used for icons
+	public static final ImageIcon SINGLE_KEY = new ImageIcon(Coffer.class.getResource("/key.png"));
+	public static final ImageIcon MULTIPLE_KEYS = new ImageIcon(Coffer.class.getResource("/keys.png"));
+	public static final ImageIcon ADD_KEY = new ImageIcon(Coffer.class.getResource("/addKey.png"));
+	public static final ImageIcon KEY_GEN = new ImageIcon(Coffer.class.getResource("/keyGen.png"));
+	public static final ImageIcon CLIPBOARD = new ImageIcon(Coffer.class.getResource("/clipBoard.png"));
+
 	// Images used in Frame
 	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));
 	
-	// Images used in DashBoard
-	public static final ImageIcon DASHBOARD_TAB1 = new ImageIcon(Coffer.class.getResource("/tab1.png"));
-	public static final ImageIcon DASHBOARD_TAB2 = new ImageIcon(Coffer.class.getResource("/tab2.png"));
-	public static final ImageIcon DASHBOARD_TAB3 = new ImageIcon(Coffer.class.getResource("/tab3.png"));
-	public static final ImageIcon DASHBOARD_TAB_KEYS = new ImageIcon(Coffer.class.getResource("/keys.png"));
-	public static final ImageIcon DASHBOARD_TAB_ADD_KEY = new ImageIcon(Coffer.class.getResource("/addKey.png"));
-	public static final ImageIcon DASHBOARD_TAB_KEY_GEN = new ImageIcon(Coffer.class.getResource("/keyGen.png"));
-	
-	// Images used in DashBoard - Password Almanac
+	// Images used in Password Almanac
 	public static final ImageIcon COFFER_SCROLLBAR_TRACK = new ImageIcon(Coffer.class.getResource("/scrollbarTrack.png"));
-	public static final ImageIcon COFFER_KEY = new ImageIcon(Coffer.class.getResource("/key.png"));
 
-//	public static final ImageIcon EXCLAIM_RED = new ImageIcon(Coffer.class.getResource("/exclaimRed.png"));
-	public static final ImageIcon CLIPBOARD = new ImageIcon(Coffer.class.getResource("/clipBoard.png"));
 
-	// Images used for Custom Components
+	// Images used in Custom Components
 	public static final ImageIcon CHECKBOX = new ImageIcon(Coffer.class.getResource("/checkBox.png")); 
 	public static final ImageIcon CHECKEDBOX = new ImageIcon(Coffer.class.getResource("/checkedBox.png"));
 	public static final ImageIcon PASSWORD_TOGGLE_IMG = new ImageIcon(Coffer.class.getResource("/passwordToggle.png"));
@@ -66,9 +62,6 @@ public class CofferReferences {
 	public static final Color CofferDarkGrey = new Color(75, 75, 75);
 	public static final Color CofferLightGrey = new Color(100,100,100);
 	public static final Color CofferVeryLightGrey = new Color(150,150,150);
-	
-	private static long COFFER_SEED;
-	private static int COFFER_KEY_INDEX;
 	
 	public static final Clipboard SYS_CLIPBOARD =  Toolkit.getDefaultToolkit().getSystemClipboard();
 	
@@ -101,12 +94,4 @@ public class CofferReferences {
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
-	public static long getCofferSeed(){ return COFFER_SEED; }
-	
-	public static void setCofferSeed(long seed){ COFFER_SEED = seed; }
-	
-	public static int getCofferKeyIndex(){
-		COFFER_KEY_INDEX = (int) COFFER_SEED % 100000;
-		return COFFER_KEY_INDEX;
-	}
 }

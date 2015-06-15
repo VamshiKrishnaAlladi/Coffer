@@ -13,7 +13,7 @@ public class CofferPasswordEntryLabel extends JLabel {
 
 	public CofferPasswordEntryLabel(CofferPasswordEntry p){
 		
-		super(p.getTitle()+" ["+p.getUsername()+"]", CofferReferences.COFFER_KEY, SwingConstants.LEFT);
+		super(p.getTitle()+" ["+p.getUsername()+"]", CofferReferences.SINGLE_KEY, SwingConstants.LEFT);
 		
 		setForeground(CofferReferences.CofferLightGrey);
 		setFont(CofferReferences.Comfortaa_Plain_15);

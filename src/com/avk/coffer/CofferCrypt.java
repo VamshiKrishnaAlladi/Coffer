@@ -15,11 +15,13 @@ public class CofferCrypt {
     
     public static final int MAX_KEY_INDEX = 100000;
     
+	private static long COFFER_SEED;
+    
     private static Random R;
     private static long[] randomKeys;
     
     static{
-    		R = new Random(CofferReferences.getCofferSeed());
+    		R = new Random(COFFER_SEED);
 			randomKeys = R.longs(MAX_KEY_INDEX, 1000000000000000L, 10000000000000000L).toArray();
     }
     
@@ -110,9 +112,10 @@ public class CofferCrypt {
     	return new String(outputBytes);		
     }
 
-    public static String getKey(int index)
-    {
-    	return Long.toString(randomKeys[index]);
-    }
+    public static String getKey(int index){ return Long.toString(randomKeys[index]); }
+    
+	public static void setCofferSeed(long seed){ COFFER_SEED = seed; }
+	
+	public static int getCofferKeyIndex(){ return (int) COFFER_SEED % 100000; }
     
 }

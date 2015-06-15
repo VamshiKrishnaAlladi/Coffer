@@ -162,7 +162,7 @@ public class AddEntryPage extends JPanel {
 						Random r = new Random();
 						int index;
 						int fileNo;
-						String user_coffer = CofferCrypt.decryptFromFile_Index(CofferReferences.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
+						String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 						do{
 							index = r.nextInt(CofferCrypt.MAX_KEY_INDEX);
 						}
@@ -180,7 +180,7 @@ public class AddEntryPage extends JPanel {
 						{
 							user_coffer += "\n" + title + "|" + Integer.toString(fileNo) + "|" + Integer.toString(index);
 						}
-						CofferCrypt.encrypt2File_Index(CofferReferences.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
+						CofferCrypt.encrypt2File_Index(CofferCrypt.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
 						CofferCrypt.encrypt2File_Index(index, username + "|" + password, new File("./Coffer/" + fileNo + ".cofferpass"));
 
 						titleField.setText("");
@@ -192,7 +192,7 @@ public class AddEntryPage extends JPanel {
 						usernameField.grabFocus();
 						titleField.grabFocus();
 						focusGrab.grabFocus();
-						DashBoard.swapTo("AllPasswordsPage");
+						Coffer.swapTo(Coffer.AllPasswordsPage);
 						Coffer.setStatus("Entry made into your coffer.");
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }

@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.StringTokenizer;
 
-import javax.swing.JOptionPane;
-
 @SuppressWarnings("serial")
 public class CofferPasswordPopupMenu extends CofferPopupMenu {
 
@@ -23,10 +21,11 @@ public class CofferPasswordPopupMenu extends CofferPopupMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(JOptionPane.showConfirmDialog(deleteMenuItem, "You are about to delete the password entry.\nDo you want to continue?",
-							"Delete password Confirmation",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+					String[] msgs = {"You are about to delete the password entry.","Do you want to continue?"};
+					CofferDialog deleteDialog = new CofferDialog(true, "Delete Confirmation", msgs , CofferDialog.YES_NO_OPTIONS);
+					if(deleteDialog.selectedOption==CofferDialog.YES_OPTION)
 					{
-						String new_user_coffer="", user_coffer = CofferCrypt.decryptFromFile_Index(CofferReferences.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
+						String new_user_coffer="", user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 						StringTokenizer st = new StringTokenizer(user_coffer,"\n");
 						while(st.hasMoreTokens()){
 							String token =st.nextToken();
@@ -38,8 +37,8 @@ public class CofferPasswordPopupMenu extends CofferPopupMenu {
 							}
 							else{ new_user_coffer += st.hasMoreTokens()? token + "\n" : token; }
 						}
-						CofferCrypt.encrypt2File_Index(CofferReferences.getCofferKeyIndex(), new_user_coffer, new File("./Coffer/user's.coffer"));
-						DashBoard.swapTo("AllPasswordsPage");
+						CofferCrypt.encrypt2File_Index(CofferCrypt.getCofferKeyIndex(), new_user_coffer, new File("./Coffer/user's.coffer"));
+						Coffer.swapTo(Coffer.AllPasswordsPage);
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }				
 			}

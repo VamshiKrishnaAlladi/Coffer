@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 import com.avk.animation.Animation;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
 public class CofferMenu extends JPanel {
@@ -29,8 +31,16 @@ public class CofferMenu extends JPanel {
 	
 	public CofferMenu() {
 		super();
+		addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(isMenuShown())
+					toggleMenu();
+			}
+		});
+		setLayout(null);
 		setBackground(CofferReferences.CofferLightGrey);
-		setPreferredSize(new Dimension(750,150));		
+		setPreferredSize(new Dimension(750,150));
 	}
 	
 	public void toggleMenu() {
@@ -50,6 +60,7 @@ public class CofferMenu extends JPanel {
 			else if(location == CofferMenu.RIGHT)
 				Animation.moveComponentRight(CofferMenu.this, x, x - toggleOffset, interval, pixelSteps );
 		}
+		CofferMenu.this.grabFocus();
 	}
 
 	public boolean isMenuShown(){
