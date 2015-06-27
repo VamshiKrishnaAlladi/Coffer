@@ -29,6 +29,7 @@ public class CofferReferences {
 	public static final ImageIcon ADD_KEY = new ImageIcon(Coffer.class.getResource("/addKey.png"));
 	public static final ImageIcon KEY_GEN = new ImageIcon(Coffer.class.getResource("/keyGen.png"));
 	public static final ImageIcon CLIPBOARD = new ImageIcon(Coffer.class.getResource("/clipBoard.png"));
+	public static final ImageIcon MENU_BUTTON = new ImageIcon(Coffer.class.getResource("/menuButton.png"));
 
 	// Images used in Frame
 	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));

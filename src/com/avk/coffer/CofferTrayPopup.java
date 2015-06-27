@@ -14,7 +14,7 @@ public class CofferTrayPopup extends CofferPopupMenu {
 		lockItem.setIcon(CofferReferences.COFFER_LOCK);
 		lockItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { 
-            	Coffer.lockCoffer();
+            	Coffer.logout();
             }
         });
 		add(lockItem);

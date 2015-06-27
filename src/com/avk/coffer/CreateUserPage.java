@@ -152,8 +152,7 @@ public class CreateUserPage extends JPanel {
 						CofferCrypt.setCofferSeed(timeStamp);
 						CofferCrypt.encrypt2File_Index(key, "no_passwords", new File("./Coffer/user's.coffer"));
 						
-						Coffer.user_logged_in = true;
-						Coffer.swapTo(Coffer.AllPasswordsPage);
+						Coffer.login();
 						Coffer.setStatus("You can make entries in \"Add a Password\" tab.");
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }

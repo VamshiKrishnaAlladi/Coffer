@@ -38,7 +38,7 @@ public class CofferPasswordPopupMenu extends CofferPopupMenu {
 							else{ new_user_coffer += st.hasMoreTokens()? token + "\n" : token; }
 						}
 						CofferCrypt.encrypt2File_Index(CofferCrypt.getCofferKeyIndex(), new_user_coffer, new File("./Coffer/user's.coffer"));
-						Coffer.swapTo(Coffer.AllPasswordsPage);
+						DashBoard.setSelection(DashBoard.all_passwords_page);
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }				
 			}

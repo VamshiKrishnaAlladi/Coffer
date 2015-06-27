@@ -67,14 +67,14 @@ public class CofferPasswordField extends JPanel {
 			
 		});
 		passwordField.addKeyListener(new KeyAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(passwordField.getText().equals(CofferPasswordField.this.placeHolder) || passwordField.getText().equals(""))
+				if(passwordField.getPassword().length <= 0)
 					passwordToggleImg.setVisible(false);
 				else
 					passwordToggleImg.setVisible(true);
 			}
+
 		});
 		
 		passwordToggleImg = new JLabel(CofferReferences.PASSWORD_TOGGLE_IMG);

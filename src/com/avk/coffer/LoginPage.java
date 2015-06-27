@@ -124,8 +124,7 @@ public class LoginPage extends JPanel {
 						
 						if(username.equals(actUsername))
 						{
-							Coffer.user_logged_in = true;
-							Coffer.swapTo(Coffer.AllPasswordsPage);
+							Coffer.login();
 							Coffer.setStatus("Good to see you back.    :)");
 						}
 						else

@@ -44,7 +44,6 @@ public class CofferMenu extends JPanel {
 	}
 	
 	public void toggleMenu() {
-		Coffer.setDisable(!Coffer.isDisabled());
 		if(orientation == CofferMenu.HORIZONTAL){
 			int y =  initialBounds.y;
 			if(location == CofferMenu.TOP){
@@ -61,6 +60,7 @@ public class CofferMenu extends JPanel {
 				Animation.moveComponentRight(CofferMenu.this, x, x - toggleOffset, interval, pixelSteps );
 		}
 		CofferMenu.this.grabFocus();
+		Coffer.setDisable(!Coffer.isDisabled());
 	}
 
 	public boolean isMenuShown(){

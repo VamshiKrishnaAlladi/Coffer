@@ -8,23 +8,27 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class AddEntryPage extends JPanel {
-	private CofferTextField usernameField;
-	private CofferTextField titleField;
-	private CofferPasswordField passwordField;
-	private CofferPasswordField confirmPasswordField;
+	private static CofferTextField titleField;
+	private static CofferTextField usernameField;
+	private static CofferPasswordField passwordField;
+	private static CofferPasswordField confirmPasswordField;
 	private String defaultStatus;
-	
+	private static JButton focusGrab;
 	/**
 	 * Create the panel.
 	 */
 	public AddEntryPage() {
+		setPreferredSize(new Dimension(750, 425));
 		setOpaque(false);
 		setLayout(null);
 
-		JButton focusGrab = new JButton("");
+		focusGrab = new JButton("");
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
 		add(focusGrab);
@@ -34,7 +38,7 @@ public class AddEntryPage extends JPanel {
 		titleField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(titleField.getText().equalsIgnoreCase("title")){
+				if(titleField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Enter the Title of entry here...");
 				}
@@ -51,7 +55,7 @@ public class AddEntryPage extends JPanel {
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(usernameField.getText().equalsIgnoreCase("username")){
+				if(usernameField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Enter your Username here...");
 				}
@@ -68,7 +72,7 @@ public class AddEntryPage extends JPanel {
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(passwordField.getText().equalsIgnoreCase("Password")){
+				if(passwordField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Enter your Password here...");
 				}
@@ -85,7 +89,7 @@ public class AddEntryPage extends JPanel {
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(confirmPasswordField.getText().equalsIgnoreCase("Confirm Password")){
+				if(confirmPasswordField.getText().equals("")){
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Retype your password here...");
 				}
@@ -110,40 +114,40 @@ public class AddEntryPage extends JPanel {
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
 					String conPass = confirmPasswordField.getText().trim();
-					if(title.equalsIgnoreCase("title")|| title.equalsIgnoreCase(""))
+					if(title.equals(""))
 					{
-						Coffer.setStatus("Oops! Title is important and so mandatory.");
+						Coffer.setStatus("I guess you don't know that Title is mandatory.");
 						titleField.setValid(false);
 						usernameField.setValid(true);
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
 					}
-					else if( username.equalsIgnoreCase("") )
+					else if( username.equals("") )
 					{
-						Coffer.setStatus("Pick a username.");
+						Coffer.setStatus("Comm'on you forgot entering your username?    O.o");
 						titleField.setValid(true);
 						usernameField.setValid(false);
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
 					}
-					else if( password.equalsIgnoreCase(""))
+					else if( password.equals(""))
 					{
-						Coffer.setStatus("Pick a password.");
+						Coffer.setStatus("Pick a strong password, empty ones dont serve the purpose.");
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(false);
 						confirmPasswordField.setValid(true);
 					}
-					else if( conPass.equalsIgnoreCase(""))
+					else if( conPass.equals(""))
 					{
-						Coffer.setStatus("Confirm your password.");
+						Coffer.setStatus("All that's needed was to retype your password!");
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(false);
 					}
 					else if(!password.equals(conPass)){
-						Coffer.setStatus("Passwords did not match. :(");
+						Coffer.setStatus("Try again! Your passwords didn't match.    :(");
 						passwordField.setText("");
 						passwordField.grabFocus();
 						confirmPasswordField.setText("");
@@ -183,17 +187,8 @@ public class AddEntryPage extends JPanel {
 						CofferCrypt.encrypt2File_Index(CofferCrypt.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
 						CofferCrypt.encrypt2File_Index(index, username + "|" + password, new File("./Coffer/" + fileNo + ".cofferpass"));
 
-						titleField.setText("");
-						usernameField.setText("");
-						passwordField.setText("");
-						confirmPasswordField.setText("");
-						confirmPasswordField.grabFocus();
-						passwordField.grabFocus();
-						usernameField.grabFocus();
-						titleField.grabFocus();
-						focusGrab.grabFocus();
-						Coffer.swapTo(Coffer.AllPasswordsPage);
-						Coffer.setStatus("Entry made into your coffer.");
+						clearPage();
+						Coffer.setStatus("Entry made into your coffer.");						
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}
@@ -206,5 +201,31 @@ public class AddEntryPage extends JPanel {
 		lblTitle.setBounds(50, 25, 300, 50);
 		add(lblTitle);
 		
+		JLabel lblClear = new JLabel("Clear all fields");
+		lblClear.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClear.setFont(CofferReferences.Comfortaa_Plain_13);
+		lblClear.setForeground(CofferReferences.CofferBlue);
+		lblClear.setBounds(590, 400, 150, 20);
+		lblClear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				clearPage();
+			}
+		});
+		add(lblClear);
+
+	}
+	
+	public static void clearPage(){
+		titleField.setText("");
+		usernameField.setText("");
+		passwordField.setText("");
+		confirmPasswordField.setText("");
+		titleField.grabFocus();
+		usernameField.grabFocus();
+		passwordField.grabFocus();
+		confirmPasswordField.grabFocus();
+		focusGrab.grabFocus();
+		titleField.getParent().revalidate();
 	}
 }

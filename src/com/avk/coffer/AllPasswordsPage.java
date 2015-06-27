@@ -22,8 +22,8 @@ public class AllPasswordsPage extends JPanel {
 	 * Create the panel.
 	 */
 	public AllPasswordsPage() {
-		setPreferredSize(new Dimension(750, 460));
 		try{
+			setPreferredSize(new Dimension(750, 425));
 			setOpaque(false);
 			setLayout(null);
 
