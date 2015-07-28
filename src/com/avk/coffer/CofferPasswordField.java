@@ -1,5 +1,6 @@
 package com.avk.coffer;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -37,10 +38,10 @@ public class CofferPasswordField extends JPanel {
 		passwordField = new JPasswordField((password != null)? password : this.placeHolder);
 		passwordField.setBorder(null);
 		passwordField.setOpaque(false);
-		passwordField.setCaretColor(CofferReferences.CofferDarkGrey);
-		passwordField.setForeground((password != null)? CofferReferences.CofferDarkGrey : CofferReferences.CofferLightGrey);
+		passwordField.setCaretColor(CofferReferences.CofferVeryLightGrey);
+		passwordField.setForeground((password != null)? Color.WHITE : CofferReferences.CofferVeryLightGrey);
 		passwordField.setBackground(null);
-		passwordField.setEchoChar((char)0);
+		passwordField.setEchoChar((password == null)? (char)0 : '#');
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setFont(CofferReferences.Comfortaa_Plain_14);
 		passwordField.setBounds(20, 5, 280, 30);
@@ -49,7 +50,7 @@ public class CofferPasswordField extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				if(passwordField.getText().equals(CofferPasswordField.this.placeHolder)){
-					passwordField.setForeground(CofferReferences.CofferDarkGrey);
+					passwordField.setForeground(Color.WHITE);
 					passwordField.setEchoChar('#');
 					passwordField.setText("");
 				}
@@ -60,7 +61,7 @@ public class CofferPasswordField extends JPanel {
 			public void focusLost(FocusEvent e) {
 				if(passwordField.getText().equals("")){
 					passwordField.setEchoChar((char) 0);
-					passwordField.setForeground(CofferReferences.CofferLightGrey);
+					passwordField.setForeground(CofferReferences.CofferVeryLightGrey);
 					passwordField.setText(CofferPasswordField.this.placeHolder);
 				}
 			}
@@ -85,7 +86,7 @@ public class CofferPasswordField extends JPanel {
 			public void mouseReleased(MouseEvent e) { passwordField.setEchoChar('#'); }
 		});
 		passwordToggleImg.setBounds(265, 5, 45, 30);
-		passwordToggleImg.setVisible(false);
+		passwordToggleImg.setVisible((password != null)? true : false);
 		add(passwordToggleImg);
 		add(passwordField);
 		

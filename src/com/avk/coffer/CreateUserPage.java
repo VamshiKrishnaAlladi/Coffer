@@ -1,5 +1,7 @@
 package com.avk.coffer;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -9,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class CreateUserPage extends JPanel {
@@ -18,11 +19,14 @@ public class CreateUserPage extends JPanel {
 	private CofferPasswordField confirmPasswordField;
 	private String defaultStatus;
 	
+	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width;
+	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+
 	/**
 	 * Create the panel.
 	 */
 	public CreateUserPage() {
-		setPreferredSize(new Dimension(750, 460));
+		setPreferredSize(new Dimension(pageWidth, pageHeight));
 		setOpaque(false);
 		setLayout(null);
 
@@ -32,7 +36,7 @@ public class CreateUserPage extends JPanel {
 		add(focusGrab);
 
 		usernameField = new CofferTextField("Username", null);
-		usernameField.setBounds(215, 175, 320, 40);
+		usernameField.setBounds(((pageWidth - 320) / 2), 175, 320, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -49,7 +53,7 @@ public class CreateUserPage extends JPanel {
 		add(usernameField);
 
 		passwordField = new CofferPasswordField("Password", null);
-		passwordField.setBounds(215, 225, 320, 40);
+		passwordField.setBounds(((pageWidth - 320) / 2), 225, 320, 40);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -79,12 +83,12 @@ public class CreateUserPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		confirmPasswordField.setBounds(215, 275, 320, 40);
+		confirmPasswordField.setBounds(((pageWidth - 320) / 2), 275, 320, 40);
 		add(confirmPasswordField);
 
 
 		CofferButton submit = new CofferButton("Submit");
-		submit.setBounds(275, 325, 200, 40);
+		submit.setBounds(((pageWidth - 200) / 2), 325, 200, 40);
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -162,19 +166,19 @@ public class CreateUserPage extends JPanel {
 
 		JLabel lblCofferlogo = new JLabel();
 		lblCofferlogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCofferlogo.setForeground( CofferReferences.CofferVeryLightGrey);
+		lblCofferlogo.setForeground( Color.WHITE);
 		lblCofferlogo.setIconTextGap(90);
 		lblCofferlogo.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblCofferlogo.setFont(CofferReferences.Comfortaa_Bold_80);
 		lblCofferlogo.setText("Coffer");
-		lblCofferlogo.setBounds(0, 60, 750, 80);
+		lblCofferlogo.setBounds(0, 60, pageWidth, 80);
 		add(lblCofferlogo);
 		
 		JLabel lblPolicy = new JLabel("Password Policy");
 		lblPolicy.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPolicy.setFont(CofferReferences.Comfortaa_Plain_13);
 		lblPolicy.setForeground(CofferReferences.CofferBlue);
-		lblPolicy.setBounds(590, 410, 150, 20);
+		lblPolicy.setBounds(pageWidth - 200, pageHeight - 75, 150, 20);
 		lblPolicy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

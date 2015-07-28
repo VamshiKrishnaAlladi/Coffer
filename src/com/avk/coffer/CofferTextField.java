@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class CofferTextField extends JTextField {
@@ -26,15 +27,15 @@ public class CofferTextField extends JTextField {
 		setBackground(null);
 		setPreferredSize(new Dimension(320,40));
 		setBorder(new CompoundBorder(new CofferRoundBorder(CofferReferences.CofferBlue, borderThickness, borderRoundness), new EmptyBorder(5, 20, 5, 20)));
-		setCaretColor(CofferReferences.CofferDarkGrey);
-		setForeground((text != null)? CofferReferences.CofferDarkGrey : CofferReferences.CofferLightGrey);
+		setCaretColor(CofferReferences.CofferVeryLightGrey);
+		setForeground((text != null)? Color.WHITE : CofferReferences.CofferVeryLightGrey);
 		setHorizontalAlignment(SwingConstants.LEFT);
 		setFont(CofferReferences.Comfortaa_Plain_14);
 		addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
 				if(CofferTextField.super.getText().equals(CofferTextField.this.placeHolder)){
-					setForeground(CofferReferences.CofferDarkGrey);
+					setForeground(Color.WHITE);
 					CofferTextField.super.setText("");
 				}
 			}
@@ -42,7 +43,7 @@ public class CofferTextField extends JTextField {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if(CofferTextField.super.getText().equals("")){
-					setForeground(CofferReferences.CofferLightGrey);
+					setForeground(CofferReferences.CofferVeryLightGrey);
 					CofferTextField.super.setText(CofferTextField.this.placeHolder);
 				}
 			}

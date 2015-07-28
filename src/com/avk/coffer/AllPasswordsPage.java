@@ -1,12 +1,11 @@
 package com.avk.coffer;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,26 +16,30 @@ import javax.swing.ScrollPaneConstants;
 @SuppressWarnings("serial")
 public class AllPasswordsPage extends JPanel {
 
-	private static HashMap<String, CofferPasswordEntry> allPasswords;
+//	private static HashMap<String, CofferPasswordEntry> allPasswords;
+	
+	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width - 200;
+	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+
 	/**
 	 * Create the panel.
 	 */
 	public AllPasswordsPage() {
 		try{
-			setPreferredSize(new Dimension(750, 425));
+			setPreferredSize(new Dimension(pageWidth, pageHeight));
 			setOpaque(false);
 			setLayout(null);
 
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBorder(null);
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(100, 100, 550, 300);
+			scrollPane.setBounds(100, 100, pageWidth - 150, 300);
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
 			scrollPane.setViewportBorder(null);
 			
 			JScrollBar vsb = scrollPane.getVerticalScrollBar();
-			vsb.setUI(new CofferScrollbarUI(CofferReferences.COFFER_SCROLLBAR_TRACK.getImage()));
+			vsb.setUI(new CofferScrollbarUI());
 			vsb.setPreferredSize(new Dimension(10,300));
 			vsb.setOpaque(false);
 			vsb.setUnitIncrement(10);
@@ -44,7 +47,7 @@ public class AllPasswordsPage extends JPanel {
 			JLabel lblTitle = new JLabel("Password Almanac");
 			lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
 			lblTitle.setForeground(CofferReferences.CofferBlue);
-			lblTitle.setBounds(50, 25, 240, 50);
+			lblTitle.setBounds(50, 25, pageWidth - 50, 50);
 			add(lblTitle);
 			add(scrollPane);
 
@@ -54,7 +57,6 @@ public class AllPasswordsPage extends JPanel {
 			scrollPane.setViewportView(displayPanel);
 			displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
 
-			allPasswords = new HashMap<String,CofferPasswordEntry>();
 			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 			Scanner cofferScanner = new Scanner(user_coffer);
 			cofferScanner.useDelimiter("\n");
@@ -64,22 +66,22 @@ public class AllPasswordsPage extends JPanel {
 				if(!entry.equals("no_passwords"))
 				{
 					StringTokenizer st = new StringTokenizer(entry,"|");
-					CofferPasswordEntry p = new CofferPasswordEntry();
-					//do not alter the order of following 3 statements.
-					p.setTitle(st.nextToken());
+					
+					//do not alter the order of following 2 statements.
 					int f = Integer.parseInt(st.nextToken());
 					int i = Integer.parseInt(st.nextToken());
-					st = new StringTokenizer(CofferCrypt.decryptFromFile_Index(i, new File("./Coffer/"+ f +".cofferpass")),"|");
-					p.setUsername(st.nextToken());
-					p.setPassword(st.nextToken());
-					allPasswords.put(p.getTitle(), p);
-					displayPanel.add(new CofferPasswordEntryLabel(p));					
-					displayPanel.add(Box.createRigidArea(new Dimension(0,5)));
+					
+					CofferPasswordEntry p = new CofferPasswordEntry();
+					p.setValuesFromFile(new File("./Coffer/"+ f +".cofferpass"), i);
+
+					CofferPasswordEntryElement element = new CofferPasswordEntryElement(p);
+					element.setSize(600, 40);
+					displayPanel.add(element);
 				}
 				else{
 					Coffer.setStatus("You can add entries using \"Add a Password\" tab.");
-					JLabel noPass = new JLabel("You have'nt stored any passwords yet");
-					noPass.setForeground(CofferReferences.CofferLightGrey);
+					JLabel noPass = new JLabel("You have'nt stored any passwords.");
+					noPass.setForeground(Color.WHITE);
 					noPass.setFont(CofferReferences.Comfortaa_Plain_15);
 					displayPanel.add(noPass);						
 				}
@@ -89,9 +91,5 @@ public class AllPasswordsPage extends JPanel {
 			e.printStackTrace();
 		}
 
-	}
-
-	public static CofferPasswordEntry getPasswordObj(String key){
-		return allPasswords.get(key);
 	}
 }

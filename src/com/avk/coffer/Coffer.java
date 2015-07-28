@@ -6,12 +6,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -26,13 +23,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
 
 public class Coffer {
 
 	public static JFrame frmcoffer;
-	private static JPanel contentPanel, disablePanel;
-	private static CofferMenu menuPanel;
-	private static CofferMenuItem allPasswordsItem, addPasswordItem, generatePasswordItem, aboutItem;
+	private static JPanel contentPanel, disablePanel, statusPanel;
 	private static CardLayout cl;
 	private static JLabel titleBar, titleBar2, frmTitleLabel, frmStatusLabel, frmIconImg, lbl_, lblX, frmDragger;
 	private static TrayIcon trayIcon;
@@ -54,10 +50,8 @@ public class Coffer {
 	protected static final String dash_board = "DashBoard";
 	
 	
-//	protected static final String AllPasswordsPage = "AllPasswordsPage";
-//	protected static final String AddEntryPage = "AddEntryPage";
-//	protected static final String PasswordGeneratorPage = "PasswordGeneratorPage";
-
+	private static final int frameWidth = CofferReferences.COFFER_FRAME_SIZE.width;
+	private static final int frameHeight = CofferReferences.COFFER_FRAME_SIZE.height;
 
 	
 	/**
@@ -134,15 +128,15 @@ public class Coffer {
 			frmcoffer.setIconImages(CofferReferences.COFFER_LOGOS);
 			frmcoffer.setTitle("Coffer");
 			frmcoffer.setUndecorated(true);
-			frmcoffer.setBounds(0, 0, 750, 550);
+			frmcoffer.setSize(CofferReferences.COFFER_FRAME_SIZE);
 			frmcoffer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frmcoffer.getContentPane().setLayout(null);
 			frmcoffer.setLocationRelativeTo(null);
 			frmcoffer.addWindowListener(new WindowAdapter() {
 				@Override
-				public void windowOpened(WindowEvent e) { Coffer.setStatus("Hey there! Welcome to Coffer. :)"); }
+				public void windowOpened(WindowEvent e) { Coffer.setStatus("Hey there! Welcome to Coffer.    :)"); }
 				@Override
-				public void windowDeiconified(WindowEvent e) { Coffer.setStatus("Welcome Back. :)"); }
+				public void windowDeiconified(WindowEvent e) { Coffer.setStatus("Welcome Back.    :)"); }
 				@Override
 				public void windowClosing(WindowEvent e) { clearAndExit();}
 			});
@@ -177,6 +171,7 @@ public class Coffer {
 			});
 			frmcoffer.setVisible(true);
 
+			
 			lbl_ = new JLabel("_");
 			lbl_.setVerticalAlignment(SwingConstants.TOP);
 			lbl_.setForeground(Color.WHITE);
@@ -209,8 +204,7 @@ public class Coffer {
 					lbl_.setForeground(Color.WHITE);
 				}
 			});
-
-			lbl_.setBounds(660, 15, 40, 40);
+			lbl_.setBounds( frameWidth - 90, 10, 40, 40);
 
 
 			lblX = new JLabel("X");
@@ -231,21 +225,13 @@ public class Coffer {
 				@Override
 				public void mouseExited(MouseEvent e) { lblX.setForeground(Color.WHITE); }
 			});
-			lblX.setBounds(700, 10, 40, 40);
+			lblX.setBounds( frameWidth - 50, 10, 40, 40);
 
 			
 			frmIconImg = new JLabel(CofferReferences.COFFER_LOGO_SMALL);
 			frmIconImg.setMinimumSize(new Dimension(30, 30));
 			frmIconImg.setBounds(10, 10, 40, 40);
 			frmIconImg.setBackground(Color.WHITE);
-			frmIconImg.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if(user_logged_in && ! (e.getClickCount()>=2))
-						menuPanel.toggleMenu();
-				}
-			});
-
 
 
 			frmDragger = new JLabel();
@@ -265,122 +251,75 @@ public class Coffer {
 					frmcoffer.setLocation( ( x - xPressed), ( y - yPressed) );				
 				}
 			});		
-			frmDragger.setBounds(0, 0, 750, 60);
+			frmDragger.setBounds(0, 0, frameWidth , 60);
 
+			
 			frmTitleLabel = new JLabel();
 			frmTitleLabel.setIconTextGap(0);
 			frmTitleLabel.setBackground(CofferReferences.CofferDarkGrey);
-			frmTitleLabel.setBounds(10, 10, 730, 40);
+			frmTitleLabel.setBounds(10, 10, frameWidth - 20, 40);
 			frmTitleLabel.setVerticalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			frmTitleLabel.setForeground(Color.WHITE);
 			frmTitleLabel.setFont(CofferReferences.Comfortaa_Bold_16);
 			frmTitleLabel.setText("Coffer");
-			
-			frmStatusLabel = new JLabel();
-			frmStatusLabel.setBackground(CofferReferences.CofferDarkGrey);
-			frmStatusLabel.setOpaque(true);
-			frmStatusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			frmStatusLabel.setBounds(0, 520, 750, 30);
-			frmStatusLabel.setFont(CofferReferences.Comfortaa_Bold_Italic_15);
-			frmStatusLabel.setForeground(Color.white);
+
 
 			titleBar2 = new JLabel();
 			titleBar2.setBackground(CofferReferences.CofferDarkGrey);
 			titleBar2.setOpaque(true);
-			titleBar2.setBounds(10, 10, 730, 40);
+			titleBar2.setBounds(10, 10, frameWidth - 20, 40);
 			
+
 			titleBar = new JLabel();
 			titleBar.setOpaque(true);
 			titleBar.setBackground(CofferReferences.CofferLightGrey);
-			titleBar.setBounds(0, 0, 750, 60);
+			titleBar.setBounds(0, 0, frameWidth , 60);
 
-			menuPanel = new CofferMenu();
-			menuPanel.setMenuLocation(CofferMenu.VERTICAL, CofferMenu.LEFT, new Rectangle(-200,60,200,462));
-			menuPanel.setToggleConstraints(200, 1, 4);
 
-			allPasswordsItem = new CofferMenuItem("All My Passwords");
-			allPasswordsItem.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					DashBoard.setSelection(DashBoard.all_passwords_page);
-					menuPanel.toggleMenu();
-				}
-			});
-			allPasswordsItem.setBounds(0, 0, 200, 40);
-			allPasswordsItem.setIcon(CofferReferences.MULTIPLE_KEYS);
-			menuPanel.add(allPasswordsItem);
-			
-			addPasswordItem = new CofferMenuItem("Add a Password");
-			addPasswordItem.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					DashBoard.setSelection(DashBoard.add_entry_page);
-					menuPanel.toggleMenu();
-				}
-			});
-			addPasswordItem.setBounds(0,40,200,40);
-			addPasswordItem.setIcon(CofferReferences.ADD_KEY);
-			menuPanel.add(addPasswordItem);
-			
-			generatePasswordItem = new CofferMenuItem("Password Generator");
-			generatePasswordItem.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					DashBoard.setSelection(DashBoard.password_generator_page);
-					menuPanel.toggleMenu();
-				}
-			});
-			generatePasswordItem.setBounds(0,80,200,40);
-			generatePasswordItem.setIcon(CofferReferences.KEY_GEN);
-			menuPanel.add(generatePasswordItem);
-			
-			aboutItem = new CofferMenuItem("About Coffer");
-			aboutItem.setBounds(0,120,200,40);
-			aboutItem.setIcon(CofferReferences.PLUS);
-			menuPanel.add(aboutItem);
-			
 			disablePanel = new JPanel();
+			disablePanel.setBackground(new Color(50,50,50,100));
+			disablePanel.setBounds(0, 60, frameWidth , frameHeight - 60);
+			disablePanel.setVisible(false);
 			disablePanel.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					disablePanel.grabFocus();
 				}
 			});
-			disablePanel.addFocusListener(new FocusAdapter() {
-				@Override
-				public void focusGained(FocusEvent e) {
-					if(menuPanel.isMenuShown())
-						menuPanel.toggleMenu();
-				}
-			});
-			disablePanel.setBackground(new Color(75,75,75,100));
-			disablePanel.setBounds(0, 60, 750, 460);
-			disablePanel.setVisible(false);
+
+			frmStatusLabel = new JLabel();
+			frmStatusLabel.setBounds(200, 0, 800, 40);
+			frmStatusLabel.setFont(CofferReferences.Comfortaa_Bold_Italic_16);
+			frmStatusLabel.setForeground(CofferReferences.CofferVeryLightGrey);
+			
+			
+			statusPanel = new JPanel();
+			statusPanel.setBorder(new MatteBorder(1, 0, 0, 0, CofferReferences.CofferDarkGrey ));
+			statusPanel.setBackground(CofferReferences.CofferLightGrey);
+			statusPanel.setBounds(0, frameHeight - 40 , frameWidth , 40);
+			statusPanel.setLayout(null);
+			statusPanel.add(frmStatusLabel);
+
 
 			cl=new CardLayout(0, 0);
 			contentPanel= new JPanel(cl);
-			contentPanel.setBackground(Color.WHITE);
-			contentPanel.setBounds(0, 60, 750, 460);
+			contentPanel.setBackground(CofferReferences.CofferLightGrey);
+			contentPanel.setBounds(0, 60, frameWidth , frameHeight - 100);
 
-			
-			
+
 			frmcoffer.getContentPane().add(lbl_);
 			frmcoffer.getContentPane().add(lblX);
 			frmcoffer.getContentPane().add(frmIconImg);
 			frmcoffer.getContentPane().add(frmDragger);
 			frmcoffer.getContentPane().add(frmTitleLabel);
-			frmcoffer.getContentPane().add(frmStatusLabel);
 			frmcoffer.getContentPane().add(titleBar2);
 			frmcoffer.getContentPane().add(titleBar);
-			frmcoffer.getContentPane().add(menuPanel);
-			
-			JLabel blueLine = new JLabel(CofferReferences.BLUE_STREAK);
-			blueLine.setBounds(0, 518, 750, 2);
-			frmcoffer.getContentPane().add(blueLine);
-			frmcoffer.getContentPane().add(disablePanel);			
+			frmcoffer.getContentPane().add(disablePanel);
+			frmcoffer.getContentPane().add(statusPanel);
 			frmcoffer.getContentPane().add(contentPanel);
-
+			
+			
 			if(!KEY_FILE.exists()){ Coffer.swapTo(Coffer.create_user_page); }
 			else{ Coffer.swapTo(Coffer.login_page); }
 
@@ -402,21 +341,13 @@ public class Coffer {
 
 	public static boolean isDisabled(){return disablePanel.isVisible();}
 	
-	public static boolean isMenuShown(){ return menuPanel.isMenuShown();}
-
-	public static void toggleMenu() { menuPanel.toggleMenu(); }
-	
 	public static void login(){
 		user_logged_in = true;
 		swapTo(dash_board);
-		frmTitleLabel.setIcon(CofferReferences.COFFER_LOGO_SMALL);
-		frmIconImg.setIcon(CofferReferences.MENU_BUTTON);
 	}
 	
 	public static void logout(){
 		user_logged_in = false;
-		frmIconImg.setIcon(CofferReferences.COFFER_LOGO_SMALL);
-		frmTitleLabel.setIcon(null);
 		
 		if(!KEY_FILE.exists()){
 			swapTo(create_user_page); 
@@ -427,9 +358,6 @@ public class Coffer {
 	}
 
 	public static void swapTo(String page){
-		
-		if(isMenuShown())
-			menuPanel.toggleMenu();
 		
 		contentPanel.removeAll();
 		

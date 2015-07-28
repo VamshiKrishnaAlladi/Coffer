@@ -5,21 +5,37 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.Icon;
 import javax.swing.JLabel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class CofferMenuItem extends JLabel {
+public class CofferMenuItem extends JPanel {
 
-	public CofferMenuItem(String text) {
-		super(text);
+	private static JLabel label;
+	private static JLabel icon;
+	
+	
+	public CofferMenuItem(String text, Icon icn) {
 		
-		setIconTextGap(10);
-		setBorder(new EmptyBorder(2, 10, 2, 5));
-		setFont(CofferReferences.Comfortaa_Plain_13);
-		setForeground(Color.WHITE);
+		label = new JLabel(text);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(CofferReferences.Comfortaa_Plain_13);
+		label.setForeground(Color.WHITE);
+		label.setBounds(0, 0, 160, 40);
+
+		icon = new JLabel(icn);
+		
+		icon.setBounds(160,0,40,40);
+		setLayout(null);
+		
+		add(label);
+		add(icon);
+		
+		setBackground((Color) null);
+		setBorder(null);
 		setPreferredSize(new Dimension(200, 40));
-		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {

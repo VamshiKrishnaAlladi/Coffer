@@ -2,12 +2,12 @@ package com.avk.coffer;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.JPanel;
 
 import com.avk.animation.Animation;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
 public class CofferMenu extends JPanel {

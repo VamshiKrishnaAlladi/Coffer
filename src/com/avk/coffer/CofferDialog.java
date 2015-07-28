@@ -36,18 +36,14 @@ public class CofferDialog extends JDialog {
 	public final static int OK_CANCEL_OPTIONS = 43;
 	
 	public int selectedOption;
-	private int xPressed;
-	private int yPressed;
+	private int xPressed , yPressed;
 	
 	private Dimension dialogDimensions;
 
 	public CofferDialog(boolean isModal, String title, String[] messages, int Option_type) {
 		super(Coffer.frmcoffer, isModal);
 		
-		if(Coffer.isMenuShown())
-			Coffer.toggleMenu();
-		else
-			Coffer.setDisable(true);
+		Coffer.setDisable(true);
 		
 		int length = messages.length;
 		int scrollPaneHeight = Math.max( 40, Math.min(length*21,125));
@@ -60,7 +56,7 @@ public class CofferDialog extends JDialog {
 			public void windowClosing(WindowEvent e) { Coffer.setDisable(false);}
 		});
 		JPanel contentPanel = new JPanel();
-		contentPanel.setBackground(Color.WHITE);
+		contentPanel.setBackground(CofferReferences.CofferLightGrey);
 		contentPanel.setLayout(null);
 		
 		JLabel lblX = new JLabel("X");
@@ -112,14 +108,14 @@ public class CofferDialog extends JDialog {
 		contentPanel.add(titleLbl);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(CofferReferences.CofferLightGrey);
 		panel.setOpaque(false);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		
 		for(int i = 0 ; i < length ; i++)
 		{
 			JLabel lbl = new JLabel(messages[i]);
-			lbl.setForeground(CofferReferences.CofferDarkGrey);
+			lbl.setForeground(Color.WHITE);
 			lbl.setFont(CofferReferences.Comfortaa_Plain_14);
 			panel.add(lbl);
 			if(i!= length-1)
@@ -135,7 +131,7 @@ public class CofferDialog extends JDialog {
 		scrollPane.setViewportBorder(null);
 		
 		JScrollBar vsb = scrollPane.getVerticalScrollBar();
-		vsb.setUI(new CofferScrollbarUI(null));
+		vsb.setUI(new CofferScrollbarUI());
 		vsb.setPreferredSize(new Dimension(10,125));
 		vsb.setOpaque(false);
 		vsb.setUnitIncrement(10);

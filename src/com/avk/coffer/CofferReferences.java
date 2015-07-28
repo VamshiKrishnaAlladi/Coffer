@@ -1,6 +1,7 @@
 package com.avk.coffer;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class CofferReferences {
+	
+	public static final Dimension COFFER_FRAME_SIZE = new Dimension(1000,600);
 
 	// Images used for Coffer logos
 	public static final ImageIcon COFFER_SAFE_LOGO_16X16 = new ImageIcon(Coffer.class.getResource("/CofferSafeLogo16x16.png"));
@@ -30,14 +33,12 @@ public class CofferReferences {
 	public static final ImageIcon KEY_GEN = new ImageIcon(Coffer.class.getResource("/keyGen.png"));
 	public static final ImageIcon CLIPBOARD = new ImageIcon(Coffer.class.getResource("/clipBoard.png"));
 	public static final ImageIcon MENU_BUTTON = new ImageIcon(Coffer.class.getResource("/menuButton.png"));
+	public static final ImageIcon DELETE = new ImageIcon(Coffer.class.getResource("/delete.png"));	
+	public static final ImageIcon EDIT = new ImageIcon(Coffer.class.getResource("/edit.png"));	
 
 	// Images used in Frame
 	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));
 	
-	// Images used in Password Almanac
-	public static final ImageIcon COFFER_SCROLLBAR_TRACK = new ImageIcon(Coffer.class.getResource("/scrollbarTrack.png"));
-
-
 	// Images used in Custom Components
 	public static final ImageIcon CHECKBOX = new ImageIcon(Coffer.class.getResource("/checkBox.png")); 
 	public static final ImageIcon CHECKEDBOX = new ImageIcon(Coffer.class.getResource("/checkedBox.png"));
@@ -54,7 +55,7 @@ public class CofferReferences {
 	
 	public static Font 	Comfortaa_Plain_13, Comfortaa_Plain_14,	Comfortaa_Plain_15,
 						Comfortaa_Bold_15, Comfortaa_Bold_16, Comfortaa_Bold_80,
-						Comfortaa_Bold_Italic_15, Comfortaa_Bold_Italic_20,
+						Comfortaa_Bold_Italic_16, Comfortaa_Bold_Italic_20,
 						
 						Antipasto_Bold_15, Antipasto_Plain_15, Antipasto_Plain_26;
 
@@ -79,7 +80,7 @@ public class CofferReferences {
 	    	Comfortaa_Bold_16 = Comfortaa.deriveFont(Font.BOLD, 16);
 	    	Comfortaa_Bold_80 = Comfortaa.deriveFont(Font.BOLD, 80);
 	    	
-	    	Comfortaa_Bold_Italic_15 = Comfortaa.deriveFont(Font.ITALIC|Font.BOLD, 15);
+	    	Comfortaa_Bold_Italic_16 = Comfortaa.deriveFont(Font.ITALIC|Font.BOLD, 16);
 	    	Comfortaa_Bold_Italic_20  = Comfortaa.deriveFont(Font.ITALIC|Font.BOLD, 20);
 	    	
 	    	Antipasto_Bold_15 = Antipasto.deriveFont(Font.BOLD, 15);

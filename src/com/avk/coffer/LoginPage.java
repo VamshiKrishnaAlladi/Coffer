@@ -1,5 +1,7 @@
 package com.avk.coffer;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -11,19 +13,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import java.awt.Dimension;
-
 @SuppressWarnings("serial")
 public class LoginPage extends JPanel {
 	private CofferTextField usernameField;
 	private CofferPasswordField passwordField;
 	private String defaultStatus;
 
+	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width;
+	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+	
 	/**
 	 * Create the panel.
 	 */
 	public LoginPage() {
-		setPreferredSize(new Dimension(750, 460));
+		setPreferredSize(new Dimension(pageWidth, pageHeight));
 		setOpaque(false);
 		setLayout(null);
 		defaultStatus = Coffer.getStatus();
@@ -36,11 +39,11 @@ public class LoginPage extends JPanel {
 		JLabel lblCoffer = new JLabel("Coffer");
 		lblCoffer.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCoffer.setVerticalTextPosition(SwingConstants.TOP);
-		lblCoffer.setForeground( CofferReferences.CofferVeryLightGrey);
+		lblCoffer.setForeground( Color.WHITE);
 		lblCoffer.setIconTextGap(90);
 		lblCoffer.setHorizontalTextPosition(SwingConstants.RIGHT);
 		lblCoffer.setFont(CofferReferences.Comfortaa_Bold_80);
-		lblCoffer.setBounds(0, 90, 750, 80);
+		lblCoffer.setBounds(0, 90, pageWidth , 80);
 		add(lblCoffer);
 
 		usernameField = new CofferTextField("Username",null);
@@ -57,7 +60,7 @@ public class LoginPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		usernameField.setBounds(215, 230, 320, 40);
+		usernameField.setBounds(((pageWidth - 320) / 2), 230, 320, 40);
 		add(usernameField);
 		
 		
@@ -75,7 +78,7 @@ public class LoginPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		passwordField.setBounds(215, 280, 320, 40);
+		passwordField.setBounds(((pageWidth - 320) / 2), 280, 320, 40);
 		add(passwordField);
 		
 		
@@ -140,8 +143,22 @@ public class LoginPage extends JPanel {
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}
 		});
-		submit.setBounds(275, 330, 200, 40);
+		submit.setBounds(((pageWidth - 200) / 2), 330, 200, 40);
 		add(submit);
 		
+		JLabel lblPolicy = new JLabel("Password Policy");
+		lblPolicy.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPolicy.setFont(CofferReferences.Comfortaa_Plain_13);
+		lblPolicy.setForeground(CofferReferences.CofferBlue);
+		lblPolicy.setBounds(pageWidth - 200, pageHeight - 75, 150, 20);
+		lblPolicy.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String[] strs = {"-> Master password should be atleast 10 characters.", "-> It should include atleast 1 for each of","        * Upper Case Letter","        * Lower Case Letter","        * Number and","        * Symbol"};
+				new CofferDialog(true,"Password Policy", strs, CofferDialog.OK_OPTION);
+			}
+		});
+
+		add(lblPolicy);
 	}
 }

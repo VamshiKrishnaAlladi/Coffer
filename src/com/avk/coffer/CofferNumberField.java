@@ -1,5 +1,6 @@
 package com.avk.coffer;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,7 +29,7 @@ public class CofferNumberField extends JPanel {
 		
 		numField = new JTextField();
 		numField.setText(num.toString());
-		numField.setForeground(CofferReferences.CofferLightGrey);
+		numField.setForeground(Color.WHITE);
 		numField.setFont(CofferReferences.Comfortaa_Plain_15);
 		numField.setHorizontalAlignment(SwingConstants.CENTER);
 		numField.setEditable(false);

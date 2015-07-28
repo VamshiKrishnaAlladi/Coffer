@@ -1,43 +1,119 @@
 package com.avk.coffer;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.Random;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import java.awt.Dimension;
-
 @SuppressWarnings("serial")
-public class AddEntryPage extends JPanel {
-	private static CofferTextField titleField, usernameField, urlField;
+public class CofferEditPasswordFrame extends JDialog {
+	
+	private final JPanel popupFrame;
+	private int xPressed , yPressed;
+
+	private JPanel contentPanel;
+	private JLabel titleLbl;
+
+	private static CofferTextField titleField;
+	private static CofferTextField usernameField;
 	private static CofferPasswordField passwordField;
 	private static CofferPasswordField confirmPasswordField;
 	private String defaultStatus;
 	private static JButton focusGrab;
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width - 200;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
-	
-	/**
-	 * Create the panel.
-	 */
-	public AddEntryPage() {
-		setPreferredSize(new Dimension(pageWidth, pageHeight));
-		setOpaque(false);
-		setLayout(null);
+	private int frameWidth = 600, frameHeight = 700;
+
+	public CofferEditPasswordFrame( CofferPasswordEntry p) {
+		super(Coffer.frmcoffer, true);
+
+		setMinimumSize(new Dimension(300, 300));
+		
+		Coffer.setDisable(true);
+		
+		addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent e) { Coffer.setDisable(false);}
+		});
+
+		setUndecorated(true);
+		setSize(frameWidth, frameHeight);
+
+		popupFrame = new JPanel();
+		popupFrame.setBackground(CofferReferences.CofferLightGrey);
+		popupFrame.setLayout(null);
+		
+		JLabel lblX = new JLabel("X");
+		lblX.setForeground(Color.WHITE);
+		lblX.setFont(CofferReferences.Antipasto_Bold_15);
+		lblX.setHorizontalAlignment(SwingConstants.CENTER);
+		lblX.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblX.setBounds(frameWidth - 35, 5, 30, 30);
+		lblX.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Coffer.setDisable(false);
+				CofferEditPasswordFrame.this.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblX.setForeground(CofferReferences.CofferBlue);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblX.setForeground(Color.WHITE);
+			}
+		});
+		popupFrame.add(lblX);
+
+		titleLbl = new JLabel("Editing " + p.getTitle() + " Entry");
+		titleLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLbl.setBounds(0, 0, frameWidth, 40);
+		titleLbl.setOpaque(true);
+		titleLbl.setBackground(CofferReferences.CofferDarkGrey);
+		titleLbl.setForeground(Color.WHITE);
+		titleLbl.setFont(CofferReferences.Comfortaa_Bold_15);
+		titleLbl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				xPressed = e.getX();
+				yPressed = e.getY();
+			}
+		});
+		titleLbl.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				int x = e.getXOnScreen();
+				int y = e.getYOnScreen();
+
+				CofferEditPasswordFrame.this.setLocation( ( x - xPressed), ( y - yPressed) );				
+			}
+		});
+		popupFrame.add(titleLbl);
+
+		
+		CofferEditPasswordFrame.this.setContentPane(popupFrame);
+		
+		contentPanel = new JPanel();
+		contentPanel.setLayout(null);
+		contentPanel.setOpaque(false);
+		contentPanel.setBounds(0, 40, frameWidth, frameHeight-40);
 
 		focusGrab = new JButton("");
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
-		add(focusGrab);
+		contentPanel.add(focusGrab);
 		
-		titleField = new CofferTextField("Title",null);
-		titleField.setBounds(((pageWidth - 320) / 2), 100, 320, 40);
+		titleField = new CofferTextField("Title", p.getTitle());
+		titleField.setBounds(((frameWidth - 320) / 2), 115, 320, 40);
 		titleField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -51,10 +127,10 @@ public class AddEntryPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		add(titleField);
+		contentPanel.add(titleField);
 		
-		usernameField = new CofferTextField("Username",null);
-		usernameField.setBounds(((pageWidth - 320) / 2), 150, 320, 40);
+		usernameField = new CofferTextField("Username", p.getUsername());
+		usernameField.setBounds(((frameWidth - 320) / 2), 165, 320, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -68,10 +144,10 @@ public class AddEntryPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		add(usernameField);
+		contentPanel.add(usernameField);
 
-		passwordField = new CofferPasswordField("Password", null);
-		passwordField.setBounds(((pageWidth - 320) / 2), 200, 320, 40);
+		passwordField = new CofferPasswordField("Password", p.getPassword());
+		passwordField.setBounds(((frameWidth - 320) / 2), 215, 320, 40);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -85,10 +161,10 @@ public class AddEntryPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		add(passwordField);
+		contentPanel.add(passwordField);
 
 		confirmPasswordField = new CofferPasswordField("Confirm Password",null);
-		confirmPasswordField.setBounds(((pageWidth - 320) / 2), 250, 320, 40);
+		confirmPasswordField.setBounds(((frameWidth - 320) / 2), 265, 320, 40);
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -102,27 +178,10 @@ public class AddEntryPage extends JPanel {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
-		add(confirmPasswordField);
-		
-		urlField = new CofferTextField("URL",null);
-		urlField.setBounds(((pageWidth - 320) / 2), 300, 320, 40);
-		urlField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				if(urlField.getText().equals("")){
-					defaultStatus = Coffer.getStatus();
-					Coffer.setStatus("Enter the login URL here...");
-				}
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				Coffer.setStatus(defaultStatus);
-			}
-		});
-		add(urlField);
+		contentPanel.add(confirmPasswordField);
 		
 		CofferButton submit = new CofferButton("Submit");
-		submit.setBounds(((pageWidth - 200) / 2), 350, 200, 40);
+		submit.setBounds(((frameWidth - 200) / 2), 315, 200, 40);
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -130,15 +189,10 @@ public class AddEntryPage extends JPanel {
 				{
 					focusGrab.grabFocus();
 					defaultStatus = Coffer.getStatus();
-					
 					String title = titleField.getText().trim();
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
 					String conPass = confirmPasswordField.getText().trim();
-					String url = urlField.getText().trim();
-					
-					url = url.equals("")? "no_url" : url;
-					
 					if(title.equals(""))
 					{
 						Coffer.setStatus("I guess you don't know that Title is mandatory.");
@@ -188,56 +242,31 @@ public class AddEntryPage extends JPanel {
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
 						
-						Random r = new Random();
-						int index, fileNo;
-						String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
-						
-						do{
-							index = r.nextInt(CofferCrypt.MAX_KEY_INDEX);
-						}
-						while(index < 10000);
-						
-						do{
-							fileNo = r.nextInt(100000000);
-						}
-						while(fileNo < 10000000 || user_coffer.contains(Integer.toString(fileNo).subSequence(0, 8)));
-						
-						if(user_coffer.equals("no_passwords")){
-							user_coffer = Integer.toString(fileNo) + "|" + Integer.toString(index);
-						}
-						else{
-							user_coffer += "\n" + Integer.toString(fileNo) + "|" + Integer.toString(index);
-						}
-						
-						CofferCrypt.encrypt2File_Index(CofferCrypt.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
-						CofferCrypt.encrypt2File_Index(index, fileNo + "| " + title + "|" + username + "|" + password + "|" + url, new File("./Coffer/" + fileNo + ".cofferpass"));
-
-						DashBoard.setSelection(DashBoard.add_entry_page, true);
-						Coffer.setStatus("Entry made into your coffer.");						
+//						String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
+//						
+//						Scanner cofferScanner = new Scanner(user_coffer);
+//						cofferScanner.useDelimiter("\n");
+//						while(cofferScanner.hasNext())
+//						{	
+//							String entry =  cofferScanner.next();
+//							
+//						}
+						Coffer.setDisable(false);
+						CofferEditPasswordFrame.this.dispose();
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}
 		});
-		add(submit);
+		contentPanel.add(submit);
 
-		JLabel lblTitle = new JLabel("Password Registry");
-		lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
-		lblTitle.setForeground(CofferReferences.CofferBlue);
-		lblTitle.setBounds(50, 25, 300, 50);
-		add(lblTitle);
-		
-		JLabel lblClear = new JLabel("Clear all fields");
-		lblClear.setHorizontalAlignment(SwingConstants.CENTER);
-		lblClear.setFont(CofferReferences.Comfortaa_Plain_13);
-		lblClear.setForeground(CofferReferences.CofferBlue);
-		lblClear.setBounds(590, 450, 150, 20);
-		lblClear.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				DashBoard.setSelection(DashBoard.add_entry_page, true);
-			}
-		});
-		add(lblClear);
+		popupFrame.add(contentPanel);
 
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setModal(true);
+		setResizable(false);
+		setUndecorated(true);
+		setVisible(true);
 	}
+
 }
