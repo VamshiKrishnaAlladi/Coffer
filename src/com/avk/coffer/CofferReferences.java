@@ -33,9 +33,10 @@ public class CofferReferences {
 	public static final ImageIcon KEY_GEN = new ImageIcon(Coffer.class.getResource("/keyGen.png"));
 	public static final ImageIcon CLIPBOARD = new ImageIcon(Coffer.class.getResource("/clipBoard.png"));
 	public static final ImageIcon MENU_BUTTON = new ImageIcon(Coffer.class.getResource("/menuButton.png"));
-	public static final ImageIcon DELETE = new ImageIcon(Coffer.class.getResource("/delete.png"));	
+	public static final ImageIcon LAUNCH = new ImageIcon(Coffer.class.getResource("/launch.png"));	
 	public static final ImageIcon EDIT = new ImageIcon(Coffer.class.getResource("/edit.png"));	
-
+	public static final ImageIcon DELETE = new ImageIcon(Coffer.class.getResource("/delete.png"));	
+	
 	// Images used in Frame
 	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));
 	

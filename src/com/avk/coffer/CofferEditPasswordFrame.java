@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class CofferEditPasswordFrame extends JDialog {
@@ -23,14 +24,12 @@ public class CofferEditPasswordFrame extends JDialog {
 	private JPanel contentPanel;
 	private JLabel titleLbl;
 
-	private static CofferTextField titleField;
-	private static CofferTextField usernameField;
-	private static CofferPasswordField passwordField;
-	private static CofferPasswordField confirmPasswordField;
+	private static CofferTextField titleField, usernameField,  urlField;
+	private static CofferPasswordField passwordField, confirmPasswordField;
 	private String defaultStatus;
 	private static JButton focusGrab;
 
-	private int frameWidth = 600, frameHeight = 700;
+	private int frameWidth = 600, frameHeight = 500;
 
 	public CofferEditPasswordFrame( CofferPasswordEntry p) {
 		super(Coffer.frmcoffer, true);
@@ -75,12 +74,12 @@ public class CofferEditPasswordFrame extends JDialog {
 		popupFrame.add(lblX);
 
 		titleLbl = new JLabel("Editing " + p.getTitle() + " Entry");
-		titleLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLbl.setBounds(0, 0, frameWidth, 40);
 		titleLbl.setOpaque(true);
+		titleLbl.setBorder(new EmptyBorder(0, 25, 0, 0));
+		titleLbl.setBounds(0, 0, frameWidth, 40);
 		titleLbl.setBackground(CofferReferences.CofferDarkGrey);
 		titleLbl.setForeground(Color.WHITE);
-		titleLbl.setFont(CofferReferences.Comfortaa_Bold_15);
+		titleLbl.setFont(CofferReferences.Comfortaa_Bold_Italic_16);
 		titleLbl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -110,10 +109,10 @@ public class CofferEditPasswordFrame extends JDialog {
 		focusGrab = new JButton("");
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
-		contentPanel.add(focusGrab);
+		getContentPane().add(focusGrab);
 		
-		titleField = new CofferTextField("Title", p.getTitle());
-		titleField.setBounds(((frameWidth - 320) / 2), 115, 320, 40);
+		titleField = new CofferTextField("Title",p.getTitle());
+		titleField.setBounds(((frameWidth - 320) / 2), 100, 320, 40);
 		titleField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -129,8 +128,25 @@ public class CofferEditPasswordFrame extends JDialog {
 		});
 		contentPanel.add(titleField);
 		
-		usernameField = new CofferTextField("Username", p.getUsername());
-		usernameField.setBounds(((frameWidth - 320) / 2), 165, 320, 40);
+		urlField = new CofferTextField("URL",p.getUrl());
+		urlField.setBounds(((frameWidth - 320) / 2), 150, 320, 40);
+		urlField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(urlField.getText().equals("")){
+					defaultStatus = Coffer.getStatus();
+					Coffer.setStatus("Enter the login URL here...");
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Coffer.setStatus(defaultStatus);
+			}
+		});
+		contentPanel.add(urlField);
+
+		usernameField = new CofferTextField("Username",p.getUsername());
+		usernameField.setBounds(((frameWidth - 320) / 2), 200, 320, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -147,7 +163,7 @@ public class CofferEditPasswordFrame extends JDialog {
 		contentPanel.add(usernameField);
 
 		passwordField = new CofferPasswordField("Password", p.getPassword());
-		passwordField.setBounds(((frameWidth - 320) / 2), 215, 320, 40);
+		passwordField.setBounds(((frameWidth - 320) / 2), 250, 320, 40);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -163,8 +179,8 @@ public class CofferEditPasswordFrame extends JDialog {
 		});
 		contentPanel.add(passwordField);
 
-		confirmPasswordField = new CofferPasswordField("Confirm Password",null);
-		confirmPasswordField.setBounds(((frameWidth - 320) / 2), 265, 320, 40);
+		confirmPasswordField = new CofferPasswordField("Confirm Password",p.getPassword());
+		confirmPasswordField.setBounds(((frameWidth - 320) / 2), 300, 320, 40);
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -181,7 +197,7 @@ public class CofferEditPasswordFrame extends JDialog {
 		contentPanel.add(confirmPasswordField);
 		
 		CofferButton submit = new CofferButton("Submit");
-		submit.setBounds(((frameWidth - 200) / 2), 315, 200, 40);
+		submit.setBounds(((frameWidth - 200) / 2), 350, 200, 40);
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -189,10 +205,15 @@ public class CofferEditPasswordFrame extends JDialog {
 				{
 					focusGrab.grabFocus();
 					defaultStatus = Coffer.getStatus();
+					
 					String title = titleField.getText().trim();
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
 					String conPass = confirmPasswordField.getText().trim();
+					String url = urlField.getText().trim();
+					
+					url = url.equals("")? "no_url" : url;
+					
 					if(title.equals(""))
 					{
 						Coffer.setStatus("I guess you don't know that Title is mandatory.");
@@ -211,7 +232,7 @@ public class CofferEditPasswordFrame extends JDialog {
 					}
 					else if( password.equals(""))
 					{
-						Coffer.setStatus("Pick a strong password, empty ones dont serve the purpose.");
+						Coffer.setStatus("Pick a strong password, empty ones don't serve the purpose.");
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(false);
@@ -219,7 +240,7 @@ public class CofferEditPasswordFrame extends JDialog {
 					}
 					else if( conPass.equals(""))
 					{
-						Coffer.setStatus("All that's needed was to retype your password!");
+						Coffer.setStatus("All that's needed is to retype your password!");
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(true);
@@ -242,17 +263,15 @@ public class CofferEditPasswordFrame extends JDialog {
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
 						
-//						String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
-//						
-//						Scanner cofferScanner = new Scanner(user_coffer);
-//						cofferScanner.useDelimiter("\n");
-//						while(cofferScanner.hasNext())
-//						{	
-//							String entry =  cofferScanner.next();
-//							
-//						}
+						p.setTitle(title);
+						p.setUrl(url);
+						p.setUsername(username);
+						p.setPassword(password);
+						
+						p.writeToFile();
+						
 						Coffer.setDisable(false);
-						CofferEditPasswordFrame.this.dispose();
+						CofferEditPasswordFrame.this.dispose();				
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }
 			}

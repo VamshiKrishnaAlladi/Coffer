@@ -17,11 +17,10 @@ public class DashBoard extends JPanel {
 	protected static final String all_passwords_page = "AllPasswordsPage";
 	protected static final String add_entry_page = "AddEntryPage";
 	protected static final String password_generator_page = "PasswordGeneratorPage";
-	protected static final String help_page = "HelpPage";
 	protected static final String about_page = "AboutPage";
 
 	private static JPanel tabsDisplay, displayPanel;
-	private static CofferTabLabel allPasswordsTab, addPasswordTab, generatePasswordTab, helpTab, aboutTab;
+	private static CofferTabLabel allPasswordsTab, addPasswordTab, generatePasswordTab, aboutTab;
 	private static CardLayout cl;
 	
 	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width;
@@ -78,12 +77,6 @@ public class DashBoard extends JPanel {
 		tabsDisplay.add(generatePasswordTab);
 		tabs.put(password_generator_page, generatePasswordTab);
 
-		
-		helpTab = new CofferTabLabel("Help", CofferReferences.SINGLE_KEY);
-		helpTab.setBounds(0, pageHeight - 80, 200, 40);
-		tabsDisplay.add(helpTab);
-		tabs.put(help_page, helpTab );
-		
 		
 		aboutTab = new CofferTabLabel("About Coffer", CofferReferences.COFFER_LOGO_SMALL);
 		aboutTab.setBounds(0, pageHeight - 40, 200, 40);

@@ -33,7 +33,7 @@ public class AllPasswordsPage extends JPanel {
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBorder(null);
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			scrollPane.setBounds(100, 100, pageWidth - 150, 300);
+			scrollPane.setBounds( 75, 100, pageWidth - 150, 300);
 			scrollPane.setOpaque(false);
 			scrollPane.getViewport().setOpaque(false);
 			scrollPane.setViewportBorder(null);
@@ -55,7 +55,7 @@ public class AllPasswordsPage extends JPanel {
 			displayPanel.setBorder(null);
 			displayPanel.setOpaque(false);
 			scrollPane.setViewportView(displayPanel);
-			displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.PAGE_AXIS));
+			displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
 
 			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
 			Scanner cofferScanner = new Scanner(user_coffer);
@@ -75,7 +75,6 @@ public class AllPasswordsPage extends JPanel {
 					p.setValuesFromFile(new File("./Coffer/"+ f +".cofferpass"), i);
 
 					CofferPasswordEntryElement element = new CofferPasswordEntryElement(p);
-					element.setSize(600, 40);
 					displayPanel.add(element);
 				}
 				else{

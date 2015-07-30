@@ -1,16 +1,13 @@
 package com.avk.coffer;
 
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class AddEntryPage extends JPanel {
@@ -53,8 +50,25 @@ public class AddEntryPage extends JPanel {
 		});
 		add(titleField);
 		
+		urlField = new CofferTextField("URL",null);
+		urlField.setBounds(((pageWidth - 320) / 2), 150, 320, 40);
+		urlField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(urlField.getText().equals("")){
+					defaultStatus = Coffer.getStatus();
+					Coffer.setStatus("Enter the login URL here...");
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Coffer.setStatus(defaultStatus);
+			}
+		});
+		add(urlField);
+
 		usernameField = new CofferTextField("Username",null);
-		usernameField.setBounds(((pageWidth - 320) / 2), 150, 320, 40);
+		usernameField.setBounds(((pageWidth - 320) / 2), 200, 320, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -71,7 +85,7 @@ public class AddEntryPage extends JPanel {
 		add(usernameField);
 
 		passwordField = new CofferPasswordField("Password", null);
-		passwordField.setBounds(((pageWidth - 320) / 2), 200, 320, 40);
+		passwordField.setBounds(((pageWidth - 320) / 2), 250, 320, 40);
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -88,7 +102,7 @@ public class AddEntryPage extends JPanel {
 		add(passwordField);
 
 		confirmPasswordField = new CofferPasswordField("Confirm Password",null);
-		confirmPasswordField.setBounds(((pageWidth - 320) / 2), 250, 320, 40);
+		confirmPasswordField.setBounds(((pageWidth - 320) / 2), 300, 320, 40);
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -103,23 +117,6 @@ public class AddEntryPage extends JPanel {
 			}
 		});
 		add(confirmPasswordField);
-		
-		urlField = new CofferTextField("URL",null);
-		urlField.setBounds(((pageWidth - 320) / 2), 300, 320, 40);
-		urlField.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				if(urlField.getText().equals("")){
-					defaultStatus = Coffer.getStatus();
-					Coffer.setStatus("Enter the login URL here...");
-				}
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				Coffer.setStatus(defaultStatus);
-			}
-		});
-		add(urlField);
 		
 		CofferButton submit = new CofferButton("Submit");
 		submit.setBounds(((pageWidth - 200) / 2), 350, 200, 40);
@@ -165,7 +162,7 @@ public class AddEntryPage extends JPanel {
 					}
 					else if( conPass.equals(""))
 					{
-						Coffer.setStatus("All that's needed was to retype your password!");
+						Coffer.setStatus("All that's needed is to retype your password!");
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(true);
@@ -188,31 +185,17 @@ public class AddEntryPage extends JPanel {
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
 						
-						Random r = new Random();
-						int index, fileNo;
-						String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
-						
-						do{
-							index = r.nextInt(CofferCrypt.MAX_KEY_INDEX);
-						}
-						while(index < 10000);
-						
-						do{
-							fileNo = r.nextInt(100000000);
-						}
-						while(fileNo < 10000000 || user_coffer.contains(Integer.toString(fileNo).subSequence(0, 8)));
-						
-						if(user_coffer.equals("no_passwords")){
-							user_coffer = Integer.toString(fileNo) + "|" + Integer.toString(index);
-						}
-						else{
-							user_coffer += "\n" + Integer.toString(fileNo) + "|" + Integer.toString(index);
-						}
-						
-						CofferCrypt.encrypt2File_Index(CofferCrypt.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
-						CofferCrypt.encrypt2File_Index(index, fileNo + "| " + title + "|" + username + "|" + password + "|" + url, new File("./Coffer/" + fileNo + ".cofferpass"));
+						CofferPasswordEntry p = new CofferPasswordEntry();
 
+						p.setTitle(title);
+						p.setUrl(url);
+						p.setUsername(username);
+						p.setPassword(password);
+						
+						p.writeToFile();
+						
 						DashBoard.setSelection(DashBoard.add_entry_page, true);
+						DashBoard.setSelection(DashBoard.all_passwords_page, true);
 						Coffer.setStatus("Entry made into your coffer.");						
 					}
 				} catch (Exception e1) { e1.printStackTrace(); }
