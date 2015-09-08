@@ -1,5 +1,6 @@
 package com.avk.coffer;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -8,7 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class CofferTextField extends JTextField {

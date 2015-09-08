@@ -155,7 +155,7 @@ public class LoginPage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String[] strs = {"-> Master password should be atleast 10 characters.", "-> It should include atleast 1 for each of","        * Upper Case Letter","        * Lower Case Letter","        * Number and","        * Symbol"};
-				new CofferDialog(true,"Password Policy", strs, CofferDialog.OK_OPTION);
+				new CofferDialog(Coffer.frmcoffer, true,"Password Policy", strs, CofferDialog.OK_OPTION);
 			}
 		});
 

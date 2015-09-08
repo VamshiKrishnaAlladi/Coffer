@@ -14,12 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class CofferPasswordField extends JPanel {
 
 	private JPasswordField passwordField;
 	private JLabel passwordToggleImg;
+	
+	private boolean isPasswordHidden = true;
 	
 	private String placeHolder = "";
 	private int borderThickness = 2;
@@ -36,7 +39,7 @@ public class CofferPasswordField extends JPanel {
 		this.placeHolder = placeHolder;
 		
 		passwordField = new JPasswordField((password != null)? password : this.placeHolder);
-		passwordField.setBorder(null);
+		passwordField.setBorder(new EmptyBorder(5, 20, 5, 20));
 		passwordField.setOpaque(false);
 		passwordField.setCaretColor(CofferReferences.CofferVeryLightGrey);
 		passwordField.setForeground((password != null)? Color.WHITE : CofferReferences.CofferVeryLightGrey);
@@ -44,7 +47,7 @@ public class CofferPasswordField extends JPanel {
 		passwordField.setEchoChar((password == null)? (char)0 : '#');
 		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
 		passwordField.setFont(CofferReferences.Comfortaa_Plain_14);
-		passwordField.setBounds(20, 5, 280, 30);
+		passwordField.setBounds(0, 0, 320, 40);
 		passwordField.addFocusListener(new FocusAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -67,25 +70,29 @@ public class CofferPasswordField extends JPanel {
 			}
 			
 		});
+		
 		passwordField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
+				passwordToggleImg.setVisible(true);
+
 				if(passwordField.getPassword().length <= 0)
 					passwordToggleImg.setVisible(false);
-				else
-					passwordToggleImg.setVisible(true);
 			}
 
 		});
 		
-		passwordToggleImg = new JLabel(CofferReferences.PASSWORD_TOGGLE_IMG);
+		passwordToggleImg = new JLabel(isPasswordHidden? CofferReferences.SHOW : CofferReferences.HIDE);
 		passwordToggleImg.addMouseListener(new MouseAdapter() {
+			
 			@Override
-			public void mousePressed(MouseEvent e) { passwordField.setEchoChar((char)0); }
-			@Override
-			public void mouseReleased(MouseEvent e) { passwordField.setEchoChar('#'); }
+			public void mouseClicked(MouseEvent e) { 
+				isPasswordHidden = !isPasswordHidden;
+				passwordField.setEchoChar(isPasswordHidden? '#' : (char)0 );
+				passwordToggleImg.setIcon(isPasswordHidden? CofferReferences.SHOW : CofferReferences.HIDE);
+			}
 		});
-		passwordToggleImg.setBounds(265, 5, 45, 30);
+		passwordToggleImg.setBounds(280, 5, 30, 30);
 		passwordToggleImg.setVisible((password != null)? true : false);
 		add(passwordToggleImg);
 		add(passwordField);

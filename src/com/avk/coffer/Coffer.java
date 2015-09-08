@@ -182,8 +182,10 @@ public class Coffer {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
 					String[] msgs = {"Your Coffer will be locked in a minute.", "Do you want to lock it right away?"};
-					CofferDialog lockDialog = new CofferDialog(true,"Lock Confirmation",msgs,CofferDialog.YES_NO_CANCEL_OPTIONS);
-
+					setDisable(true);
+					CofferDialog lockDialog = new CofferDialog(Coffer.frmcoffer, true,"Lock Confirmation",msgs,CofferDialog.YES_NO_CANCEL_OPTIONS);
+					setDisable(true);
+					
 					switch(lockDialog.selectedOption){
 					case CofferDialog.YES_OPTION:{
 						logout();
@@ -216,7 +218,9 @@ public class Coffer {
 				public void mouseClicked(MouseEvent arg0)
 				{
 					String[] msgs = {"You are about to exit.", "Do you want to continue?"};
-					CofferDialog exitDialog = new CofferDialog(true, "Exit Confirmation", msgs , CofferDialog.YES_NO_OPTIONS);
+					setDisable(true);
+					CofferDialog exitDialog = new CofferDialog(Coffer.frmcoffer, true, "Exit Confirmation", msgs , CofferDialog.YES_NO_OPTIONS);
+					setDisable(false);
 					if(exitDialog.selectedOption==CofferDialog.YES_OPTION)
 						clearAndExit();					
 				}

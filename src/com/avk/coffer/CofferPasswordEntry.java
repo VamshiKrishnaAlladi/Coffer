@@ -23,12 +23,14 @@ public class CofferPasswordEntry {
 	
 	public void setValuesFromFile(File file, int index){
 		try {
+			
 			StringTokenizer st = new StringTokenizer(CofferCrypt.decryptFromFile_Index(index, file), "|"); 
 			this.id = st.nextToken();
 			this.title = st.nextToken();
 			this.url = st.nextToken();
 			this.username = st.nextToken();
 			this.password = st.nextToken();
+			
 		} 
 		catch (Exception e) { e.printStackTrace(); }
 	}
@@ -36,7 +38,7 @@ public class CofferPasswordEntry {
 	
 	public void writeToFile() {
 		try{
-			if(id == "default_id"){
+			if(id.equals("default_id")){
 				Random r = new Random();
 				
 				String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
@@ -48,20 +50,31 @@ public class CofferPasswordEntry {
 				}
 				while(fileNo < 10000000 || user_coffer.contains(Integer.toString(fileNo).subSequence(0, 8)));
 				
-				if(user_coffer.equals("no_passwords")){
+				if(user_coffer.equals("no_passwords"))
 					user_coffer = Integer.toString(fileNo) + "|" + Integer.toString(index);
-				}
-				else{
+				else
 					user_coffer += "\n" + Integer.toString(fileNo) + "|" + Integer.toString(index);
-				}
 				
 				CofferCrypt.encrypt2File_Index(CofferCrypt.getCofferKeyIndex(), user_coffer, new File("./Coffer/user's.coffer"));
 				
-				id = Integer.toString(fileNo);
+				CofferCrypt.encrypt2File_Index(index, fileNo + "|" + title + "|" + url + "|" + username + "|" + password, new File("./Coffer/" + fileNo + ".cofferpass"));
 			}
-			
-			CofferCrypt.encrypt2File_Index(index, id + "|" + title + "|" + url + "|" + username + "|" + password, new File("./Coffer/" + fileNo + ".cofferpass"));
+			else{
 
+				String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
+				
+				StringTokenizer cofferTokens = new StringTokenizer(user_coffer, "\n");
+				while(cofferTokens.hasMoreTokens())
+				{	
+					StringTokenizer st = new StringTokenizer(cofferTokens.nextToken() ,"|");
+					
+					if(st.nextToken().equals(id)){
+						CofferCrypt.encrypt2File_Index(Integer.parseInt(st.nextToken()), id + "|" + title + "|" + url + "|" + username + "|" + password, new File("./Coffer/" + id + ".cofferpass"));
+						break;
+					}
+				}
+				DashBoard.setSelection(DashBoard.all_passwords_page, true);
+			}
 		}
 		catch(Exception e){ e.printStackTrace(); }
 	}

@@ -35,7 +35,9 @@ public class CofferReferences {
 	public static final ImageIcon MENU_BUTTON = new ImageIcon(Coffer.class.getResource("/menuButton.png"));
 	public static final ImageIcon LAUNCH = new ImageIcon(Coffer.class.getResource("/launch.png"));	
 	public static final ImageIcon EDIT = new ImageIcon(Coffer.class.getResource("/edit.png"));	
-	public static final ImageIcon DELETE = new ImageIcon(Coffer.class.getResource("/delete.png"));	
+	public static final ImageIcon DELETE = new ImageIcon(Coffer.class.getResource("/delete.png"));
+	public static final ImageIcon SHOW = new ImageIcon(Coffer.class.getResource("/show.png"));
+	public static final ImageIcon HIDE = new ImageIcon(Coffer.class.getResource("/hide.png"));
 	
 	// Images used in Frame
 	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));
@@ -43,7 +45,8 @@ public class CofferReferences {
 	// Images used in Custom Components
 	public static final ImageIcon CHECKBOX = new ImageIcon(Coffer.class.getResource("/checkBox.png")); 
 	public static final ImageIcon CHECKEDBOX = new ImageIcon(Coffer.class.getResource("/checkedBox.png"));
-	public static final ImageIcon PASSWORD_TOGGLE_IMG = new ImageIcon(Coffer.class.getResource("/passwordToggle.png"));
+	public static final ImageIcon TOGGLE_SWITCH = new ImageIcon(Coffer.class.getResource("/toggleSwitch.png")); 
+	public static final ImageIcon TOGGLED_SWITCH = new ImageIcon(Coffer.class.getResource("/toggledSwitch.png"));
 	public static final ImageIcon TEXT_BLANK = new ImageIcon(Coffer.class.getResource("/textBlank.png"));
 	public static final ImageIcon MEDIUM_TEXT_BLANK = new ImageIcon(Coffer.class.getResource("/mediumTextBlank.png"));
 	public static final ImageIcon PLUS = new ImageIcon(Coffer.class.getResource("/plus.png"));
@@ -54,7 +57,7 @@ public class CofferReferences {
 	public static final ImageIcon COFFER_FRAME_RESTORE =new ImageIcon(Coffer.class.getResource("/restore.png"));
 	
 	
-	public static Font 	Comfortaa_Plain_13, Comfortaa_Plain_14,	Comfortaa_Plain_15,
+	public static Font 	Comfortaa_Plain_13, Comfortaa_Plain_14,	Comfortaa_Plain_15, Comfortaa_Italic_13,
 						Comfortaa_Bold_15, Comfortaa_Bold_16, Comfortaa_Bold_80,
 						Comfortaa_Bold_Italic_16, Comfortaa_Bold_Italic_20,
 						
@@ -76,7 +79,9 @@ public class CofferReferences {
 	    	Comfortaa_Plain_13 = Comfortaa.deriveFont( Font.PLAIN, 13);
 	    	Comfortaa_Plain_14 = Comfortaa.deriveFont( Font.PLAIN, 14);
 	    	Comfortaa_Plain_15 = Comfortaa.deriveFont( Font.PLAIN, 15);
-
+	    	
+	    	Comfortaa_Italic_13 = Comfortaa.deriveFont( Font.ITALIC, 13);
+	    	
 	    	Comfortaa_Bold_15 = Comfortaa.deriveFont(Font.BOLD, 15);
 	    	Comfortaa_Bold_16 = Comfortaa.deriveFont(Font.BOLD, 16);
 	    	Comfortaa_Bold_80 = Comfortaa.deriveFont(Font.BOLD, 80);

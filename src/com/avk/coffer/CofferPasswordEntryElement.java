@@ -55,14 +55,19 @@ public class CofferPasswordEntryElement extends JPanel {
 			public void mouseExited(MouseEvent arg0) { optionsPanel.setVisible(false); }
 
 			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount() == 2){
-					CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(p.getPassword()), null);
-					Coffer.setStatus("Password copied to clipboard");
-				}
-				else if(e.isControlDown() && SwingUtilities.isLeftMouseButton(e))
+				if(e.isControlDown() && SwingUtilities.isLeftMouseButton(e))
 				{
 					CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(p.getUsername()), null);
 					Coffer.setStatus("Username copied to clipboard");
+				}
+				else if(e.isAltDown() && SwingUtilities.isLeftMouseButton(e)){
+					CofferReferences.SYS_CLIPBOARD.setContents(new StringSelection(p.getPassword()), null);
+					Coffer.setStatus("Password copied to clipboard");
+				}
+				else if(e.getClickCount() == 1){
+					Coffer.setDisable(true);
+					new CofferPasswordDisplayFrame(p);
+					Coffer.setDisable(false);
 				}
 			}
 			
@@ -113,10 +118,10 @@ public class CofferPasswordEntryElement extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new CofferEditPasswordFrame(p);
+				new CofferPasswordDisplayFrame(p);
 			}
 		});
-		optionsPanel.add(edit);
+//		optionsPanel.add(edit);
 		
 				
 		delete = new JLabel(CofferReferences.DELETE);
@@ -133,7 +138,7 @@ public class CofferPasswordEntryElement extends JPanel {
 				try {
 					
 					String[] msgs = {"You are about to delete \""+ p.getTitle() +"\" entry.","Do you want to continue?"};
-					CofferDialog deleteDialog = new CofferDialog(true, "Delete Confirmation", msgs , CofferDialog.YES_NO_OPTIONS);
+					CofferDialog deleteDialog = new CofferDialog(Coffer.frmcoffer, true, "Delete Confirmation", msgs , CofferDialog.YES_NO_OPTIONS);
 					
 					if(deleteDialog.selectedOption==CofferDialog.YES_OPTION)
 					{

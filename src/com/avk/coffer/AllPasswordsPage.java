@@ -3,7 +3,6 @@ package com.avk.coffer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import javax.swing.BoxLayout;
@@ -58,11 +57,10 @@ public class AllPasswordsPage extends JPanel {
 			displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
 
 			String user_coffer = CofferCrypt.decryptFromFile_Index(CofferCrypt.getCofferKeyIndex(), new File("./Coffer/user's.coffer"));
-			Scanner cofferScanner = new Scanner(user_coffer);
-			cofferScanner.useDelimiter("\n");
-			while(cofferScanner.hasNext())
+			StringTokenizer cofferTokens = new StringTokenizer(user_coffer, "\n");
+			while(cofferTokens.hasMoreTokens())
 			{	
-				String entry =  cofferScanner.next();
+				String entry =  cofferTokens.nextToken();
 				if(!entry.equals("no_passwords"))
 				{
 					StringTokenizer st = new StringTokenizer(entry,"|");
@@ -85,7 +83,6 @@ public class AllPasswordsPage extends JPanel {
 					displayPanel.add(noPass);						
 				}
 			}
-			cofferScanner.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
