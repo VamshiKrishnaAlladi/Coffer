@@ -38,6 +38,8 @@ public class CofferReferences {
 	public static final ImageIcon DELETE = new ImageIcon(Coffer.class.getResource("/delete.png"));
 	public static final ImageIcon SHOW = new ImageIcon(Coffer.class.getResource("/show.png"));
 	public static final ImageIcon HIDE = new ImageIcon(Coffer.class.getResource("/hide.png"));
+	public static final ImageIcon GEAR = new ImageIcon(Coffer.class.getResource("/gear.png"));
+	
 	
 	// Images used in Frame
 	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));
