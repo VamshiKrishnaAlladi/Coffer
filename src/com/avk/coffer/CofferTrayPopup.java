@@ -13,23 +13,27 @@ public class CofferTrayPopup extends CofferPopupMenu {
 		CofferPopupMenuItem lockItem = new CofferPopupMenuItem("Lock Coffer");
 		lockItem.setIcon(CofferReferences.COFFER_LOCK);
 		lockItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { 
-            	Coffer.logout();
-            }
-        });
+			public void actionPerformed(ActionEvent e) {
+				Coffer.logout();
+			}
+		});
 		add(lockItem);
-		
+
 		CofferPopupMenuItem restoreItem = new CofferPopupMenuItem("Restore");
 		restoreItem.setIcon(CofferReferences.COFFER_FRAME_RESTORE);
 		restoreItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { Coffer.makeAppear(); }
-        });
+			public void actionPerformed(ActionEvent e) {
+				Coffer.makeAppear();
+			}
+		});
 		add(restoreItem);
-		
+
 		JMenuItem exitItem = new JMenuItem("Exit");
 		exitItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { Coffer.clearAndExit(); }
-        });
+			public void actionPerformed(ActionEvent e) {
+				Coffer.clearAndExit();
+			}
+		});
 		add(exitItem);
 	}
 }

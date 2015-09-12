@@ -18,25 +18,26 @@ import javax.swing.SwingConstants;
 public class CofferPopupFrame extends JDialog {
 
 	private final JPanel popupFrame;
-	private int xPressed , yPressed;
+	private int xPressed, yPressed;
 	private int frameWidth = 300, frameHeight = 300;
 
 	private JPanel contentPanel;
 	private JLabel titleLbl;
-	
-	
+
 	public CofferPopupFrame(boolean isModal, String title, Dimension d) {
 		super(Coffer.frmcoffer, isModal);
 		setMinimumSize(new Dimension(300, 300));
-		
+
 		Coffer.setDisable(true);
-		
+
 		frameWidth = d.width;
 		frameHeight = d.height;
-		
-		addWindowListener(new WindowAdapter(){
+
+		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) { Coffer.setDisable(false);}
+			public void windowClosing(WindowEvent e) {
+				Coffer.setDisable(false);
+			}
 		});
 
 		setUndecorated(true);
@@ -45,7 +46,7 @@ public class CofferPopupFrame extends JDialog {
 		popupFrame = new JPanel();
 		popupFrame.setBackground(CofferReferences.CofferLightGrey);
 		popupFrame.setLayout(null);
-		
+
 		JLabel lblX = new JLabel("X");
 		lblX.setForeground(Color.WHITE);
 		lblX.setFont(CofferReferences.Antipasto_Bold_15);
@@ -58,10 +59,12 @@ public class CofferPopupFrame extends JDialog {
 				Coffer.setDisable(false);
 				CofferPopupFrame.this.dispose();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lblX.setForeground(CofferReferences.CofferBlue);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblX.setForeground(Color.WHITE);
@@ -89,17 +92,16 @@ public class CofferPopupFrame extends JDialog {
 				int x = e.getXOnScreen();
 				int y = e.getYOnScreen();
 
-				CofferPopupFrame.this.setLocation( ( x - xPressed), ( y - yPressed) );				
+				CofferPopupFrame.this.setLocation((x - xPressed), (y - yPressed));
 			}
 		});
 		popupFrame.add(titleLbl);
 
-		
 		CofferPopupFrame.this.setContentPane(popupFrame);
-		
+
 		contentPanel = new JPanel();
 		contentPanel.setOpaque(false);
-		contentPanel.setBounds(0, 40, frameWidth, frameHeight-40);
+		contentPanel.setBounds(0, 40, frameWidth, frameHeight - 40);
 		popupFrame.add(contentPanel);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -110,20 +112,16 @@ public class CofferPopupFrame extends JDialog {
 
 	}
 
-
 	@Override
-	public Container getContentPane(){
+	public Container getContentPane() {
 		return contentPanel;
 	}
 
-
 	public void setContentPanel(JPanel contentPane) {
-		contentPane.setBounds(0, 40, frameWidth, frameHeight-40);
+		contentPane.setBounds(0, 40, frameWidth, frameHeight - 40);
 		contentPanel = contentPane;
 		popupFrame.add(contentPanel);
 		CofferPopupFrame.this.repaint();
 	}
-	
-	
-	
+
 }

@@ -12,11 +12,11 @@ public class CofferButton extends JLabel {
 
 	public CofferButton(String text) {
 		super(text);
-		setPreferredSize(new Dimension(200,40));
+		setPreferredSize(new Dimension(200, 40));
 		setVisible(true);
 		setLayout(null);
 		setOpaque(false);
-		
+
 		setBorder(new CofferRoundBorder(CofferReferences.CofferBlue, 2, 10));
 		setBackground(CofferReferences.CofferBlue);
 		setOpaque(true);
@@ -26,7 +26,7 @@ public class CofferButton extends JLabel {
 		setHorizontalTextPosition(SwingConstants.CENTER);
 		setBounds(0, 0, 200, 40);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
-				
+
 	}
-	
+
 }
