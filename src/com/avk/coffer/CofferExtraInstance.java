@@ -18,7 +18,7 @@ public class CofferExtraInstance extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	
+
 	public CofferExtraInstance() {
 		setBounds(0, 0, 400, 200);
 		setUndecorated(true);
@@ -29,7 +29,7 @@ public class CofferExtraInstance extends JDialog {
 		contentPanel.setBorder(new LineBorder(CofferReferences.CofferBlue, 1));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
 		panel.setBounds(0, 40, 400, 80);
@@ -40,7 +40,7 @@ public class CofferExtraInstance extends JDialog {
 			lblLogo.setBounds(30, 0, 80, 80);
 			panel.add(lblLogo);
 		}
-		
+
 		JLabel lbl1 = new JLabel("An Instance of Coffer is already running.");
 		lbl1.setBounds(95, 10, 280, 30);
 		panel.add(lbl1);
@@ -65,7 +65,6 @@ public class CofferExtraInstance extends JDialog {
 				System.exit(0);
 			}
 		});
-		
 
 	}
 }

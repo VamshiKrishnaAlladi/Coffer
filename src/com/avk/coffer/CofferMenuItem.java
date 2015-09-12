@@ -15,10 +15,9 @@ public class CofferMenuItem extends JPanel {
 
 	private static JLabel label;
 	private static JLabel icon;
-	
-	
+
 	public CofferMenuItem(String text, Icon icn) {
-		
+
 		label = new JLabel(text);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(CofferReferences.Comfortaa_Plain_13);
@@ -26,13 +25,13 @@ public class CofferMenuItem extends JPanel {
 		label.setBounds(0, 0, 160, 40);
 
 		icon = new JLabel(icn);
-		
-		icon.setBounds(160,0,40,40);
+
+		icon.setBounds(160, 0, 40, 40);
 		setLayout(null);
-		
+
 		add(label);
 		add(icon);
-		
+
 		setBackground((Color) null);
 		setBorder(null);
 		setPreferredSize(new Dimension(200, 40));
@@ -42,6 +41,7 @@ public class CofferMenuItem extends JPanel {
 				setOpaque(true);
 				setBackground(CofferReferences.CofferDarkGrey);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setOpaque(false);
