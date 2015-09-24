@@ -19,7 +19,7 @@ public class AddEntryPage extends JPanel {
 
 	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width - 200;
 	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -32,34 +32,36 @@ public class AddEntryPage extends JPanel {
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
 		add(focusGrab);
-		
-		titleField = new CofferTextField("Title",null);
+
+		titleField = new CofferTextField("Title", null);
 		titleField.setBounds(((pageWidth - 320) / 2), 100, 320, 40);
 		titleField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(titleField.getText().equals("")){
+				if (titleField.getText().equals("")) {
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Enter the Title of entry here...");
 				}
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
 		add(titleField);
-		
-		urlField = new CofferTextField("URL",null);
+
+		urlField = new CofferTextField("URL", null);
 		urlField.setBounds(((pageWidth - 320) / 2), 150, 320, 40);
 		urlField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(urlField.getText().equals("")){
+				if (urlField.getText().equals("")) {
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Enter the login URL here...");
 				}
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				Coffer.setStatus(defaultStatus);
@@ -67,16 +69,17 @@ public class AddEntryPage extends JPanel {
 		});
 		add(urlField);
 
-		usernameField = new CofferTextField("Username",null);
+		usernameField = new CofferTextField("Username", null);
 		usernameField.setBounds(((pageWidth - 320) / 2), 200, 320, 40);
 		usernameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(usernameField.getText().equals("")){
+				if (usernameField.getText().equals("")) {
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Enter your Username here...");
 				}
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				Coffer.setStatus(defaultStatus);
@@ -89,11 +92,12 @@ public class AddEntryPage extends JPanel {
 		passwordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(passwordField.getText().equals("")){
+				if (passwordField.getText().equals("")) {
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Enter your Password here...");
 				}
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				Coffer.setStatus(defaultStatus);
@@ -101,74 +105,66 @@ public class AddEntryPage extends JPanel {
 		});
 		add(passwordField);
 
-		confirmPasswordField = new CofferPasswordField("Confirm Password",null);
+		confirmPasswordField = new CofferPasswordField("Confirm Password", null);
 		confirmPasswordField.setBounds(((pageWidth - 320) / 2), 300, 320, 40);
 		confirmPasswordField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(confirmPasswordField.getText().equals("")){
+				if (confirmPasswordField.getText().equals("")) {
 					defaultStatus = Coffer.getStatus();
 					Coffer.setStatus("Retype your password here...");
 				}
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				Coffer.setStatus(defaultStatus);
 			}
 		});
 		add(confirmPasswordField);
-		
+
 		CofferButton submit = new CofferButton("Submit");
 		submit.setBounds(((pageWidth - 200) / 2), 350, 200, 40);
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try 
-				{
+				try {
 					focusGrab.grabFocus();
 					defaultStatus = Coffer.getStatus();
-					
+
 					String title = titleField.getText().trim();
 					String username = usernameField.getText().trim();
 					String password = passwordField.getText().trim();
 					String conPass = confirmPasswordField.getText().trim();
 					String url = urlField.getText().trim();
-					
-					url = url.equals("")? "no_url" : url;
-					
-					if(title.equals(""))
-					{
+
+					url = url.equals("") ? "no_url" : url;
+
+					if (title.equals("")) {
 						Coffer.setStatus("I guess you don't know that Title is mandatory.");
 						titleField.setValid(false);
 						usernameField.setValid(true);
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
-					}
-					else if( username.equals("") )
-					{
+					} else if (username.equals("")) {
 						Coffer.setStatus("Comm'on you forgot entering your username?    O.o");
 						titleField.setValid(true);
 						usernameField.setValid(false);
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
-					}
-					else if( password.equals(""))
-					{
+					} else if (password.equals("")) {
 						Coffer.setStatus("Pick a strong password, empty ones dont serve the purpose.");
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(false);
 						confirmPasswordField.setValid(true);
-					}
-					else if( conPass.equals(""))
-					{
+					} else if (conPass.equals("")) {
 						Coffer.setStatus("All that's needed is to retype your password!");
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(false);
-					}
-					else if(!password.equals(conPass)){
+					} else if (!password.equals(conPass)) {
 						Coffer.setStatus("Try again! Your passwords didn't match.    :(");
 						passwordField.setText("");
 						passwordField.grabFocus();
@@ -177,28 +173,28 @@ public class AddEntryPage extends JPanel {
 						usernameField.setValid(true);
 						passwordField.setValid(false);
 						confirmPasswordField.setValid(false);
-					}
-					else
-					{
+					} else {
 						titleField.setValid(true);
 						usernameField.setValid(true);
 						passwordField.setValid(true);
 						confirmPasswordField.setValid(true);
-						
+
 						CofferPasswordEntry p = new CofferPasswordEntry();
 
 						p.setTitle(title);
 						p.setUrl(url);
 						p.setUsername(username);
 						p.setPassword(password);
-						
+
 						p.writeToFile();
-						
+
 						DashBoard.setSelection(DashBoard.add_entry_page, true);
 						DashBoard.setSelection(DashBoard.all_passwords_page, true);
-						Coffer.setStatus("Entry made into your coffer.");						
+						Coffer.setStatus("Entry made into your coffer.");
 					}
-				} catch (Exception e1) { e1.printStackTrace(); }
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		add(submit);
@@ -208,7 +204,7 @@ public class AddEntryPage extends JPanel {
 		lblTitle.setForeground(CofferReferences.CofferBlue);
 		lblTitle.setBounds(50, 25, 300, 50);
 		add(lblTitle);
-		
+
 		JLabel lblClear = new JLabel("Clear all fields");
 		lblClear.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClear.setFont(CofferReferences.Comfortaa_Plain_13);

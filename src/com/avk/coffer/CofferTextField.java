@@ -12,66 +12,70 @@ import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class CofferTextField extends JTextField {
-	
+
 	private String placeHolder = "";
-	
+
 	private int borderThickness = 2;
 	private int borderRoundness = 5;
 
 	public CofferTextField(String placeHolder, String text) {
-		super((text != null)? text : placeHolder);
+		super((text != null) ? text : placeHolder);
 
 		this.placeHolder = placeHolder;
 
 		setOpaque(false);
 		setBackground(null);
-		setPreferredSize(new Dimension(320,40));
+		setPreferredSize(new Dimension(320, 40));
 		setBorder(new CompoundBorder(new CofferRoundBorder(CofferReferences.CofferBlue, borderThickness, borderRoundness), new EmptyBorder(5, 20, 5, 20)));
 		setCaretColor(CofferReferences.CofferVeryLightGrey);
-		setForeground((text != null)? Color.WHITE : CofferReferences.CofferVeryLightGrey);
+		setForeground((text != null) ? Color.WHITE : CofferReferences.CofferVeryLightGrey);
 		setHorizontalAlignment(SwingConstants.LEFT);
 		setFont(CofferReferences.Comfortaa_Plain_14);
 		addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if(CofferTextField.super.getText().equals(CofferTextField.this.placeHolder)){
+				if (CofferTextField.super.getText().equals(CofferTextField.this.placeHolder)) {
 					setForeground(Color.WHITE);
 					CofferTextField.super.setText("");
 				}
 			}
-			
+
 			@Override
 			public void focusLost(FocusEvent e) {
-				if(CofferTextField.super.getText().equals("")){
+				if (CofferTextField.super.getText().equals("")) {
 					setForeground(CofferReferences.CofferVeryLightGrey);
 					CofferTextField.super.setText(CofferTextField.this.placeHolder);
 				}
 			}
-			
+
 		});
 	}
-	
-	public void setValid(boolean flag){
+
+	public void setValid(boolean flag) {
 		setBorder(new CompoundBorder(new CofferRoundBorder(flag ? CofferReferences.CofferBlue : CofferReferences.CofferRed, borderThickness, borderRoundness), new EmptyBorder(5, 20, 5, 20)));
 	}
-	
+
 	@Override
-	public String getText(){
+	public String getText() {
 		String temp = CofferTextField.super.getText();
-		if(temp.equals(this.placeHolder))
+		if (temp.equals(this.placeHolder))
 			return "";
 		return temp;
 	}
-	
-	public void setPlaceHolder(String placeholder){ this.placeHolder = placeholder;}
-	
-	public String getPlaceHolder(){	return placeHolder; }
-	
-	public void setBorderThickness(int thickness){
+
+	public void setPlaceHolder(String placeholder) {
+		this.placeHolder = placeholder;
+	}
+
+	public String getPlaceHolder() {
+		return placeHolder;
+	}
+
+	public void setBorderThickness(int thickness) {
 		this.borderThickness = thickness;
 	}
-	
-	public int getBorderThickness(){
+
+	public int getBorderThickness() {
 		return borderThickness;
 	}
 
@@ -82,5 +86,5 @@ public class CofferTextField extends JTextField {
 	public void setBorderRoundness(int borderRoundness) {
 		this.borderRoundness = borderRoundness;
 	}
-	
+
 }

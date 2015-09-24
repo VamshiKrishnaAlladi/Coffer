@@ -21,13 +21,13 @@ public class CofferRoundBorder extends AbstractBorder {
 		this.thickness = thickness;
 		this.radius = radius;
 	}
-	
+
 	@Override
-	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height){
+	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 		Graphics2D graphics = (Graphics2D) g;
 		graphics.setStroke(new BasicStroke(thickness));
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics.setColor(borderColor);
-		graphics.drawRoundRect(x, y, width - thickness/2, height - thickness/2, radius, radius);
+		graphics.drawRoundRect(x, y, width - thickness / 2, height - thickness / 2, radius, radius);
 	}
 }
