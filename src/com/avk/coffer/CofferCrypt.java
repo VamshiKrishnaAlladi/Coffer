@@ -10,6 +10,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class CofferCrypt {
+
 	private static final String ALGORITHM = "AES";
 	private static final String TRANSFORMATION = "AES";
 
@@ -21,106 +22,108 @@ public class CofferCrypt {
 	private static long[] randomKeys;
 
 	static {
-		R = new Random(COFFER_SEED);
-		randomKeys = R.longs(MAX_KEY_INDEX, 1000000000000000L, 10000000000000000L).toArray();
+		R = new Random( COFFER_SEED );
+		randomKeys = R.longs( MAX_KEY_INDEX, 1000000000000000L, 10000000000000000L ).toArray();
 	}
 
-	public static void encrypt2File_Index(int index, String plainText, File outputFile) {
+	public static void encrypt2File_Index( int index, String plainText, File outputFile ) {
 		try {
-			String key = getKey(Math.abs(index));
-			Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+			String key = getKey( Math.abs( index ) );
+			Key secretKey = new SecretKeySpec( key.getBytes(), ALGORITHM );
+			Cipher cipher = Cipher.getInstance( TRANSFORMATION );
+			cipher.init( Cipher.ENCRYPT_MODE, secretKey );
 
 			byte[] inputBytes = plainText.getBytes();
-			byte[] outputBytes = cipher.doFinal(inputBytes);
+			byte[] outputBytes = cipher.doFinal( inputBytes );
 
-			FileOutputStream outputStream = new FileOutputStream(outputFile);
-			outputStream.write(outputBytes);
+			FileOutputStream outputStream = new FileOutputStream( outputFile );
+			outputStream.write( outputBytes );
 			outputStream.close();
-		} catch (Exception ex) {
+		}
+		catch ( Exception ex ) {
 			ex.printStackTrace();
 		}
 	}
 
-	public static String decryptFromFile_Index(int index, File encryptedFile) throws Exception {
-		String key = getKey(Math.abs(index));
-		Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-		Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-		cipher.init(Cipher.DECRYPT_MODE, secretKey);
+	public static String decryptFromFile_Index( int index, File encryptedFile ) throws Exception {
+		String key = getKey( Math.abs( index ) );
+		Key secretKey = new SecretKeySpec( key.getBytes(), ALGORITHM );
+		Cipher cipher = Cipher.getInstance( TRANSFORMATION );
+		cipher.init( Cipher.DECRYPT_MODE, secretKey );
 
-		FileInputStream inputStream = new FileInputStream(encryptedFile);
+		FileInputStream inputStream = new FileInputStream( encryptedFile );
 		byte[] inputBytes = new byte[(int) encryptedFile.length()];
-		inputStream.read(inputBytes);
+		inputStream.read( inputBytes );
 		inputStream.close();
 
-		byte[] outputBytes = cipher.doFinal(inputBytes);
+		byte[] outputBytes = cipher.doFinal( inputBytes );
 
-		return new String(outputBytes);
+		return new String( outputBytes );
 	}
 
-	public static void encrypt2File_Key(String key, String plainText, File outputFile) {
+	public static void encrypt2File_Key( String key, String plainText, File outputFile ) {
 		try {
-			Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+			Key secretKey = new SecretKeySpec( key.getBytes(), ALGORITHM );
+			Cipher cipher = Cipher.getInstance( TRANSFORMATION );
+			cipher.init( Cipher.ENCRYPT_MODE, secretKey );
 
 			byte[] inputBytes = plainText.getBytes();
-			byte[] outputBytes = cipher.doFinal(inputBytes);
+			byte[] outputBytes = cipher.doFinal( inputBytes );
 
-			FileOutputStream outputStream = new FileOutputStream(outputFile);
-			outputStream.write(outputBytes);
+			FileOutputStream outputStream = new FileOutputStream( outputFile );
+			outputStream.write( outputBytes );
 			outputStream.close();
-		} catch (Exception ex) {
+		}
+		catch ( Exception ex ) {
 			ex.printStackTrace();
 		}
 	}
 
-	public static String decryptFromFile_Key(String key, File encryptedFile) throws Exception {
-		Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-		Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-		cipher.init(Cipher.DECRYPT_MODE, secretKey);
+	public static String decryptFromFile_Key( String key, File encryptedFile ) throws Exception {
+		Key secretKey = new SecretKeySpec( key.getBytes(), ALGORITHM );
+		Cipher cipher = Cipher.getInstance( TRANSFORMATION );
+		cipher.init( Cipher.DECRYPT_MODE, secretKey );
 
-		FileInputStream inputStream = new FileInputStream(encryptedFile);
+		FileInputStream inputStream = new FileInputStream( encryptedFile );
 		byte[] inputBytes = new byte[(int) encryptedFile.length()];
-		inputStream.read(inputBytes);
+		inputStream.read( inputBytes );
 		inputStream.close();
 
-		byte[] outputBytes = cipher.doFinal(inputBytes);
+		byte[] outputBytes = cipher.doFinal( inputBytes );
 
-		return new String(outputBytes);
+		return new String( outputBytes );
 	}
 
-	public static byte[] encrypt(int index, String plainText) throws Exception {
-		String key = getKey(Math.abs(index));
-		Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-		Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-		cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+	public static byte[] encrypt( int index, String plainText ) throws Exception {
+		String key = getKey( Math.abs( index ) );
+		Key secretKey = new SecretKeySpec( key.getBytes(), ALGORITHM );
+		Cipher cipher = Cipher.getInstance( TRANSFORMATION );
+		cipher.init( Cipher.ENCRYPT_MODE, secretKey );
 
 		byte[] inputBytes = plainText.getBytes();
-		byte[] outputBytes = cipher.doFinal(inputBytes);
+		byte[] outputBytes = cipher.doFinal( inputBytes );
 
 		return outputBytes;
 	}
 
-	public static String decrypt(int index, byte[] encryptedText) throws Exception {
-		String key = getKey(Math.abs(index));
-		Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-		Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-		cipher.init(Cipher.DECRYPT_MODE, secretKey);
+	public static String decrypt( int index, byte[] encryptedText ) throws Exception {
+		String key = getKey( Math.abs( index ) );
+		Key secretKey = new SecretKeySpec( key.getBytes(), ALGORITHM );
+		Cipher cipher = Cipher.getInstance( TRANSFORMATION );
+		cipher.init( Cipher.DECRYPT_MODE, secretKey );
 
 		byte[] inputBytes = encryptedText;
 
-		byte[] outputBytes = cipher.doFinal(inputBytes);
+		byte[] outputBytes = cipher.doFinal( inputBytes );
 
-		return new String(outputBytes);
+		return new String( outputBytes );
 	}
 
-	public static String getKey(int index) {
-		return Long.toString(randomKeys[index]);
+	public static String getKey( int index ) {
+		return Long.toString( randomKeys[index] );
 	}
 
-	public static void setCofferSeed(long seed) {
+	public static void setCofferSeed( long seed ) {
 		COFFER_SEED = seed;
 	}
 

@@ -12,63 +12,65 @@ import javax.swing.SwingConstants;
 
 import com.avk.coffer.CofferReferences;
 
-@SuppressWarnings("serial")
+@SuppressWarnings( "serial" )
 public class CofferNumberField extends JPanel {
 
 	private JTextField numField;
-	private JLabel blank = new JLabel(CofferReferences.MEDIUM_TEXT_BLANK);
-	private JLabel plus = new JLabel(CofferReferences.PLUS);
-	private JLabel minus = new JLabel(CofferReferences.MINUS);
+	private JLabel blank = new JLabel( CofferReferences.MEDIUM_TEXT_BLANK );
+	private JLabel plus = new JLabel( CofferReferences.PLUS );
+	private JLabel minus = new JLabel( CofferReferences.MINUS );
 	private Integer num = 0;
 	private Integer max = Integer.MAX_VALUE;
 	private Integer min = Integer.MIN_VALUE;
 
 	public CofferNumberField() {
 		super();
-		setOpaque(false);
-		setLayout(null);
-		setPreferredSize(new Dimension(140, 30));
+		setOpaque( false );
+		setLayout( null );
+		setPreferredSize( new Dimension( 140, 30 ) );
 
 		numField = new JTextField();
-		numField.setText(num.toString());
-		numField.setForeground(Color.WHITE);
-		numField.setFont(CofferReferences.Comfortaa_Plain_15);
-		numField.setHorizontalAlignment(SwingConstants.CENTER);
-		numField.setEditable(false);
-		numField.setOpaque(false);
-		numField.setBorder(null);
-		numField.setBounds(30, 5, 80, 30);
-		add(numField);
+		numField.setText( num.toString() );
+		numField.setForeground( Color.WHITE );
+		numField.setFont( CofferReferences.Comfortaa_Plain_15 );
+		numField.setHorizontalAlignment( SwingConstants.CENTER );
+		numField.setEditable( false );
+		numField.setOpaque( false );
+		numField.setBorder( null );
+		numField.setBounds( 30, 5, 80, 30 );
+		add( numField );
 
-		plus.setBounds(115, 15, 10, 10);
-		plus.addMouseListener(new MouseAdapter() {
+		plus.setBounds( 115, 15, 10, 10 );
+		plus.addMouseListener( new MouseAdapter() {
+
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (CofferNumberField.this.num < CofferNumberField.this.max) {
+			public void mouseClicked( MouseEvent e ) {
+				if ( CofferNumberField.this.num < CofferNumberField.this.max ) {
 					incNum();
 				}
 			}
-		});
-		add(plus);
+		} );
+		add( plus );
 
-		minus.setBounds(15, 15, 10, 10);
-		minus.addMouseListener(new MouseAdapter() {
+		minus.setBounds( 15, 15, 10, 10 );
+		minus.addMouseListener( new MouseAdapter() {
+
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (CofferNumberField.this.num > CofferNumberField.this.min) {
+			public void mouseClicked( MouseEvent e ) {
+				if ( CofferNumberField.this.num > CofferNumberField.this.min ) {
 					decNum();
 				}
 			}
-		});
-		add(minus);
+		} );
+		add( minus );
 
-		blank.setBounds(10, 20, 120, 10);
-		add(blank);
+		blank.setBounds( 10, 20, 120, 10 );
+		add( blank );
 	}
 
-	public void setNum(int num) {
+	public void setNum( int num ) {
 		this.num = num;
-		numField.setText(this.num.toString());
+		numField.setText( this.num.toString() );
 	}
 
 	public int getNum() {
@@ -77,15 +79,15 @@ public class CofferNumberField extends JPanel {
 
 	public void decNum() {
 		this.num -= 1;
-		numField.setText(this.num.toString());
+		numField.setText( this.num.toString() );
 	}
 
 	public void incNum() {
 		this.num += 1;
-		numField.setText(this.num.toString());
+		numField.setText( this.num.toString() );
 	}
 
-	public void setMaxNum(int maxNum) {
+	public void setMaxNum( int maxNum ) {
 		this.max = maxNum;
 	}
 
@@ -93,7 +95,7 @@ public class CofferNumberField extends JPanel {
 		return this.max;
 	}
 
-	public void setMinNum(int minNum) {
+	public void setMinNum( int minNum ) {
 		this.min = minNum;
 	}
 

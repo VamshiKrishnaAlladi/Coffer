@@ -17,94 +17,95 @@ import javax.swing.border.MatteBorder;
 import com.avk.coffer.CofferReferences;
 import com.avk.coffer.components.listeners.CofferTextBlankEditListener;
 
-@SuppressWarnings("serial")
+@SuppressWarnings( "serial" )
 public class CofferTextBlank extends JPanel {
+
 	private JTextField textField;
 	private JLabel lblTitle, blank;
 
-	private ArrayList<CofferTextBlankEditListener> listeners = new ArrayList<CofferTextBlankEditListener>();
+	private ArrayList< CofferTextBlankEditListener > listeners = new ArrayList< CofferTextBlankEditListener >();
 
 	private int width = 320;
 	private String defaultText;
 
-	public CofferTextBlank(String placeHolder, String text) {
+	public CofferTextBlank( String placeHolder, String text ) {
 		defaultText = text;
-		setOpaque(false);
-		setPreferredSize(new Dimension(width, 50));
-		setMaximumSize(new Dimension(width, 50));
-		setLayout(new BorderLayout(0, 0));
+		setOpaque( false );
+		setPreferredSize( new Dimension( width, 50 ) );
+		setMaximumSize( new Dimension( width, 50 ) );
+		setLayout( new BorderLayout( 0, 0 ) );
 
-		lblTitle = new JLabel(placeHolder);
-		lblTitle.setForeground(CofferReferences.CofferBlue);
-		lblTitle.setBorder(new EmptyBorder(0, 5, 0, 0));
-		lblTitle.setFont(CofferReferences.Comfortaa_Italic_13);
-		lblTitle.setPreferredSize(new Dimension(width, 20));
+		lblTitle = new JLabel( placeHolder );
+		lblTitle.setForeground( CofferReferences.CofferBlue );
+		lblTitle.setBorder( new EmptyBorder( 0, 5, 0, 0 ) );
+		lblTitle.setFont( CofferReferences.Comfortaa_Italic_13 );
+		lblTitle.setPreferredSize( new Dimension( width, 20 ) );
 
-		add(lblTitle, BorderLayout.NORTH);
+		add( lblTitle, BorderLayout.NORTH );
 
 		JLayeredPane panel = new JLayeredPane();
-		panel.setOpaque(false);
-		panel.setLayout(null);
+		panel.setOpaque( false );
+		panel.setLayout( null );
 
 		blank = new JLabel();
-		blank.setBounds(0, 25, width, 5);
-		blank.setBorder(new MatteBorder(0, 2, 2, 2, (Color) CofferReferences.CofferBlue));
-		panel.add(blank);
+		blank.setBounds( 0, 25, width, 5 );
+		blank.setBorder( new MatteBorder( 0, 2, 2, 2, (Color) CofferReferences.CofferBlue ) );
+		panel.add( blank );
 
-		textField = new JTextField(text != null ? text : placeHolder);
-		textField.setSelectedTextColor(CofferReferences.CofferLightGrey);
-		textField.setSelectionColor(CofferReferences.CofferBlue);
-		textField.addKeyListener(new KeyAdapter() {
+		textField = new JTextField( text != null ? text : placeHolder );
+		textField.setSelectedTextColor( CofferReferences.CofferLightGrey );
+		textField.setSelectionColor( CofferReferences.CofferBlue );
+		textField.addKeyListener( new KeyAdapter() {
 
 			@Override
-			public void keyTyped(KeyEvent arg0) {
-				for (CofferTextBlankEditListener listener : listeners) {
+			public void keyTyped( KeyEvent arg0 ) {
+				for ( CofferTextBlankEditListener listener : listeners ) {
 					listener.onValueChange();
 				}
 			}
 
-		});
-		textField.setForeground(text != null ? Color.WHITE : CofferReferences.CofferVeryLightGrey);
-		textField.setFont(CofferReferences.Comfortaa_Plain_14);
-		textField.setCaretColor(CofferReferences.CofferVeryLightGrey);
-		textField.setBounds(0, 0, width, 30);
-		textField.setOpaque(false);
-		textField.setCaretPosition(0);
-		textField.setBackground((Color) null);
-		textField.setBorder(new EmptyBorder(0, 15, 0, 0));
-		panel.add(textField);
+		} );
+		textField.setForeground( text != null ? Color.WHITE : CofferReferences.CofferVeryLightGrey );
+		textField.setFont( CofferReferences.Comfortaa_Plain_14 );
+		textField.setCaretColor( CofferReferences.CofferVeryLightGrey );
+		textField.setBounds( 0, 0, width, 30 );
+		textField.setOpaque( false );
+		textField.setCaretPosition( 0 );
+		textField.setBackground( (Color) null );
+		textField.setBorder( new EmptyBorder( 0, 15, 0, 0 ) );
+		panel.add( textField );
 
-		add(panel);
+		add( panel );
 
 	}
 
 	public void reset() {
-		textField.setText(defaultText);
+		textField.setText( defaultText );
 	}
 
-	public void setWidth(int width) {
+	public void setWidth( int width ) {
 		this.width = width;
 	}
 
-	public void setEditable(boolean flag) {
-		textField.setEditable(flag);
-		textField.setCaretPosition(flag ? textField.getText().length() : 0);
+	public void setEditable( boolean flag ) {
+		textField.setEditable( flag );
+		textField.setCaretPosition( flag ? textField.getText().length() : 0 );
 	}
 
-	public void setText(String text) {
-		textField.setText(text);
+	public void setText( String text ) {
+		textField.setText( text );
 	}
 
 	public String getText() {
 		return textField.getText();
 	}
 
-	public void setValid(boolean flag) {
-		blank.setBorder(new MatteBorder(0, 2, 2, 2, flag ? (Color) CofferReferences.CofferBlue : CofferReferences.CofferRed));
+	public void setValid( boolean flag ) {
+		blank.setBorder( new MatteBorder( 0, 2, 2, 2, flag ? (Color) CofferReferences.CofferBlue : CofferReferences.CofferRed ) );
 	}
 
-	public void addCofferTextBlankEditListener(CofferTextBlankEditListener ctbel) {
-		listeners.add(ctbel);
+	public void addCofferTextBlankEditListener( CofferTextBlankEditListener ctbel ) {
+		listeners.add( ctbel );
 	}
 
 }

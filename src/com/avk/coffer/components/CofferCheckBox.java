@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import com.avk.coffer.CofferReferences;
 
-@SuppressWarnings("serial")
+@SuppressWarnings( "serial" )
 public class CofferCheckBox extends JLabel {
 
 	private boolean checked = false;
@@ -15,35 +15,37 @@ public class CofferCheckBox extends JLabel {
 
 	public CofferCheckBox() {
 		super();
-		createUI(false, "");
+		createUI( false, "" );
 	}
 
-	public CofferCheckBox(boolean check, String text) {
+	public CofferCheckBox( boolean check, String text ) {
 		super();
 		this.text = text;
 		this.checked = check;
-		createUI(check, text);
+		createUI( check, text );
 	}
 
-	private void createUI(boolean checked, String text) {
-		if (checked) {
-			setIcon(CofferReferences.CHECKEDBOX);
-		} else {
-			setIcon(CofferReferences.CHECKBOX);
+	private void createUI( boolean checked, String text ) {
+		if ( checked ) {
+			setIcon( CofferReferences.CHECKEDBOX );
 		}
-		this.setText(text);
-		setForeground(CofferReferences.CofferBlue);
-		setFont(CofferReferences.Comfortaa_Plain_15);
-		this.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+		else {
+			setIcon( CofferReferences.CHECKBOX );
+		}
+		this.setText( text );
+		setForeground( CofferReferences.CofferBlue );
+		setFont( CofferReferences.Comfortaa_Plain_15 );
+		this.addMouseListener( new MouseAdapter() {
+
+			public void mouseClicked( MouseEvent e ) {
 				toggleCheck();
 			}
-		});
+		} );
 	}
 
-	public void setText(String text) {
+	public void setText( String text ) {
 		this.text = text;
-		super.setText(text);
+		super.setText( text );
 	}
 
 	public String getText() {
@@ -51,11 +53,12 @@ public class CofferCheckBox extends JLabel {
 	}
 
 	public void toggleCheck() {
-		if (checked) {
-			setIcon(CofferReferences.CHECKBOX);
+		if ( checked ) {
+			setIcon( CofferReferences.CHECKBOX );
 			checked = false;
-		} else {
-			setIcon(CofferReferences.CHECKEDBOX);
+		}
+		else {
+			setIcon( CofferReferences.CHECKEDBOX );
 			checked = true;
 		}
 	}

@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 import com.avk.coffer.CofferReferences;
 import com.avk.coffer.CofferRoundBorder;
 
-@SuppressWarnings("serial")
+@SuppressWarnings( "serial" )
 public class CofferPasswordField extends JPanel {
 
 	private JPasswordField passwordField;
@@ -31,74 +31,75 @@ public class CofferPasswordField extends JPanel {
 	private int borderThickness = 2;
 	private int borderRoundness = 5;
 
-	public CofferPasswordField(String placeHolder, String password) {
-		setOpaque(false);
-		setBackground(null);
-		setLayout(null);
-		setPreferredSize(new Dimension(320, 40));
-		setBorder(new CofferRoundBorder(CofferReferences.CofferBlue, borderThickness, borderRoundness));
+	public CofferPasswordField( String placeHolder, String password ) {
+		setOpaque( false );
+		setBackground( null );
+		setLayout( null );
+		setPreferredSize( new Dimension( 320, 40 ) );
+		setBorder( new CofferRoundBorder( CofferReferences.CofferBlue, borderThickness, borderRoundness ) );
 
 		this.placeHolder = placeHolder;
 
-		passwordField = new JPasswordField((password != null) ? password : this.placeHolder);
-		passwordField.setBorder(new EmptyBorder(5, 20, 5, 20));
-		passwordField.setOpaque(false);
-		passwordField.setCaretColor(CofferReferences.CofferVeryLightGrey);
-		passwordField.setForeground((password != null) ? Color.WHITE : CofferReferences.CofferVeryLightGrey);
-		passwordField.setBackground(null);
-		passwordField.setEchoChar((password == null) ? (char) 0 : '#');
-		passwordField.setHorizontalAlignment(SwingConstants.LEFT);
-		passwordField.setFont(CofferReferences.Comfortaa_Plain_14);
-		passwordField.setBounds(0, 0, 320, 40);
-		passwordField.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
+		passwordField = new JPasswordField( ( password != null ) ? password : this.placeHolder );
+		passwordField.setBorder( new EmptyBorder( 5, 20, 5, 20 ) );
+		passwordField.setOpaque( false );
+		passwordField.setCaretColor( CofferReferences.CofferVeryLightGrey );
+		passwordField.setForeground( ( password != null ) ? Color.WHITE : CofferReferences.CofferVeryLightGrey );
+		passwordField.setBackground( null );
+		passwordField.setEchoChar( ( password == null ) ? (char) 0 : '#' );
+		passwordField.setHorizontalAlignment( SwingConstants.LEFT );
+		passwordField.setFont( CofferReferences.Comfortaa_Plain_14 );
+		passwordField.setBounds( 0, 0, 320, 40 );
+		passwordField.addFocusListener( new FocusAdapter() {
+
+			@SuppressWarnings( "deprecation" )
 			@Override
-			public void focusGained(FocusEvent e) {
-				if (passwordField.getText().equals(CofferPasswordField.this.placeHolder)) {
-					passwordField.setForeground(Color.WHITE);
-					passwordField.setEchoChar('#');
-					passwordField.setText("");
+			public void focusGained( FocusEvent e ) {
+				if ( passwordField.getText().equals( CofferPasswordField.this.placeHolder ) ) {
+					passwordField.setForeground( Color.WHITE );
+					passwordField.setEchoChar( '#' );
+					passwordField.setText( "" );
 				}
 			}
 
-			@SuppressWarnings("deprecation")
+			@SuppressWarnings( "deprecation" )
 			@Override
-			public void focusLost(FocusEvent e) {
-				if (passwordField.getText().equals("")) {
-					passwordField.setEchoChar((char) 0);
-					passwordField.setForeground(CofferReferences.CofferVeryLightGrey);
-					passwordField.setText(CofferPasswordField.this.placeHolder);
+			public void focusLost( FocusEvent e ) {
+				if ( passwordField.getText().equals( "" ) ) {
+					passwordField.setEchoChar( (char) 0 );
+					passwordField.setForeground( CofferReferences.CofferVeryLightGrey );
+					passwordField.setText( CofferPasswordField.this.placeHolder );
 				}
 			}
 
-		});
+		} );
 
-		passwordField.addKeyListener(new KeyAdapter() {
+		passwordField.addKeyListener( new KeyAdapter() {
+
 			@Override
-			public void keyTyped(KeyEvent e) {
-				passwordToggleImg.setVisible(true);
+			public void keyTyped( KeyEvent e ) {
+				passwordToggleImg.setVisible( true );
 
-				if (passwordField.getPassword().length <= 0)
-					passwordToggleImg.setVisible(false);
+				if ( passwordField.getPassword().length <= 0 ) passwordToggleImg.setVisible( false );
 			}
 
-		});
+		} );
 
-		passwordToggleImg = new JLabel(isPasswordHidden ? CofferReferences.SHOW : CofferReferences.HIDE);
-		passwordToggleImg.addMouseListener(new MouseAdapter() {
+		passwordToggleImg = new JLabel( isPasswordHidden ? CofferReferences.SHOW : CofferReferences.HIDE );
+		passwordToggleImg.addMouseListener( new MouseAdapter() {
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed( MouseEvent e ) {
 				isPasswordHidden = false;
-				passwordField.setEchoChar((char) 0);
-				passwordToggleImg.setIcon(CofferReferences.HIDE);
+				passwordField.setEchoChar( (char) 0 );
+				passwordToggleImg.setIcon( CofferReferences.HIDE );
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mouseReleased( MouseEvent e ) {
 				isPasswordHidden = true;
-				passwordField.setEchoChar('#');
-				passwordToggleImg.setIcon(CofferReferences.SHOW);
+				passwordField.setEchoChar( '#' );
+				passwordToggleImg.setIcon( CofferReferences.SHOW );
 			}
 
 			// @Override
@@ -108,15 +109,15 @@ public class CofferPasswordField extends JPanel {
 			// passwordToggleImg.setIcon(isPasswordHidden? CofferReferences.SHOW
 			// : CofferReferences.HIDE);
 			// }
-		});
-		passwordToggleImg.setBounds(280, 5, 30, 30);
-		passwordToggleImg.setVisible((password != null) ? true : false);
-		add(passwordToggleImg);
-		add(passwordField);
+		} );
+		passwordToggleImg.setBounds( 280, 5, 30, 30 );
+		passwordToggleImg.setVisible( ( password != null ) ? true : false );
+		add( passwordToggleImg );
+		add( passwordField );
 
 	}
 
-	public void setPlaceHolder(String placeholder) {
+	public void setPlaceHolder( String placeholder ) {
 		this.placeHolder = placeholder;
 	}
 
@@ -124,11 +125,11 @@ public class CofferPasswordField extends JPanel {
 		return placeHolder;
 	}
 
-	public void setValid(boolean flag) {
-		setBorder(new CofferRoundBorder(flag ? CofferReferences.CofferBlue : CofferReferences.CofferRed, borderThickness, borderRoundness));
+	public void setValid( boolean flag ) {
+		setBorder( new CofferRoundBorder( flag ? CofferReferences.CofferBlue : CofferReferences.CofferRed, borderThickness, borderRoundness ) );
 	}
 
-	public void setBorderThickness(int thickness) {
+	public void setBorderThickness( int thickness ) {
 		this.borderThickness = thickness;
 	}
 
@@ -140,26 +141,25 @@ public class CofferPasswordField extends JPanel {
 		return borderRoundness;
 	}
 
-	public void setBorderRoundness(int borderRoundness) {
+	public void setBorderRoundness( int borderRoundness ) {
 		this.borderRoundness = borderRoundness;
 	}
 
 	@Override
-	public void addMouseListener(MouseListener ml) {
-		super.addMouseListener(ml);
-		passwordField.addMouseListener(ml);
+	public void addMouseListener( MouseListener ml ) {
+		super.addMouseListener( ml );
+		passwordField.addMouseListener( ml );
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings( "deprecation" )
 	public String getText() {
 		String temp = passwordField.getText();
-		if (temp.equals(this.placeHolder))
-			return "";
+		if ( temp.equals( this.placeHolder ) ) return "";
 		return temp;
 	}
 
-	public void setText(String text) {
-		passwordField.setText(text);
+	public void setText( String text ) {
+		passwordField.setText( text );
 	}
 
 	public void grabFocus() {

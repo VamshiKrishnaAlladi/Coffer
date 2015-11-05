@@ -4,11 +4,11 @@ import javax.swing.JPopupMenu;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-@SuppressWarnings("serial")
+@SuppressWarnings( "serial" )
 public class CofferPopupMenu extends JPopupMenu {
 
 	public CofferPopupMenu() {
-		setBorder(new LineBorder(CofferReferences.CofferBlue));
-		setBackground(Color.WHITE);
+		setBorder( new LineBorder( CofferReferences.CofferBlue ) );
+		setBackground( Color.WHITE );
 	}
 }
