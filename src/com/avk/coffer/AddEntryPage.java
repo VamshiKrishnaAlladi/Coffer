@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import com.avk.coffer.components.CofferButton;
 import com.avk.coffer.components.CofferPasswordField;
@@ -21,12 +22,9 @@ public class AddEntryPage extends JPanel {
 	private String defaultStatus;
 	private static JButton focusGrab;
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width - 200;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+	private static final int pageWidth = CofferSettings.COFFER_PAGE_SIZE.width;
+	private static final int pageHeight = CofferSettings.COFFER_PAGE_SIZE.height;
 
-	/**
-	 * Create the panel.
-	 */
 	public AddEntryPage() {
 		setPreferredSize(new Dimension(pageWidth, pageHeight));
 		setOpaque(false);
@@ -36,6 +34,13 @@ public class AddEntryPage extends JPanel {
 		focusGrab.setBounds(0, 0, 0, 0);
 		focusGrab.grabFocus();
 		add(focusGrab);
+
+		JLabel lblTitle = new JLabel("Password Registry");
+		lblTitle.setBorder(new EmptyBorder(0, 10, 0, 0));
+		lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
+		lblTitle.setForeground(CofferReferences.CofferBlue);
+		lblTitle.setBounds(50, 25, 300, 50);
+		add(lblTitle);
 
 		titleField = new CofferTextField("Title", null);
 		titleField.setBounds(((pageWidth - 320) / 2), 100, 320, 40);
@@ -203,13 +208,7 @@ public class AddEntryPage extends JPanel {
 		});
 		add(submit);
 
-		JLabel lblTitle = new JLabel("Password Registry");
-		lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
-		lblTitle.setForeground(CofferReferences.CofferBlue);
-		lblTitle.setBounds(50, 25, 300, 50);
-		add(lblTitle);
-
-		JLabel lblClear = new JLabel("Clear all fields");
+		JLabel lblClear = new JLabel("Reset all fields");
 		lblClear.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClear.setFont(CofferReferences.Comfortaa_Plain_13);
 		lblClear.setForeground(CofferReferences.CofferBlue);

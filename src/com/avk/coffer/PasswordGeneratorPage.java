@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import com.avk.coffer.components.CofferButton;
 import com.avk.coffer.components.CofferCheckBox;
@@ -20,8 +21,8 @@ public class PasswordGeneratorPage extends JPanel {
 	private JTextField passwordDisp;
 	private CofferNumberField numChars;
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width - 200;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+	private static final int pageWidth = CofferSettings.COFFER_PAGE_SIZE.width;
+	private static final int pageHeight = CofferSettings.COFFER_PAGE_SIZE.height;
 
 	/**
 	 * Create the panel.
@@ -32,9 +33,10 @@ public class PasswordGeneratorPage extends JPanel {
 		setPreferredSize(new Dimension(pageWidth, pageHeight));
 
 		JLabel lblTitle = new JLabel("Password Factory");
+		lblTitle.setBorder(new EmptyBorder(0, 10, 0, 0));
 		lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
 		lblTitle.setForeground(CofferReferences.CofferBlue);
-		lblTitle.setBounds(50, 25, 240, 50);
+		lblTitle.setBounds(50, 25, 300, 50);
 		add(lblTitle);
 
 		JLabel lblText1 = new JLabel("Your Password will have ");

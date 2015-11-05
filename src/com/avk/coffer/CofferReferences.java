@@ -39,6 +39,7 @@ public class CofferReferences {
 	public static final ImageIcon SHOW = new ImageIcon(Coffer.class.getResource("/show.png"));
 	public static final ImageIcon HIDE = new ImageIcon(Coffer.class.getResource("/hide.png"));
 	public static final ImageIcon EXPORT = new ImageIcon(Coffer.class.getResource("/export.png"));
+	public static final ImageIcon GEAR = new ImageIcon(Coffer.class.getResource("/gear.png"));
 
 	// Images used in Frame
 	public static final ImageIcon BLUE_STREAK = new ImageIcon(Coffer.class.getResource("/blueStreak.png"));
@@ -57,10 +58,12 @@ public class CofferReferences {
 	public static final ImageIcon COFFER_LOCK = new ImageIcon(Coffer.class.getResource("/lock.png"));
 	public static final ImageIcon COFFER_FRAME_RESTORE = new ImageIcon(Coffer.class.getResource("/restore.png"));
 
-	public static Font Comfortaa_Plain_13, Comfortaa_Plain_14, Comfortaa_Plain_15, Comfortaa_Italic_13, Comfortaa_Bold_15, Comfortaa_Bold_16, Comfortaa_Bold_80, Comfortaa_Bold_Italic_16,
-			Comfortaa_Bold_Italic_20,
-
-			Antipasto_Bold_15, Antipasto_Plain_15, Antipasto_Plain_26;
+	public static Font 	Comfortaa_Plain_13, Comfortaa_Plain_14, Comfortaa_Plain_15,
+						Comfortaa_Bold_15, Comfortaa_Bold_16, Comfortaa_Bold_80,
+						Comfortaa_Bold_Italic_16, Comfortaa_Bold_Italic_20,
+						Comfortaa_Italic_13,
+						Antipasto_Plain_15, Antipasto_Plain_26,
+						Antipasto_Bold_15;
 
 	public static final Color CofferRed = new Color(230, 75, 60);
 	public static final Color CofferBlue = new Color(0, 175, 210);

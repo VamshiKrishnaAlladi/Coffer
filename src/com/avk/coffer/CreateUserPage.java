@@ -24,8 +24,8 @@ public class CreateUserPage extends JPanel {
 	private CofferPasswordField confirmPasswordField;
 	private String defaultStatus;
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+	private static final int pageWidth = CofferSettings.COFFER_DASHBOARD_SIZE.width;
+	private static final int pageHeight = CofferSettings.COFFER_DASHBOARD_SIZE.height;
 
 	/**
 	 * Create the panel.

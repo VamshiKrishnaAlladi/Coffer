@@ -24,8 +24,8 @@ public class LoginPage extends JPanel {
 	private CofferPasswordField passwordField;
 	private String defaultStatus;
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+	private static final int pageWidth = CofferSettings.COFFER_DASHBOARD_SIZE.width;
+	private static final int pageHeight = CofferSettings.COFFER_DASHBOARD_SIZE.height;
 
 	/**
 	 * Create the panel.

@@ -49,12 +49,9 @@ public class Coffer {
 	protected static final String login_page = "LoginPage";
 	protected static final String dash_board = "DashBoard";
 
-	private static final int frameWidth = CofferReferences.COFFER_FRAME_SIZE.width;
-	private static final int frameHeight = CofferReferences.COFFER_FRAME_SIZE.height;
+	private static final int frameWidth = CofferSettings.COFFER_FRAME_SIZE.width;
+	private static final int frameHeight = CofferSettings.COFFER_FRAME_SIZE.height;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -77,16 +74,8 @@ public class Coffer {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public Coffer() {
-		initialize();
-	}
+	public Coffer() { initialize(); }
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		try {
 			if (SystemTray.isSupported()) {
@@ -125,7 +114,7 @@ public class Coffer {
 			frmcoffer.setIconImages(CofferReferences.COFFER_LOGOS);
 			frmcoffer.setTitle("Coffer");
 			frmcoffer.setUndecorated(true);
-			frmcoffer.setSize(CofferReferences.COFFER_FRAME_SIZE);
+			frmcoffer.setSize(CofferSettings.COFFER_FRAME_SIZE);
 			frmcoffer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			frmcoffer.getContentPane().setLayout(null);
 			frmcoffer.setLocationRelativeTo(null);

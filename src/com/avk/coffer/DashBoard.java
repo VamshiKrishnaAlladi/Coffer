@@ -19,14 +19,15 @@ public class DashBoard extends JPanel {
 	protected static final String all_passwords_page = "AllPasswordsPage";
 	protected static final String add_entry_page = "AddEntryPage";
 	protected static final String password_generator_page = "PasswordGeneratorPage";
+	protected static final String settings_page = "SettingsPage";
 	protected static final String about_page = "AboutPage";
 
 	private static JPanel tabsDisplay, displayPanel;
-	private static CofferTabLabel allPasswordsTab, addPasswordTab, generatePasswordTab, aboutTab;
+	private static CofferTabLabel allPasswordsTab, addPasswordTab, generatePasswordTab, settingsTab, aboutTab;
 	private static CardLayout cl;
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+	private static final int pageWidth = CofferSettings.COFFER_DASHBOARD_SIZE.width;
+	private static final int pageHeight = CofferSettings.COFFER_DASHBOARD_SIZE.height;
 
 	private static HashMap<String, CofferTabLabel> tabs = new HashMap<String, CofferTabLabel>();
 
@@ -76,6 +77,17 @@ public class DashBoard extends JPanel {
 		tabsDisplay.add(generatePasswordTab);
 		tabs.put(password_generator_page, generatePasswordTab);
 
+		settingsTab = new CofferTabLabel("Settings", CofferReferences.GEAR);
+		settingsTab.setBounds(0, pageHeight - 80, 200, 40);
+		settingsTab.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setSelection(settings_page, false);
+			}
+		});
+		tabsDisplay.add(settingsTab);
+		tabs.put(settings_page, settingsTab);
+
 		aboutTab = new CofferTabLabel("About Coffer", CofferReferences.COFFER_LOGO_SMALL);
 		aboutTab.setBounds(0, pageHeight - 40, 200, 40);
 		aboutTab.addMouseListener(new MouseAdapter() {
@@ -98,6 +110,7 @@ public class DashBoard extends JPanel {
 		displayPanel.add(new AllPasswordsPage(), all_passwords_page);
 		displayPanel.add(new AddEntryPage(), add_entry_page);
 		displayPanel.add(new PasswordGeneratorPage(), password_generator_page);
+		displayPanel.add(new SettingsPage(), settings_page);
 		displayPanel.add(new AboutPage(), about_page);
 
 		setSelection(all_passwords_page, true);

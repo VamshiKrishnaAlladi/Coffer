@@ -4,23 +4,25 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class AboutPage extends JPanel {
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width - 200;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
+	private static final int pageWidth = CofferSettings.COFFER_PAGE_SIZE.width;
+	private static final int pageHeight = CofferSettings.COFFER_PAGE_SIZE.height;
 
 	public AboutPage() {
 		setPreferredSize(new Dimension(pageWidth, pageHeight));
 		setOpaque(false);
 		setLayout(null);
 
-		JLabel lblAboutCoffer = new JLabel("About Coffer");
-		lblAboutCoffer.setForeground(CofferReferences.CofferBlue);
-		lblAboutCoffer.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
-		lblAboutCoffer.setBounds(50, 25, 300, 50);
-		add(lblAboutCoffer);
+		JLabel lblTitle = new JLabel("About Coffer");
+		lblTitle.setBorder(new EmptyBorder(0, 10, 0, 0));
+		lblTitle.setForeground(CofferReferences.CofferBlue);
+		lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
+		lblTitle.setBounds(50, 25, 300, 50);
+		add(lblTitle);
 
 		JLabel line1 = new JLabel("Coffer : A Portable password manager, ");
 		line1.setFont(CofferReferences.Comfortaa_Plain_13);

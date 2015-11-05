@@ -66,6 +66,7 @@ public class CofferTextBlank extends JPanel {
 		});
 		textField.setForeground(text != null ? Color.WHITE : CofferReferences.CofferVeryLightGrey);
 		textField.setFont(CofferReferences.Comfortaa_Plain_14);
+		textField.setCaretColor(CofferReferences.CofferVeryLightGrey);
 		textField.setBounds(0, 0, width, 30);
 		textField.setOpaque(false);
 		textField.setCaretPosition(0);
@@ -87,6 +88,7 @@ public class CofferTextBlank extends JPanel {
 
 	public void setEditable(boolean flag) {
 		textField.setEditable(flag);
+		textField.setCaretPosition(flag ? textField.getText().length() : 0);
 	}
 
 	public void setText(String text) {

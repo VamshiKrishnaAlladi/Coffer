@@ -11,18 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class AllPasswordsPage extends JPanel {
 
-	// private static HashMap<String, CofferPasswordEntry> allPasswords;
+	private static final int pageWidth = CofferSettings.COFFER_PAGE_SIZE.width;
+	private static final int pageHeight = CofferSettings.COFFER_PAGE_SIZE.height;
 
-	private static final int pageWidth = CofferReferences.COFFER_FRAME_SIZE.width - 200;
-	private static final int pageHeight = CofferReferences.COFFER_FRAME_SIZE.height - 100;
-
-	/**
-	 * Create the panel.
-	 */
 	public AllPasswordsPage() {
 		try {
 			setPreferredSize(new Dimension(pageWidth, pageHeight));
@@ -44,9 +40,10 @@ public class AllPasswordsPage extends JPanel {
 			vsb.setUnitIncrement(10);
 
 			JLabel lblTitle = new JLabel("Password Almanac");
+			lblTitle.setBorder(new EmptyBorder(0, 10, 0, 0));
 			lblTitle.setFont(CofferReferences.Comfortaa_Bold_Italic_20);
 			lblTitle.setForeground(CofferReferences.CofferBlue);
-			lblTitle.setBounds(50, 25, pageWidth - 50, 50);
+			lblTitle.setBounds(50, 25, 300, 50);
 			add(lblTitle);
 			add(scrollPane);
 
