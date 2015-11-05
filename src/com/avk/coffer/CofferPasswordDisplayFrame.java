@@ -7,6 +7,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.avk.coffer.components.CofferButton;
+import com.avk.coffer.components.CofferDialog;
+import com.avk.coffer.components.CofferPasswordBlank;
+import com.avk.coffer.components.CofferPopupFrame;
+import com.avk.coffer.components.CofferTextBlank;
+import com.avk.coffer.components.CofferToggleSwitch;
+import com.avk.coffer.components.listeners.CofferPasswordBlankEditListener;
+import com.avk.coffer.components.listeners.CofferTextBlankEditListener;
+import com.avk.coffer.components.listeners.CofferToggleSwitchListener;
+
 @SuppressWarnings("serial")
 public class CofferPasswordDisplayFrame extends CofferPopupFrame {
 
@@ -27,7 +37,7 @@ public class CofferPasswordDisplayFrame extends CofferPopupFrame {
 	public CofferPasswordDisplayFrame(CofferPasswordEntry p) {
 		super(Coffer.frmcoffer, true, new Dimension(frameWidth, frameHeight));
 
-		setTitle(p.getTitle() + " Entry");
+		setTitle(p.getTitle() + " Details");
 		setStatus(defaultStatus);
 
 		contentPanel = new JPanel();

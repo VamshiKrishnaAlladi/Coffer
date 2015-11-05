@@ -8,7 +8,6 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.util.StringTokenizer;
 
@@ -17,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
+import com.avk.coffer.components.CofferDialog;
+import com.avk.coffer.components.CofferPopupFrame;
 
 @SuppressWarnings("serial")
 public class CofferPasswordEntryElement extends JPanel {
@@ -124,7 +126,7 @@ public class CofferPasswordEntryElement extends JPanel {
 					if (!url.equals("no_url"))
 						Desktop.getDesktop().browse(URI.create(url));
 
-				} catch (IOException e1) {
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}

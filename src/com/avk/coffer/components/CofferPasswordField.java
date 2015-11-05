@@ -1,4 +1,4 @@
-package com.avk.coffer;
+package com.avk.coffer.components;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import com.avk.coffer.CofferReferences;
+import com.avk.coffer.CofferRoundBorder;
 
 @SuppressWarnings("serial")
 public class CofferPasswordField extends JPanel {

@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.avk.coffer.components.CofferButton;
+import com.avk.coffer.components.CofferPasswordField;
+import com.avk.coffer.components.CofferTextField;
+
 @SuppressWarnings("serial")
 public class AddEntryPage extends JPanel {
 	private static CofferTextField titleField, usernameField, urlField;

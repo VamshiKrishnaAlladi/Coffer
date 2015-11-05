@@ -25,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import com.avk.coffer.components.CofferDialog;
+
 public class Coffer {
 
 	public static JFrame frmcoffer;
@@ -185,7 +187,7 @@ public class Coffer {
 					String[] msgs = { "Your Coffer will be locked in a minute.", "Do you want to lock it right away?" };
 					setDisable(true);
 					CofferDialog lockDialog = new CofferDialog(Coffer.frmcoffer, true, "Lock Confirmation", msgs, CofferDialog.YES_NO_CANCEL_OPTIONS);
-					setDisable(true);
+					setDisable(false);
 
 					switch (lockDialog.selectedOption) {
 						case CofferDialog.YES_OPTION: {

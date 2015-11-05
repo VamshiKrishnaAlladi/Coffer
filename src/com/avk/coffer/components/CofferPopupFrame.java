@@ -1,4 +1,4 @@
-package com.avk.coffer;
+package com.avk.coffer.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import com.avk.coffer.CofferReferences;
 
 @SuppressWarnings("serial")
 public class CofferPopupFrame extends JDialog {

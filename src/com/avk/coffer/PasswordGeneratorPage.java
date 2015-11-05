@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.avk.coffer.components.CofferButton;
+import com.avk.coffer.components.CofferCheckBox;
+import com.avk.coffer.components.CofferNumberField;
+
 @SuppressWarnings("serial")
 public class PasswordGeneratorPage extends JPanel {
 	private JTextField passwordDisp;
